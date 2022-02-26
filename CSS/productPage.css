@@ -1,0 +1,89 @@
+#grey
+    {
+        color: grey;
+        font-size: 30px;
+    }
+    #star
+    {   
+        margin-top: -20px;
+        color: rgb(243,144,25);
+        font-size: 30px;
+    }
+    img
+    {
+        width: 430px;
+    }
+    #choice>img
+    {
+        width: 70px;
+        margin-right: 10px;
+        height: 70%;
+    }
+    p
+    {
+        font-family: sans-serif;
+        font-size: 13px;
+    }
+    #main
+    {
+        width: 1000px;
+        border: red solid 1px;
+        margin-left: 70px;
+        display: flex;
+    }
+    #desc_div
+    {
+        margin-left: 20px;
+        font-family: sans-serif;
+        font-weight: 200;
+        border: pink solid 1px;
+        height: 420px;
+        width: 400px;
+    }
+    #desc_div>h3
+    {
+        font-size: 20px;
+        font-weight: 200;
+    }
+    #cost
+    {
+        margin-top: -20px;
+    }
+    #choice
+    {
+        border: red solid 1px;
+        width: 70%;
+        height: 90px;
+        display: flex;
+    }
+    select
+    {
+        margin-top: 20px;
+        border: 1px solid rgb(226, 226, 226);
+        padding: 8px 100px 8px 4px;
+    }
+    #addCart_btn
+    {
+        border: none;
+        background-color: rgb(39,134,95);
+        color: white;
+        padding:10px  60px 10px 60px;
+        border-radius: 5px;
+        margin-left: 10px;
+    }
+    #top
+    {
+        margin-left: 67px;
+    }
+    #icons
+    {
+        display: flex;
+        border: blue solid 1px;
+        width: 150px;
+        height: 40px;
+        margin-left: 67px;
+    }
+    #icons>i
+    {
+        width: 100px;
+    }
