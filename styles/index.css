@@ -150,9 +150,18 @@ height: 100%;
 }
 #bannereight>div{
     background-color: rgb(245,246,247);
+    
 
 
-}#bannereight>div:hover{
+}
+#bannereight>div>h2,p{
+    
+margin-left: 30px;    
+}
+
+
+
+#bannereight>div:hover{
     cursor: pointer;
 }
 
