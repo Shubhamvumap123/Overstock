@@ -3,9 +3,9 @@ let navbar = () =>{
     <div class="header">
     <div>
        
-        <div class="overStlogo overstockIndex"><img src="images/icon.png" alt=""></div>
+     
         <div class="overstocklogo">
-            <img class="overstockIndex" src="https://i.postimg.cc/0yCKC2SV/svgexport-1.png" alt="" />
+            // <img class="overstockIndex" src="https://i.postimg.cc/0yCKC2SV/svgexport-1.png" alt="" />
         </div>
         <div class="class-input">
             <div>

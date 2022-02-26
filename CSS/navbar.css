@@ -354,7 +354,7 @@ html {
         margin-left: 0%;
         content: url("/images/Menu.png");
         /* display: none; */
-    }
+    } 
 
     .d-flex {
         width: 30%;
@@ -411,13 +411,13 @@ html {
         font-size: 100%;
     }
 
-    .navbar-brand>img {
+ .navbar-brand>img {
         width: 90%;
         height: 1.8rem;
         margin-left: 0%;
         content: url("/images/Menu.png");
         /* display: none; */
-    }
+    } 
 
     .d-flex {
         width: 30%;
@@ -493,6 +493,7 @@ img {
 
 .header div {
     color: #2f3337;
+    height: 50px;
     font-size: 14px;
     font-weight: 500;
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -621,9 +622,9 @@ img {
     width: 70%;
 }
 
- .dropdown-content-main {
+.header .dropdown-content-main {
     /* height: fit-content; */
-  display: none;
+  
     position: absolute;
     top: 50%;
     width: 75%;
