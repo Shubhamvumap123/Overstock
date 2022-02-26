@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a1703e299a.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<style>
+    #grey
+    {
+        color: grey;
+        font-size: 30px;
+    }
+    #star
+    {   
+        margin-top: -20px;
+        color: rgb(243,144,25);
+        font-size: 30px;
+    }
+    img
+    {
+        width: 430px;
+    }
+    #choice>img
+    {
+        width: 70px;
+        margin-right: 10px;
+        height: 70%;
+    }
+    p
+    {
+        font-family: sans-serif;
+        font-size: 13px;
+    }
+    #main
+    {
+        width: 1000px;
+        border: red solid 1px;
+        margin-left: 70px;
+        display: flex;
+    }
+    #desc_div
+    {
+        margin-left: 20px;
+        font-family: sans-serif;
+        font-weight: 200;
+        border: pink solid 1px;
+        height: 420px;
+        width: 400px;
+    }
+    #desc_div>h3
+    {
+        font-size: 20px;
+        font-weight: 200;
+    }
+    #cost
+    {
+        margin-top: -20px;
+    }
+    #choice
+    {
+        border: red solid 1px;
+        width: 70%;
+        height: 90px;
+        display: flex;
+    }
+    select
+    {
+        margin-top: 20px;
+        border: 1px solid rgb(226, 226, 226);
+        padding: 8px 100px 8px 4px;
+    }
+    #addCart_btn
+    {
+        border: none;
+        background-color: rgb(39,134,95);
+        color: white;
+        padding:10px  60px 10px 60px;
+        border-radius: 5px;
+        margin-left: 10px;
+    }
+    #top
+    {
+        margin-left: 67px;
+    }
+    #icons
+    {
+        display: flex;
+        border: blue solid 1px;
+        width: 150px;
+        height: 40px;
+        margin-left: 67px;
+    }
+    #icons>i
+    {
+        width: 100px;
+    }
+</style>
+<body>
+    <p id="top">Furniture / Living Room Furniture / Living Room Chairs / Accent Chairs</p>
+    <div id="main">
+
+    </div>
+    <i style="margin-left: 67px;margin-top: 100px;">Share This Product:</i>
+    <div id="icons">
+        <i class="fa-solid fa-envelope" id="email"></i>
+        <i class="fa-brands fa-facebook" style="color: blue;"></i>
+        <i class="fa-brands fa-twitter-square"></i>
+        <i class="fa-brands fa-pinterest-square"></i>
+    </div>
+    
+</body>
+</html>
+<script type="module">
+    import {apiCall, appendArticles} from "./scripts/productPage.js";
+
+    let selected_id = JSON.parse(localStorage.getItem("selected_id"));
+
+    let res = await apiCall(`https://overstockapi.herokuapp.com/products/id=${selected_id}`);
+    console.log(res);
+
+    let parent = document.getElementById("main");
+
+    appendArticles(res,parent);
+</script>
