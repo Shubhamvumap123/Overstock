@@ -1,0 +1,211 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+    <link rel="stylesheet" href="./CSS/checkout.css">
+
+</head>
+
+<body>
+
+    <div class="overstock_div"> 
+        <img src="images/svgexport-1 (1).png"/>
+      
+    </div>
+
+    <div class="overstock_div2">
+        <img src="images/fedex.jpg"/>
+        <p>Secure checkout provided by FedEx International.</br>
+            Your order total includes customs and taxes, if applicable.</p>
+    </div>
+
+    <div class = "returnAnchor_div">
+        <a class = "returnAnchor" href="http://">  Back to Cart</a></div>
+    <div id="addressContainer">
+        <div class="addressBox1">
+            <div class="addressBoxHead">
+                <p>Billing Address</p>
+            </div>
+            <div class= "bilingInputDiv">
+                <div class="bilingLabel">
+                    <label class = "topEle boldLabel">EMAIL</label> 
+                    <label  class = "boldLabel">First Name</label>
+                    <label  class = "boldLabel">Last Name</label> 
+                    <label>Company</label> 
+                    <label>Tax ID</label> 
+                    <label class = "boldLabel">Address Line 1</label>
+                    <label>Address Line 2</label>
+                    <label class = "boldLabel">Country</label> 
+                    <label class = "boldLabel">City</label> 
+                    <label>State</label> 
+                    <label>Zip code</label> 
+                    <label class = "boldLabel">Phone #</label> 
+                </div>
+                <div class="bilingInput">
+                    <input class = "topEle" id="email" height: type="text" required/>
+                    <input id="firstName" height: type="text" required />
+                    <input id="lastName" height: type="text" required/>
+                    <input id="company" height: type="text" />
+                    <input id="taxId" height: type="text" />
+                    <input id="address1" height: type="text" required/>
+                    <input id="address2" height: type="text" />
+                    <select class="form-select countrySelect" id = "country" aria-label="Default select example" required>
+                        <option selected>Select Country</option>
+                            <option value="india">India</option>
+                            <option value="canada">Canada</option>
+                            <option value="china">China</option>
+                            <option value="japan">Japan</option>
+                            <option value="russia">Russia</option>
+                            <option value="france">France</option>
+                 </select>
+                    <input id="city" height: type="text" required/>
+                    <input id="state" height: type="text" />
+                    <input id="zipcode" height: type="text" />
+                    <input id="phone" height: type="text" required/>
+
+                </div>
+            </div>
+            
+
+        </div>
+        <div class="addressBox2">
+            <div class="addressBoxHead">
+                <p>Shipping Address</p>
+            </div>
+            <div class= "bilingInputDiv">
+                <div class="bilingLabel increaseDivWidth">
+                    <label class = "topEle boldLabel">EMAIL</label> 
+                    <label  class = "boldLabel">First Name</label>
+                    <label  class = "boldLabel">Last Name</label> 
+                    <label>Company</label> 
+                    <label>Tax ID</label> 
+                    <label class = "boldLabel">Address Line 1</label>
+                    <label>Address Line 2</label>
+                    <label></label>
+                    <label class = "boldLabel">Country</label> 
+                    <label class = "boldLabel">City</label> 
+                    <label>State</label> 
+                    <label>Zip code</label> 
+                    <label class = "boldLabel">Phone #</label> 
+                </div>
+                <div class="bilingInput">
+                    <input class = "topEle" id="email2" height: type="text" />
+                    <input id="firstName2" height: type="text" />
+                    <input id="lastName2" height: type="text" />
+                    <input id="company2" height: type="text" />
+                    <input id="taxId2" height: type="text" />
+                    <input id="address12" height: type="text" />
+                    <input id="shipping_address22" height: type="text" />
+                    <p class = "interputer">(We cannot ship to PO box, APO or FPO addresses.)</p>
+                    <select class="form-select countrySelect" id = "country2" aria-label="Default select example">
+                            <option selected>Select Country</option>
+                            <option value="india">India</option>
+                            <option value="canada">Canada</option>
+                            <option value="china">China</option>
+                            <option value="japan">Japan</option>
+                            <option value="russia">Russia</option>
+                            <option value="france">France</option>
+                     </select>
+                    <input id="city2" height: type="text" />
+                    <input id="state2" height: type="text" />
+                    <input id="zipcode2" height: type="text" />
+                    <input id="phone2" height: type="text" />
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class = "paymentsItemInfo">
+        <div>
+
+        </div>
+        <div class = "methodShipping">
+            <div class="headShipping">
+                <p>Shipping Method</p>
+            </div>
+            <div class = "shippingInfo">
+               
+                <div class = "shippingDiv2">
+                     <div>
+                        <input type="radio" name = "shippingMethod" value="standard">
+                         <span><b>International Standard</b> - 11785.06 INR</span>
+                         <p class = "green">Estimated Delivery Date: 2022-01-05</p>
+                     </div>
+                     <div>
+                        <input type="radio" name = "shippingMethod" value="express">
+                        <span><b>International Express</b> - 14405.21 INR</span>
+                        <p class = "green">Estimated Delivery Date: 2021-12-31</p>
+                     </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+
+    <div class = "paymentUserDetails">
+        <div class = "payment_divHead">
+            <p>Payment Information</p>
+        </div>
+        <div class = "paymentDetails">
+            <div class = "imgDiv">
+                <img src = "https://e7.pngegg.com/pngimages/27/252/png-clipart-mastercard-visa-credit-card-paypal-logo-mastercard-text-display-advertising.png"/>
+            </div>
+            <div class = "cardInfo">
+                <div class="cardQuery">
+                    <p>Card Type</p>
+                    <p>Cardholder Name</p>
+                    <p class="expcvv_text">Expiry</p>
+                    <p class="expcvv_text2">CVV</p>
+                </div>
+                <div class="cardQueryResult">
+                    <select class="inputbox" name="card_type" id="card_type" required>
+                        <option value="">Select Card</option>
+                        <option value="Visa">Visa</option>
+                        <option value="RuPay">RuPay</option>
+                        <option value="MasterCard">MasterCard</option>
+                      </select>
+                    <input type="text" class="inputbox" name="name" id="name" required />
+                    <input type="date" class="inputbox" name="exp_date" id="exp_date" required />
+                    <input type="password" class="inputbox" name="cvv" id="cvv" required />
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+                <div id="t3">
+                    <input type="checkbox" />
+                    <span id="five">When you sign up for email, you'll get exclusive coupons, sale notifications, and product ideas.</span>
+                    <br />
+                    <br />
+                </div>
+                <p></p>
+                    <button type="submit" class="button">Place order >></button>
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+</body>
+
+</html>
+
+<script src="./script/checkout.js"></script>
