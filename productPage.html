@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a1703e299a.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="./CSS/productPage.css">
+
+</head>
+
+<body>
+    <p id="top">Furniture / Living Room Furniture / Living Room Chairs / Accent Chairs</p>
+    <div id="main">
+
+    </div>
+    <i style="margin-left: 67px;margin-top: 100px;">Share This Product:</i>
+    <div id="icons">
+        <i class="fa-solid fa-envelope" id="email"></i>
+        <i class="fa-brands fa-facebook" style="color: blue;"></i>
+        <i class="fa-brands fa-twitter-square"></i>
+        <i class="fa-brands fa-pinterest-square"></i>
+    </div>
+    
+</body>
+</html>
+<script type="module">
+    import {apiCall, appendArticles} from "./scripts/productPage.js";
+
+    let selected_id = JSON.parse(localStorage.getItem("selected_id"));
+
+    let res = await apiCall(`https://overstockapi.herokuapp.com/products/id=${selected_id}`);
+    console.log(res);
+
+    let parent = document.getElementById("main");
+
+    appendArticles(res,parent);
+</script>
