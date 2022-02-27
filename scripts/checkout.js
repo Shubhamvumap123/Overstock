@@ -1,69 +1,9 @@
-// document.querySelector("form").addEventListener("submit", function(e) {
-       
-//     e.preventDefault()
-    
-//     var name = document.getElementById("name").value
-//     var cardNo = document.getElementById("card_number").value
-//     var expiry = document.getElementById("exp_date").value
-//     var cvv = document.getElementById("cvv").value
-//     var valid = true;
-
-//     if (cardNo != 12345) {
-//         document.getElementById("alert-card").textContent = "Card No. is wrong"
-//         document.getElementById("alert-card").style.color = "red"
-//         document.getElementById("card_number").style.border = "1px solid red"
-//         valid = false
-//     } else {
-//         document.getElementById("alert-card").textContent = ""
-//         document.getElementById("card_number").style.border = "none"
-//         valid = true
-//     }
-
-//     if (expiry != "01/30") {
-//         document.getElementById("alert-expiry").textContent = "Card Expiry Date is wrong"
-//         document.getElementById("alert-expiry").style.color = "red"
-//         document.getElementById("exp_date").style.border = "1px solid red"
-//         valid = false
-//     } else {
-//         document.getElementById("alert-expiry").textContent = ""
-//         document.getElementById("exp_date").style.border = "none"
-//         valid = true
-//     }
-
-//     if (cvv != 000) {
-//         document.getElementById("alert-cvv").textContent = "CVV is wrong"
-//         document.getElementById("alert-cvv").style.color = "red"
-//         document.getElementById("cvv").style.border = "1px solid red"
-//         valid = false
-//     } else {
-//         document.getElementById("alert-cvv").textContent = ""
-//         document.getElementById("cvv").style.border = "none"
-//         valid = true
-//     }
-
-//     if (name != "Abhishek") {
-//         document.getElementById("alert-name").textContent = "Card Holder name is wrong"
-//         document.getElementById("alert-name").style.color = "red"
-//         document.getElementById("name").style.border = "1px solid red"
-//         valid = false
-//     } else {
-//         document.getElementById("alert-name").textContent = ""
-//         document.getElementById("name").style.border = "none"
-//         valid = true
-//     }
-
-//     if (valid == true) {
-//         window.location.href = ""
-//     }
-
-// })
 
 document.querySelector(".button").addEventListener("click",function(){
-
-    checkAddress()
-
+console.log("123")
+ alert("Order Placed Succesfully")
+window.location.href='index.html'
 })
-
 
  let checkAddress = ()=>{
      
@@ -159,9 +99,10 @@ document.querySelector(".button").addEventListener("click",function(){
      if (checkValue3 != "false"){
          console.log(1)
          if (paymentDetails.name == "abhi" && paymentDetails.cvv == 123){
-            //  alert("Not valid Credentials")
+           
             localStorage.clear();
-            window.location.href = "congr.html"
+            
+            window.location.href = "index.html"
          } else {
              
          }

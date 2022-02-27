@@ -23,6 +23,7 @@ function appendArticles(articles, main)
             desc_div.id="desc_div";
 
             let image = document.createElement("img");
+            image.id="post1"
             image.src = articles.imageURL;
 
             let h3 = document.createElement("h3");

@@ -1,3 +1,4 @@
+
 #grey
     {
         color: grey;
@@ -9,7 +10,7 @@
         color: rgb(243,144,25);
         font-size: 30px;
     }
-    img
+   #post1
     {
         width: 430px;
     }
@@ -24,10 +25,10 @@
         font-family: sans-serif;
         font-size: 13px;
     }
-    #main
+    #main1
     {
         width: 1000px;
-        border: red solid 1px;
+       
         margin-left: 70px;
         display: flex;
     }
@@ -36,7 +37,7 @@
         margin-left: 20px;
         font-family: sans-serif;
         font-weight: 200;
-        border: pink solid 1px;
+     
         height: 420px;
         width: 400px;
     }
@@ -51,7 +52,7 @@
     }
     #choice
     {
-        border: red solid 1px;
+       
         width: 70%;
         height: 90px;
         display: flex;
@@ -73,12 +74,13 @@
     }
     #top
     {
+        margin: 110px;
         margin-left: 67px;
     }
     #icons
     {
         display: flex;
-        border: blue solid 1px;
+      
         width: 150px;
         height: 40px;
         margin-left: 67px;

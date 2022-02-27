@@ -4,12 +4,14 @@
     margin: auto;
     
 }
+
 #livingRoomImg{
     flex: 8;
     position: relative;
     text-align: center;
 }
 #heading{
+    margin-top: 130px;
     margin-left: 30px;
 }
 #priceSort{
@@ -40,6 +42,7 @@ li{
    padding: 20px 100px 10px 100px;
    
 }
+
 span{
     font-size :95px;
 }

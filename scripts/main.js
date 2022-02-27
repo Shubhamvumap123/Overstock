@@ -94,7 +94,7 @@ function appendD(res,cont){
            rating.innerHTML = `${ele.rating} &#11088  &#11088 &#11088 &#11088 &#11088 (${rev})`;
         }
       div.onclick=()=>{
-          localStorage.setItem("selected_id",JSON.stringify(ele));
+          localStorage.setItem("selected_id",JSON.stringify(ele._id));
           window.location.href="productPage.html"
       }
        div.append(image,price,rating,name)

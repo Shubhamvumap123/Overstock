@@ -9,13 +9,14 @@
     <link rel="stylesheet" href="./styles/productPage.css">
     <link rel="stylesheet" href="./styles/index.css" />
     <link rel="stylesheet" href="./styles/navbar.css">
-
 </head>
-
+<style>
+  
+</style>
 <body>
-    <div id="navbar"></div>
+    <div id="navbar" style="height: 30px; width: 50%;"></div>
     <p id="top">Furniture / Living Room Furniture / Living Room Chairs / Accent Chairs</p>
-    <div id="main">
+    <div id="main1">
 
     </div>
     <i style="margin-left: 67px;margin-top: 100px;">Share This Product:</i>
@@ -147,18 +148,19 @@
     import {apiCall, appendArticles} from "./scripts/productPage.js";
 
     let selected_id = JSON.parse(localStorage.getItem("selected_id"));
+//https://overstockapi.herokuapp.com/products/mainCategory=${selected_cat}
 
     let res = await apiCall(`https://overstockapi.herokuapp.com/products/id=${selected_id}`);
     console.log(res);
 
-    let parent = document.getElementById("main");
+    let parent = document.getElementById("main1");
 
     appendArticles(res,parent);
 </script>
 <script type="module">
-
+ import navbar from './components/navbar.js'
     import { footer, end } from "./components/footer.js";
-    import navbar from './components/navbar.js'
+   
   
     let navbar_div = document.getElementById("navbar");
     navbar_div.innerHTML = navbar();

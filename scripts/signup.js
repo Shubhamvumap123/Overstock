@@ -28,23 +28,23 @@ signUpBtn.addEventListener("click", async (e) => {
   } else if(!isEmail(email)){
     e.preventDefault();
     errorMessage(
-      "Email is not Valid"
+      alert("Email is not Valid")
     );
     return;
   }
   else if (password != confirmPassword) {
     e.preventDefault();
     errorMessage(
-      "The passwords you have entered do not match. Please try again."
+      alert("The passwords you have entered do not match. Please try again.")
     );
     return;
   } else if (password.length < 8 && password.length != 0) {
     e.preventDefault();
     errorMessage(
-      "Password must be a minimum of 8 characters and cannot exceed 70 characters"
+      alert("Password must be a minimum of 8 characters and cannot exceed 70 characters")
     );
     errorMessage(
-      "Password must contain at least 1 Uppercase , 1 lowercase , 1 number and 1 special Character."
+      alert("Password must contain at least 1 Uppercase , 1 lowercase , 1 number and 1 special Character.")
     );
     return;
   }
@@ -68,9 +68,9 @@ signUpBtn.addEventListener("click", async (e) => {
   if (Object.keys(passResult).length != 4) {
     e.preventDefault();
     errorMessage(
-      "Password must be a minimum of 8 characters and cannot exceed 70 characters"
+     alert ("Password must be a minimum of 8 characters and cannot exceed 70 characters")
     );
-    errorMessage("Password must contain at least 1 Uppercase , 1 lowercase , 1 number and 1 special Character.");
+    alert("Password must contain at least 1 Uppercase , 1 lowercase , 1 number and 1 special Character.");
     return;
   }
   e.preventDefault();
@@ -110,8 +110,11 @@ signUpBtn.addEventListener("click", async (e) => {
   let data = await response.json();
   console.log("data: ", data);
   if (data.error == false) {
+    alert("create account succesfuly")
+   
     errorMessage(data.message);
   } else {
+    alert("user already exist")
     errorMessage(data.message);
   }
 });
@@ -127,7 +130,7 @@ signInBtn.addEventListener("click", async (e) => {
   else if(!isEmail(email)){
     e.preventDefault();
     errorMessage(
-      "Email is not Valid"
+     alert("Email is not valid")
     );
     return;
   }
@@ -166,7 +169,8 @@ signInBtn.addEventListener("click", async (e) => {
     errorMessage(data.message);
   } else {
     getProfile(userName, data.token);
-    window.location.href = "checkout.html"
+    alert("login Successful")
+    window.location.href = "index.html"
   }
 
   async function getProfile(username, token) {
@@ -182,10 +186,11 @@ signInBtn.addEventListener("click", async (e) => {
   }
 });
 
-// guest btn js
+
 var guest = document.querySelector(".guest button");
 guest.addEventListener("click", () => {
-  window.location.href = "checkout.html";
+  alert ("successfuly login as a guest")
+  window.location.href = "index.html";
 });
 
 function isEmail(email) {

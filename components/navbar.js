@@ -8,7 +8,7 @@ let navbar = () =>{
       aria-controls="offcanvasExample" class="menupng">
       </div>
       
-      <div class="overstocklogo">
+      <div class="overstocklogo" onclick="window.location.href='index.html'">
         <img class="overstockIndex" src="https://i.postimg.cc/0yCKC2SV/svgexport-1.png" alt="" />
       </div>
       <div class="class-input">
