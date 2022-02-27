@@ -87,3 +87,28 @@
     {
         width: 100px;
     }
+    #specs{
+        display: flex;
+        justify-content: space-evenly;
+        border-bottom: 1px solid black;
+        width: 70%;
+        margin: auto;
+    }
+    #ItemDet{
+        display: flex;
+        gap: 25px;
+        width: 65%;
+        margin: auto;
+    }
+    #details_Item{
+        flex: 1;
+    }
+    #spec_Details{
+        flex: 1;
+    }
+    td{
+        border-bottom: 3px dotted gray;
+    }
+    .box1{
+        border: 1px solid rgb(204, 199, 199);
+    }
