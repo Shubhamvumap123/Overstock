@@ -6,7 +6,7 @@
 .heading{
     margin-top: 120px;
     margin-bottom:20px;
-    margin-left: 20px;
+    margin-left: 50px;
 }
 #furniture-cat{
     flex:2;
@@ -32,7 +32,7 @@
 }
 
 .furniture-Img2>div{
-    background-color:bisque;
+    background-color:rgb(245,245,245);
     height:250px;
 }
  #img1{
@@ -44,14 +44,14 @@
 
 .furniture-Img1text{
     position:absolute ;
-    top: 12%;
+    top: 25%;
     left: 81%;
    text-align: center;
    font-size: 25px;
 }
 .furniture-Img2text{
     position:absolute ;
-    top: 50%;
+    top: 65%;
     left: 81%;
    text-align: center;
    font-size: 25px;
@@ -111,7 +111,8 @@
 }
 p{
     font-size:25px;
-    text-align: center;
+    /* text-align: center; */
+    margin-left: 0px;
 }
 #detail{
    width:95%;
@@ -152,6 +153,9 @@ span{
 a{
     text-decoration:none;
     color:black;
+    font-size:16px;
+    margin-top:20px;
+    font: weight 400;
 }
 li{
     list-style-type: none;
