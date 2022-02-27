@@ -1,9 +1,11 @@
     body
     {
         font-family: sans-serif;
+        margin-top:160px;
     }
     #container
-    {
+    {   
+        /* margin-top:110px; */
         width: 90%;
         height: 1200px;
         margin: auto;

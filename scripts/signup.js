@@ -1,11 +1,11 @@
-// SignUp Js
+
 let errorMessage = (err) => {
   const errorDiv = document.querySelector("#errorMessage");
   errorDiv.style.display = "block";
   const error = document.createElement("p");
   error.textContent = err;
   errorDiv.append(error);
-  // clearTimeout(state);
+  
   let state = setTimeout(function () {
     errorDiv.innerHTML = "";
     errorDiv.style.display = "none";
@@ -64,7 +64,7 @@ signUpBtn.addEventListener("click", async (e) => {
       passResult[3] = "yes4";
     }
   }
-  // console.log(passResult);
+ 
   if (Object.keys(passResult).length != 4) {
     e.preventDefault();
     errorMessage(
@@ -119,7 +119,7 @@ signUpBtn.addEventListener("click", async (e) => {
   }
 });
 
-//signIn js
+
 const signInBtn = document.querySelector(".signIn button");
 signInBtn.addEventListener("click", async (e) => {
   const email = document.getElementById("inputEmail").value;
@@ -153,7 +153,7 @@ signInBtn.addEventListener("click", async (e) => {
 
   let login_api = `https://masai-api-mocker.herokuapp.com/auth/login`;
 
-  //fetch request
+
 
   let response = await fetch(login_api, {
     method: "POST",
@@ -194,7 +194,7 @@ guest.addEventListener("click", () => {
 });
 
 function isEmail(email) {
-  return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+  return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[`0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
     email
   );
 }

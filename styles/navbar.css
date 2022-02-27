@@ -12,7 +12,10 @@ body {
     top: 0;
     z-index: 10;
   }
-  
+  .overstockIndex{
+    margin-top:10px;
+    height: 20px;
+  }
   img {
     cursor: pointer;
   }
