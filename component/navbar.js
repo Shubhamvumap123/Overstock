@@ -59,7 +59,8 @@ let navbar = () =>{
       </div>
     </div>
     <div class="section-div">
-      <div>Furniture</div>
+    <div onclick="window.location.href='furniture.html'"
+    >Furniture</div>
       <div>Rugs</div>
       <div>Decor</div>
       <div>Bed & Bath</div>
