@@ -6,13 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a1703e299a.js" crossorigin="anonymous"></script>
     <title>Document</title>
-    <link rel="stylesheet" href="./CSS/productPage.css">
+    <link rel="stylesheet" href="./styles/productPage.css">
+    <link rel="stylesheet" href="./styles/index.css" />
+    <link rel="stylesheet" href="./styles/navbar.css">
+    <link
+    rel="icon"
+    href="./images/0_overstock.com_logo-thumb.jpg"
+    sizes="16x16"
+    type="image/png"
+  />
 
 </head>
 
 <body>
+    <div id="navbar"></div>
     <p id="top">Furniture / Living Room Furniture / Living Room Chairs / Accent Chairs</p>
-    <div id="main">
+    <div id="main1">
 
     </div>
     <i style="margin-left: 67px;margin-top: 100px;">Share This Product:</i>
@@ -136,6 +145,8 @@
         </div>
     </div>
 </div>
+<div id="footer"></div>
+    <div id="end"></div>
 </body>
 </html>
 <script type="module">
@@ -150,3 +161,22 @@
 
     appendArticles(res,parent);
 </script>
+<script type="module">
+    import { footer, end } from "./components/footer.js";
+   import navbar from './components/navbar.js'
+ 
+   let navbar_div = document.getElementById("navbar");
+   navbar_div.innerHTML = navbar();
+ 
+   let sectionDiv = document.querySelector(".section-div > div");
+   sectionDiv.addEventListener("mouseover", function () {
+     let dropDownContainer = document.querySelector(".dropdown-content-part");
+     dropDownContainer.style.display = "flex";
+ 
+     dropDownContainer.addEventListener("mouseout", function () {
+       dropDownContainer.style.display = "none";
+     });
+   });
+   document.querySelector("#footer").innerHTML = footer();
+   document.querySelector("#end").innerHTML = end();
+ </script>
