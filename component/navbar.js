@@ -20,10 +20,10 @@ let navbar = () =>{
       </div>
       </div>
       <div id="account1" class="class-account class-account-common">
-        <div>
+        <div onclick="window.location.href='signup.html'">
           <img src="https://i.postimg.cc/RCb3PDNz/User.png" alt="" />
         </div>
-        <div>Account</div>
+        <div onclick="window.location.href='signup.html'" >Account</div>
         <div class="chevronup">
           <img src="https://i.postimg.cc/DZHpvK2K/Chevron-Up.png" alt="" />
         </div>
