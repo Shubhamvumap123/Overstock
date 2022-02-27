@@ -1,6 +1,9 @@
 title{
     color: white;
 }
+body{
+    margin-top:110px;
+}
 #flashsale{
     width: 100%;
     height: 20px;
