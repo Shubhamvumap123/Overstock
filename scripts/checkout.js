@@ -2,7 +2,7 @@
 document.querySelector(".button").addEventListener("click",function(){
 console.log("123")
  alert("Order Placed Succesfully")
-window.location.href='index.html'
+window.location.href='orderPlaced.html'
 })
 
  let checkAddress = ()=>{
