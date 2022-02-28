@@ -53,9 +53,9 @@ let navbar = () =>{
       </div>
       <div id="cart1" class="class-account">
         <div>
-          <img src="https://i.postimg.cc/DyZNh8vX/Cart-Empty.png" alt="" />
+          <img onclick="window.location.href='cart.html'" src="https://i.postimg.cc/DyZNh8vX/Cart-Empty.png" alt="" />
         </div>
-        <div>Cart</div>
+        <div onclick="window.location.href='cart.html'">Cart</div>
       </div>
     </div>
     <div class="section-div">
