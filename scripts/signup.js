@@ -79,7 +79,7 @@ signUpBtn.addEventListener("click", async (e) => {
     if (email[i] != "@") {
       userName += email[i];
     } else {
-      break;
+      break;    
     }
   }
   function random(number) {
