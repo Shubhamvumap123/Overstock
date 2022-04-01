@@ -4,12 +4,7 @@ let errorMessage = (err) => {
   errorDiv.style.display = "block";
   const error = document.createElement("p");
   error.textContent = err;
-  errorDiv.append(error);
-  
-  let state = setTimeout(function () {
-    errorDiv.innerHTML = "";
-    errorDiv.style.display = "none";
-  }, 5000);
+
 };
 
 const signUpBtn = document.querySelector(".signUp button");
@@ -18,6 +13,7 @@ signUpBtn.addEventListener("click", async (e) => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   const confirmPassword = document.getElementById("confirmPassword").value;
+
   if (
     email === "" ||
     password === "" ||
@@ -26,7 +22,9 @@ signUpBtn.addEventListener("click", async (e) => {
   ) {
     return;
   } else if(!isEmail(email)){
+
     e.preventDefault();
+
     errorMessage(
       alert("Email is not Valid")
     );
@@ -34,9 +32,9 @@ signUpBtn.addEventListener("click", async (e) => {
   }
   else if (password != confirmPassword) {
     e.preventDefault();
-    errorMessage(
+    
       alert("The passwords you have entered do not match. Please try again.")
-    );
+    
     return;
   } else if (password.length < 8 && password.length != 0) {
     e.preventDefault();
@@ -64,7 +62,6 @@ signUpBtn.addEventListener("click", async (e) => {
       passResult[3] = "yes4";
     }
   }
- 
   if (Object.keys(passResult).length != 4) {
     e.preventDefault();
     errorMessage(
@@ -73,31 +70,36 @@ signUpBtn.addEventListener("click", async (e) => {
     alert("Password must contain at least 1 Uppercase , 1 lowercase , 1 number and 1 special Character.");
     return;
   }
+
   e.preventDefault();
   let userName = "";
+
+
   for (let i = 0; i < email.length; i++) {
     if (email[i] != "@") {
       userName += email[i];
     } else {
-      break;    
+      break;
     }
   }
+
+
   function random(number) {
     return Math.floor(Math.random() * number);
   }
 
   let signup_data = {
-    name: "Null",
+    // name: "Null",
     email: email,
     password: password,
-    username: userName,
-    mobile: String(random(10000000000)),
-    description: "Null",
+    // username: userName,
+    // mobile: String(random(10000000000)),
+    // description: "Null",
   };
   signup_data = JSON.stringify(signup_data);
   console.log(signup_data);
 
-  let register_api = `https://masai-api-mocker.herokuapp.com/auth/register`;
+  let register_api = ` https://overstock-dubli.herokuapp.com/register`;
 
   var response = await fetch(register_api, {
     method: "POST",
@@ -109,32 +111,71 @@ signUpBtn.addEventListener("click", async (e) => {
 
   let data = await response.json();
   console.log("data: ", data);
-  if (data.error == false) {
+  if (data.token) {
     alert("create account succesfuly")
    
-    errorMessage(data.message);
+    // errorMessage(data.message);
   } else {
     alert("user already exist")
-    errorMessage(data.message);
+    // errorMessage(data.message);
   }
 });
 
-
 const signInBtn = document.querySelector(".signIn button");
 signInBtn.addEventListener("click", async (e) => {
-  const email = document.getElementById("inputEmail").value;
-  const password = document.getElementById("inputPassword").value;
-  if (email === "" || password === "") {
-    return;
-  }
-  else if(!isEmail(email)){
-    e.preventDefault();
-    errorMessage(
-     alert("Email is not valid")
-    );
-    return;
-  }
   e.preventDefault();
+  try {
+
+    let login_data = {
+       email : document.getElementById("inputEmail").value,
+       password : document.getElementById("inputPassword").value,
+    }
+    let login_data_json = JSON.stringify(login_data)
+    let res = await fetch("https://overstock-dubli.herokuapp.com/login",{
+
+ method: "POST",
+ body: login_data_json,
+ headers: {
+   "Content-Type" : "application/json",
+ }
+
+    })
+    let data = await res.json();
+    console.log(data)
+    if(data.token){
+      localStorage.setItem("token", data.token)
+      window.location.href = "index.html"
+    }else{
+      alert("email or password incorrect")
+    }
+    // getUser(login_data.email,data.token)
+    // check(data.error)
+
+  } catch (error) {
+    return console.log({error: error.message});
+  }
+  
+  // let getuser = async(email,token) => {
+  //   try {
+      
+  //   } catch (error) {
+      
+  //   }
+  // }
+
+  // if (email === "" || password === "") {
+  //   return;
+  // }
+  // else if(!isEmail(email)){
+  //   e.preventDefault();
+  //   errorMessage(
+  //    alert("Email is not valid")
+  //   );
+  //   return;
+  // }
+
+  e.preventDefault();
+
   let userName = "";
   for (let i = 0; i < email.length; i++) {
     if (email[i] != "@") {
@@ -145,36 +186,35 @@ signInBtn.addEventListener("click", async (e) => {
   }
 
   let login_data = {
-    username: userName,
+    
+    // username: userName,
+    email:email,
     password: password,
   };
 
-  login_data = JSON.stringify(login_data);
+  login_data_json = JSON.stringify(login_data);
+  
+  let login_api = `http://localhost:4000/auth/google`;
 
-  let login_api = `https://masai-api-mocker.herokuapp.com/auth/login`;
-
-
-
-  let response = await fetch(login_api, {
+  let response = await fetch('http://localhost:4000/auth/google', {
     method: "POST",
-    body: login_data,
+    body: login_data_json,
     headers: {
       "Content-Type": "application/json",
     },
   });
-
+  
   let data = await response.json();
   console.log("data: ", data);
   if (data.error === true) {
     errorMessage(data.message);
   } else {
     getProfile(userName, data.token);
-    alert("login Successful")
     window.location.href = "index.html"
   }
 
   async function getProfile(username, token) {
-    let api = `https://masai-api-mocker.herokuapp.com/user/${username}`;
+    let api = `http://localhost:4000/auth/google${username}`;
     let response = await fetch(api, {
       headers: {
         "Content-Type": "application/json",
@@ -184,17 +224,18 @@ signInBtn.addEventListener("click", async (e) => {
     let data = await response.json();
     console.log("data: ", data);
   }
-});
+ });
 
 
 var guest = document.querySelector(".guest button");
 guest.addEventListener("click", () => {
+  
   alert ("successfuly login as a guest")
-  window.location.href = "index.html";
+  window.location.href = "http://localhost:4000/auth/google";
 });
 
 function isEmail(email) {
   return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[`0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
     email
   );
-}
+  }
