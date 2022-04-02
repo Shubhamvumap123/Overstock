@@ -387,7 +387,7 @@ color:  rgb(199, 32, 44);
 
 
 
-
+/* 
    
 
 
@@ -486,7 +486,7 @@ color:  rgb(199, 32, 44);
             width: 100%;
             /* border: 1px solid; */
            
-        }
+        /* }
         #procategoryrow1>div>p{
             font-size: 18px;
             font-weight: 400;
@@ -611,7 +611,7 @@ color:  rgb(199, 32, 44);
         }
         #footer>div{
             /* border: 1px solid; */
-            text-align: left;
+            /* text-align: left;
              display: flex;
              flex-direction: column;
              gap: 20px;
@@ -666,12 +666,11 @@ color:  rgb(199, 32, 44);
         /* ....................................................... */
         
         
-        
+/*         
         .carousel {
             width: 100%;
             margin: 40px 0px 30px 0px;
-            display: grid;
-            grid-template-columns: repeat(2,1fr);
+          
          
         }
         
@@ -703,7 +702,8 @@ color:  rgb(199, 32, 44);
         
         .carousel2{
             margin: 0%;
-           
+           display: grid;
+           grid-template-columns: repeat(1,1fr);
         
         }
             
@@ -714,7 +714,7 @@ color:  rgb(199, 32, 44);
                 display: flex;
                 flex-direction: column;
                 /* border: 1px solid; */
-                background-color: rgb(245,245,245);
+                /* background-color: rgb(245,245,245);
                
               }
         .carousel-cell2>div>h2{
@@ -791,4 +791,4 @@ color:  rgb(199, 32, 44);
         
 
 
-      }
+      } */ 
