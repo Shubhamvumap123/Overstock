@@ -14,7 +14,9 @@ let parent1 = document.getElementById("main2")
 appendData(ourSty,parent1)
 //https://overstockapi.herokuapp.com/products/mainCategory=${selected_cat}
 
-let res = await getData("https://overstockapi.herokuapp.com/products/")
+// let res = await getData("https://overstockapi.herokuapp.com/products/")
+
+let res = await getData("https://product-model1.herokuapp.com/products")
 
 let cont = document.getElementById("prod-list")
 

@@ -156,7 +156,9 @@
     let selected_id = JSON.parse(localStorage.getItem("selected_id"));
 //https://overstockapi.herokuapp.com/products/mainCategory=${selected_cat}
 
-    let res = await apiCall(`https://overstockapi.herokuapp.com/products/id=${selected_id}`);
+    // let res = await apiCall(`https://overstockapi.herokuapp.com/products/id=${selected_id}`);
+
+    let res = await apiCall(`https://product-model1.herokuapp.com/products/${selected_id}`)
     console.log(res);
 
     let parent = document.getElementById("main1");
