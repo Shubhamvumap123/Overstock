@@ -155,7 +155,7 @@ signInBtn.addEventListener("click", async (e) => {
     console.log(data)
     if(data.token){
       localStorage.setItem("token", data.token)
-      window.location.href = "index.html"
+      window.location.href = "cart.html"
     }else{
       alert("email or password incorrect")
     }
