@@ -170,6 +170,7 @@ display: block;
     width: 95%;
     margin: auto;
     grid-gap: 50px;
+    margin-top:5px;
 }
 .name{
     text-align: center;
