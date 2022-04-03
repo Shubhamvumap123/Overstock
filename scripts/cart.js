@@ -46,31 +46,28 @@ function removeItem(index)
     display(cart);
     displayTotal();
 }
+
 function displayTotal()
 {   
- right.innerHTML = "";
+    right.innerHTML = "";
     var total = 0;
     for(var i =0;i<cart.length;i++)
     {
         total += Number(cart[i].price);
     }
+
     console.log(total);
     let show = document.createElement("h2");
     show.innerText = `Your Total: INR ${total}`;
     show.id="showTotal"
+
     let checkOut = document.createElement("button");
     checkOut.id = "check_out";
     checkOut.innerText="Check Out";
-    var token = JSON.parse(localStorage.getItem("token"));
-    if(token != null){
     checkOut.addEventListener("click",function()
     {
         window.location.href="checkout.html";
     });
-}else{
-    alert("please login first");
-    window.location.href="signup.html";
-}
 
 
     right.append(show,checkOut);
