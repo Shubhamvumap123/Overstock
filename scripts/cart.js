@@ -64,13 +64,27 @@ function displayTotal()
     let checkOut = document.createElement("button");
     checkOut.id = "check_out";
     checkOut.innerText="Check Out";
+
+    
     checkOut.addEventListener("click",function()
     {
-        window.location.href="checkout.html";
+        // window.location.href="checkout.html";
+        checkout()
     });
 
 
     right.append(show,checkOut);
+}
+
+var token = (localStorage.getItem("token"));
+
+function checkout(){
+    if(token!=null){
+        window.location.href="checkout.html";
+    }
+    else{
+        window.location.href="signup.html";
+    }
 }
 
 displayTotal();
