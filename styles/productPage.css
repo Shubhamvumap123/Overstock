@@ -72,6 +72,15 @@
         border-radius: 5px;
         margin-left: 10px;
     }
+    #addCart_btn1{
+       
+        padding:10px  60px 10px 60px;
+        border-radius: 5px;
+        background-color:lightgray;
+        border: 1px solid gray;
+        margin: 35px 0 0 10px;
+        cursor: pointer;
+    }
     #top
     {
         margin: 110px;

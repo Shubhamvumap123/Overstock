@@ -54,13 +54,13 @@ function appendData(data,parent){
     })
 }
 
-function appendD(res,cont){
+function appendD(res,cont){ 
     cont.innerHTML=" ";
    res.forEach(ele => {
-      
+      console.log("Done")
        let rev = Math.round(Math.random()*200)+10
        
-       if(ele.sub_catergory== "Living Room Furniture"){
+    
        let div = document.createElement("div")
        div.id="box"
 
@@ -99,7 +99,7 @@ function appendD(res,cont){
       }
        div.append(image,price,rating,name)
        cont.append(div)
-   }
+   
    });
 }
 

@@ -66,7 +66,7 @@ function appendArticles(articles, main)
             cost.id = "cost";
 
             let choose = document.createElement("p");
-            choose.innerText = `Color(${articles.color.length}):  Choose Color`;
+            choose.innerText = `Color (4) :  Choose Color`;
 
             let choice = document.createElement("div");
             choice.id = "choice";
@@ -100,9 +100,17 @@ function appendArticles(articles, main)
                 addToCart(articles);
             })
 
+            let addCart_btn1 = document.createElement("button");
+            addCart_btn1.id = "addCart_btn1";
+            addCart_btn1.textContent="Favorites";
+            addCart_btn1.addEventListener("click",function()
+            {
+                addToCart1(articles);
+            })
+
             select.append(option,option2,option3);
 
-            cart_div.append(select,addCart_btn);
+            cart_div.append(select,addCart_btn,addCart_btn1);
 
             choice.append(img1,img2,img3,img4);
 
@@ -119,6 +127,16 @@ var cart = JSON.parse(localStorage.getItem("cartItems"))||[];
         cart.push(data);
         localStorage.setItem("cartItems",JSON.stringify(cart));
         window.location.href = "cart.html";
+    }
+
+    var cart1 = JSON.parse(localStorage.getItem("list_id")) || []
+    function addToCart1(data)
+    {   
+        
+        cart1.push(data);
+        localStorage.setItem("list_id",JSON.stringify(cart1));
+        //  window.location.href = "list.html";
+        alert("Product Successfully added to list");
     }
 
 export { apiCall, appendArticles }
