@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Overstock.com: Online Shopping - Bedding, Furniture, Electronics, Jewelry,
+      Clothing &amp; more
+    </title>
+    <link rel="stylesheet" href="./styles/index.css" />
+    <link rel="stylesheet" href="./styles/navbar.css">
+    <link
+    rel="icon"
+    href="./images/0_overstock.com_logo-thumb.jpg"
+    sizes="16x16"
+    type="image/png"
+  />
+    <link rel="stylesheet" href="./styles/signup.css" />
+  </head>
+  <body>
+    <div id="navbar"></div>
+    <div id="errorMessage"></div>
+    <div class="User">
+      <div class="signUp">
+        <div>
+          <h2>Create Account</h2>
+          <form action="">
+            <label for="email">Email Address*</label>
+            <input type="email" id="email" placeholder="Email" required />
+            <div class="passwordDiv">
+              <label for="password">Create Password*</label>
+              <label for="confirmPassword">Confirm Password*</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+              />
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                required
+              />
+            </div>
+            <div class="checkboxDiv">
+              <input type="checkbox" id="checkbox" required />
+              <label for="checkbox"></label>
+              <p>
+                Sign up today for <strong>exclusive offers</strong> from
+                Overstock.com delivered right to your inbox**
+              </p>
+            </div>
+            <button>Create Account</button>
+          </form>
+          <div class="bar">
+            <div></div>
+          </div>
+          <div class="guest">
+            <div>
+              <button>Continue with Google Login</button>
+            </div>
+            <div class="info">
+              <div>
+                <p>
+                  By creating an account or continuing as a Guest, you agree to
+                  our <a href="">Terms & Conditions</a> and
+                  <a href="">Privacy Policy.</a>
+                </p>
+              </div>
+              <div>
+                <div>
+                  <a href="">Terms & Conditions</a> |
+                  <a href="">Privacy Policy.</a>
+                </div>
+                <div>**You can unsubscribe at any time</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="vertical_line"></div>
+      <div class="signIn">
+        <div>
+          <h2>Sign In</h2>
+          <form action="">
+            <div>
+              <label for="inputEmail">Email Address*</label>
+              <input
+                type="email"
+                placeholder="Email"
+                id="inputEmail"
+                required
+              />
+            </div>
+            <div>
+              <label for="inputPassword">Password*</label>
+              <input
+                type="password"
+                placeholder="Password"
+                id="inputPassword"
+                required
+              />
+            </div>
+            <button>Sign In</button>
+            <div><a href="">Forgot your password?</a></div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div id="footer"></div>
+    <div id="end"></div>
+  </body>
+</html>
+<script src="./scripts/signup.js"></script>
+<script type="module">
+  import { footer, end } from "./components/footer.js";
+ import navbar from './components/navbar.js'
+
+ let navbar_div = document.getElementById("navbar");
+ navbar_div.innerHTML = navbar();
+
+ let sectionDiv = document.querySelector(".section-div > div");
+ sectionDiv.addEventListener("mouseover", function () {
+   let dropDownContainer = document.querySelector(".dropdown-content-part");
+   dropDownContainer.style.display = "flex";
+
+   dropDownContainer.addEventListener("mouseout", function () {
+     dropDownContainer.style.display = "none";
+   });
+ });
+ document.querySelector("#footer").innerHTML = footer();
+ document.querySelector("#end").innerHTML = end();
+</script>
