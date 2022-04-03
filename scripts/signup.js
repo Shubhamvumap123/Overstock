@@ -15,13 +15,20 @@ signUpBtn.addEventListener("click", async (e) => {
   const confirmPassword = document.getElementById("confirmPassword").value;
 
   if (
-    email === "" ||
-    password === "" ||
-    confirmPassword === "" ||
-    checkbox === false
+    email === "" 
+  
   ) {
+    alert("Please enter a valid email ");
     return;
-  } else if(!isEmail(email)){
+  }else if (
+    
+    password === "" ||
+    confirmPassword === "" 
+  ) {
+    alert("Please enter a valid password");
+    return;
+  }
+  else if(!isEmail(email)){
 
     e.preventDefault();
 
@@ -34,7 +41,8 @@ signUpBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     
       alert("The passwords you have entered do not match. Please try again.")
-    
+
+      alert("Password must contain at least 1 Uppercase , 1 lowercase , 1 number and 1 special Character.")
     return;
   } else if (password.length < 8 && password.length != 0) {
     e.preventDefault();
@@ -44,6 +52,9 @@ signUpBtn.addEventListener("click", async (e) => {
     errorMessage(
       alert("Password must contain at least 1 Uppercase , 1 lowercase , 1 number and 1 special Character.")
     );
+    return;
+  }else if(checkbox==false){
+    alert("please select checkbox");
     return;
   }
 
@@ -72,6 +83,8 @@ signUpBtn.addEventListener("click", async (e) => {
   }
 
   e.preventDefault();
+
+
   let userName = "";
 
 
@@ -89,12 +102,10 @@ signUpBtn.addEventListener("click", async (e) => {
   }
 
   let signup_data = {
-    // name: "Null",
+  
     email: email,
     password: password,
-    // username: userName,
-    // mobile: String(random(10000000000)),
-    // description: "Null",
+   
   };
   signup_data = JSON.stringify(signup_data);
   console.log(signup_data);
@@ -148,32 +159,11 @@ signInBtn.addEventListener("click", async (e) => {
     }else{
       alert("email or password incorrect")
     }
-    // getUser(login_data.email,data.token)
-    // check(data.error)
-
+   
   } catch (error) {
     return console.log({error: error.message});
   }
-  
-  // let getuser = async(email,token) => {
-  //   try {
-      
-  //   } catch (error) {
-      
-  //   }
-  // }
-
-  // if (email === "" || password === "") {
-  //   return;
-  // }
-  // else if(!isEmail(email)){
-  //   e.preventDefault();
-  //   errorMessage(
-  //    alert("Email is not valid")
-  //   );
-  //   return;
-  // }
-
+ 
   e.preventDefault();
 
   let userName = "";
@@ -186,17 +176,15 @@ signInBtn.addEventListener("click", async (e) => {
   }
 
   let login_data = {
-    
-    // username: userName,
     email:email,
     password: password,
   };
 
   login_data_json = JSON.stringify(login_data);
   
-  let login_api = `http://localhost:4000/auth/google`;
+  let login_api = `http://localhost:4000/auth/google/`;
 
-  let response = await fetch('http://localhost:4000/auth/google', {
+  let response = await fetch('localhost:4000/auth/google/', {
     method: "POST",
     body: login_data_json,
     headers: {
@@ -214,7 +202,7 @@ signInBtn.addEventListener("click", async (e) => {
   }
 
   async function getProfile(username, token) {
-    let api = `http://localhost:4000/auth/google${username}`;
+    let api = `http://localhost:4000/auth/google/${username}`;
     let response = await fetch(api, {
       headers: {
         "Content-Type": "application/json",
@@ -225,14 +213,16 @@ signInBtn.addEventListener("click", async (e) => {
     console.log("data: ", data);
   }
  });
-
-
 var guest = document.querySelector(".guest button");
 guest.addEventListener("click", () => {
   
-  alert ("successfuly login as a guest")
-  window.location.href = "http://localhost:4000/auth/google";
+   alert ("successfuly login with google")
+  
+  window.location.href = "http://localhost:4000/auth/google"
+  
+  console.log("success")
 });
+
 
 function isEmail(email) {
   return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[`0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(

@@ -4,7 +4,6 @@ console.log("123")
  alert("Order Placed Succesfully")
 window.location.href='orderPlaced.html'
 })
-
  let checkAddress = ()=>{
      
  let checkValue = "true";
