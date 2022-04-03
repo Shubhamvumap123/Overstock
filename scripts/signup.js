@@ -218,7 +218,7 @@ guest.addEventListener("click", () => {
   
    alert ("successfuly login with google")
   
-  window.location.href = "http://localhost:4000/auth/google"
+  window.location.href = "cart.html"
   
   console.log("success")
 });
