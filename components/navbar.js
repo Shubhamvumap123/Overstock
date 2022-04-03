@@ -36,7 +36,7 @@ let navbar = () =>{
           <div>Sign Out</div>
         </div>
       </div>
-      <div class="class-account class-account-common">
+      <div onclick="window.location.href='list.html'" class="class-account class-account-common">
         <div>
           <img src="https://i.postimg.cc/B6TrjykP/Heart.png" alt="" />
         </div>
