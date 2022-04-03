@@ -66,7 +66,7 @@ function appendArticles(articles, main)
             cost.id = "cost";
 
             let choose = document.createElement("p");
-            choose.innerText = `Color(${articles.color.length}):  Choose Color`;
+            choose.innerText = `Color (4) :  Choose Color`;
 
             let choice = document.createElement("div");
             choice.id = "choice";
