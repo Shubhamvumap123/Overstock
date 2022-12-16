@@ -158,7 +158,7 @@
 
     // let res = await apiCall(`https://overstockapi.herokuapp.com/products/id=${selected_id}`);
 
-    let res = await apiCall(`https://product-model1.herokuapp.com/products/${selected_id}`)
+    let res = await apiCall(`http://localhost:5000/products/${selected_id}`)
     console.log(res);
 
     let parent = document.getElementById("main1");
