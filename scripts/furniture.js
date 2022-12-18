@@ -21,7 +21,7 @@ var data = JSON.parse(localStorage.getItem('furniture_data'))
         })
     }
 
-//append(res)
+
     let parent = document.getElementById('main')
     let parent1 = document.getElementById('main1')
     appendData(data,parent)
