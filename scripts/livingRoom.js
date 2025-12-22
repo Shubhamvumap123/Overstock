@@ -1,15 +1,17 @@
 import {getData, appendData,appendD} from "/scripts/main.js"
-let category = JSON.parse(localStorage.getItem("category"))
+import { categoryData, trendingData, styleData } from "/components/data.js";
+
+let category = categoryData;
 let parent = document.getElementById("main")
 appendData(category, parent)
-let trend = JSON.parse(localStorage.getItem("trending"))
+let trend = trendingData;
 
 
 let trending = document.getElementById("main1")
 
 appendData(trend, trending)
 
-let ourSty = JSON.parse(localStorage.getItem("ourstyle"))
+let ourSty = styleData;
 let parent1 = document.getElementById("main2")
 appendData(ourSty,parent1)
 //https://overstockapi.herokuapp.com/products/mainCategory=${selected_cat}

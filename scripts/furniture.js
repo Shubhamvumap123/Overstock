@@ -1,9 +1,8 @@
 import {appendData,getData} from "/scripts/main.js"
+import { furnitureData, moreCategory } from "/components/data.js";
 
-var data = JSON.parse(localStorage.getItem('furniture_data'))
-
-    var data1 = JSON.parse(localStorage.getItem('moreCategory'))
-
+var data = furnitureData;
+var data1 = moreCategory;
   
 
     let res = await getData("https://overstockapi.herokuapp.com/page")
