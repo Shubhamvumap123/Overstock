@@ -115,7 +115,7 @@ body {
   .header .class-input > div:nth-child(1) {
     width: 100%;
   }
-  .header .class-input > div:nth-child(2) {
+  .header .class-input > :nth-child(2) {
     background-color: #ff1f2c;
     height: 82.6%;
     width: 46px;
@@ -125,6 +125,8 @@ body {
     border: none;
     border-radius: 0 4px 4px 0;
     transform: translateX(-1px);
+    cursor: pointer;
+    padding: 0;
   }
   .header .class-input {
     width: 70%;
