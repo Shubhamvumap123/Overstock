@@ -13,11 +13,11 @@ let navbar = () =>{
       </div>
       <div class="class-input">
         <div>
-          <input type="text" placeholder="Search" />
+          <input type="text" placeholder="Search" aria-label="Search Overstock" />
         </div>
-        <div>
-        <img src="https://i.postimg.cc/tgWqzB8p/Search-1.png alt="">
-      </div>
+        <button type="submit" aria-label="Submit Search">
+        <img src="https://i.postimg.cc/tgWqzB8p/Search-1.png" alt="" />
+      </button>
       </div>
       <div id="account1" class="class-account class-account-common">
         <div onclick="window.location.href='signup.html'">
