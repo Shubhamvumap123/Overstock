@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const connect = require("./configs/db");
 const userController = require("./controllers/user.controller");
