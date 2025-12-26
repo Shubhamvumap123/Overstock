@@ -53,7 +53,18 @@ function displayTotal()
     var total = 0;
     for(var i =0;i<cart.length;i++)
     {
-        total += Number(cart[i].price);
+        // Handle various price formats (number, string with commas, etc.)
+        let priceVal = cart[i].price;
+        let num = 0;
+        if (typeof priceVal === 'number') {
+            num = priceVal;
+        } else if (typeof priceVal === 'string') {
+            num = Number(priceVal.replace(/[^0-9.]/g, ''));
+        }
+
+        if (!isNaN(num)) {
+            total += num;
+        }
     }
 
     console.log(total);

@@ -16,12 +16,22 @@ let res = JSON.parse(localStorage.getItem("list_id")) || [];
 
 let parent = document.getElementById("prod-list");
 let fav = document.getElementById("favorites");
-fav.innerHTML = `Favorites     ${selected_id.length} Items`;
+if (fav) {
+    fav.innerHTML = `Favorites     ${selected_id.length} Items`;
+}
 let listlength = document.getElementById("listLength");
-listlength.innerHTML = `Lists      1 Items`;
+if (listlength) {
+    listlength.innerHTML = `Lists      1 Items`;
+}
 
 function appendD(res, cont) {
   cont.innerHTML = " ";
+
+  // Update Favorites count dynamically
+  if (fav) {
+      fav.innerHTML = `Favorites     ${res.length} Items`;
+  }
+
   res.map(function (ele, index) {
     let rev = Math.round(Math.random() * 200) + 10;
 
@@ -78,11 +88,20 @@ function appendD(res, cont) {
     cont.append(div);
   });
 }
-var cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+
 function addToCart(data) {
-  console.log(data);
-  console.log(cart);
-  console.log(typeof cart);
+  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+  let exists = cart.some(item =>
+      (item._id && item._id === data._id) ||
+      (item.id && item.id === data.id) ||
+      item.name === data.name
+  );
+
+  if (exists) {
+      alert("Item already in cart");
+      return;
+  }
+
   cart.push(data);
   localStorage.setItem("cartItems", JSON.stringify(cart));
   //  window.location.href = "cart.html";

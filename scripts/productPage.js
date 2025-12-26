@@ -16,7 +16,10 @@ async function apiCall(url) {
 
 function appendArticles(articles, main) 
 {
-  
+            if (!articles) {
+                console.log("No article data found");
+                return;
+            }
             console.log(articles);
             let image_div = document.createElement("div");
             let desc_div = document.createElement("div");
@@ -32,7 +35,7 @@ function appendArticles(articles, main)
             let star = document.createElement("p");
             let grey = document.createElement("span");
 
-            let rating = Math.round(articles.rating);
+            let rating = articles.rating ? Math.round(articles.rating) : 0;
             if(rating==1)
             {
                 star.innerText = "★";
@@ -61,7 +64,8 @@ function appendArticles(articles, main)
             grey.id = "grey";
 
             let cost = document.createElement("h3");
-            cost.innerText = `Sale INR ${articles.price}/-`;
+            let priceDisplay = articles.price !== undefined ? articles.price : 'N/A';
+            cost.innerText = `Sale INR ${priceDisplay}/-`;
             cost.style.color = "#b22";
             cost.id = "cost";
 
@@ -121,18 +125,40 @@ function appendArticles(articles, main)
 
 }
 
-var cart = JSON.parse(localStorage.getItem("cartItems"))||[];
     function addToCart(data)
     {
+        let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+        let exists = cart.some(item =>
+            (item._id && item._id === data._id) ||
+            (item.id && item.id === data.id) ||
+            item.name === data.name
+        );
+
+        if (exists) {
+            alert("Item already in cart");
+            window.location.href = "cart.html";
+            return;
+        }
+
         cart.push(data);
         localStorage.setItem("cartItems",JSON.stringify(cart));
         window.location.href = "cart.html";
     }
 
-    var cart1 = JSON.parse(localStorage.getItem("list_id")) || []
     function addToCart1(data)
     {   
+        let cart1 = JSON.parse(localStorage.getItem("list_id")) || [];
+        let exists = cart1.some(item =>
+            (item._id && item._id === data._id) ||
+            (item.id && item.id === data.id) ||
+            item.name === data.name
+        );
         
+        if (exists) {
+            alert("Item already in wishlist");
+            return;
+        }
+
         cart1.push(data);
         localStorage.setItem("list_id",JSON.stringify(cart1));
         //  window.location.href = "list.html";
