@@ -59,7 +59,7 @@ function appendD(res,cont){
     cont.innerHTML=" ";
     let fragment = document.createDocumentFragment();
    res.forEach(ele => {
-      console.log("Done")
+
        let rev = Math.round(Math.random()*200)+10
        
     
@@ -107,5 +107,3 @@ function appendD(res,cont){
 }
 
 export {getData, appendData,appendD}
-
-  
