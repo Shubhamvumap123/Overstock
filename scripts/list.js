@@ -22,7 +22,8 @@ listlength.innerHTML = `Lists      1 Items`;
 
 function appendD(res, cont) {
   cont.innerHTML = " ";
-  res.map(function (ele, index) {
+  let fragment = document.createDocumentFragment();
+  res.forEach(function (ele, index) {
     let rev = Math.round(Math.random() * 200) + 10;
 
     let div = document.createElement("div");
@@ -75,8 +76,9 @@ function appendD(res, cont) {
     buttons.append(addCart_btn, remove);
     buttons.id = "buttons";
     div.append(image, price, rating, name, buttons);
-    cont.append(div);
+    fragment.append(div);
   });
+  cont.append(fragment);
 }
 var cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 function addToCart(data) {
