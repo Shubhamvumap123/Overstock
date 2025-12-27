@@ -9,6 +9,7 @@ var data = JSON.parse(localStorage.getItem('furniture_data'))
     let res = await getData("https://overstockapi.herokuapp.com/page")
    
     function append(res){
+        let fragment = document.createDocumentFragment();
         res.forEach(function(e){
 
             let div = document.createElement('div')
@@ -17,8 +18,9 @@ var data = JSON.parse(localStorage.getItem('furniture_data'))
             image.src = e.catergory.imgUrl;
 
             div.append(image)
-            document.querySelector("#category").append(div)
+            fragment.append(div)
         })
+        document.querySelector("#category").append(fragment)
     }
 
 

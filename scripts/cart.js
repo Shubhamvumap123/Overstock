@@ -5,7 +5,8 @@ var right = document.getElementById("right");
 function display(cart)
 {
     left.innerHTML="";
-    cart.map(function(el,index)
+    let fragment = document.createDocumentFragment();
+    cart.forEach(function(el,index)
     {   
         let div = document.createElement("div");
         let div1 = document.createElement("div");
@@ -34,9 +35,10 @@ function display(cart)
         div1.append(name,price,remove);
         div.append(image,div1);
         
-        left.append(div);
+        fragment.append(div);
         console.log(el);
     })
+    left.append(fragment);
 }
 display(cart);
 function removeItem(index)
