@@ -16,13 +16,20 @@ let res = JSON.parse(localStorage.getItem("list_id")) || [];
 
 let parent = document.getElementById("prod-list");
 let fav = document.getElementById("favorites");
-fav.innerHTML = `Favorites     ${selected_id.length} Items`;
+if (fav) fav.innerHTML = `Favorites     ${selected_id.length} Items`;
 let listlength = document.getElementById("listLength");
-listlength.innerHTML = `Lists      1 Items`;
+if (listlength) listlength.innerHTML = `Lists      1 Items`;
 
 function appendD(res, cont) {
+  if (!cont) return;
   cont.innerHTML = " ";
-  res.map(function (ele, index) {
+
+  // ⚡ Bolt Optimization: Use DocumentFragment to batch DOM insertions
+  // Reduces reflows from N to 1.
+  let fragment = document.createDocumentFragment();
+
+  // ⚡ Bolt Optimization: Use forEach instead of map for side effects
+  res.forEach(function (ele, index) {
     let rev = Math.round(Math.random() * 200) + 10;
 
     let div = document.createElement("div");
@@ -75,8 +82,10 @@ function appendD(res, cont) {
     buttons.append(addCart_btn, remove);
     buttons.id = "buttons";
     div.append(image, price, rating, name, buttons);
-    cont.append(div);
+    fragment.append(div);
   });
+
+  cont.append(fragment);
 }
 var cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 function addToCart(data) {
@@ -89,4 +98,4 @@ function addToCart(data) {
   alert("Cart added successfully");
 }
 
-appendD(res, parent);
+if (parent) appendD(res, parent);
