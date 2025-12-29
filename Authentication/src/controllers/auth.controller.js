@@ -4,7 +4,10 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config()
 
 const generateToken = (user) => {
-    return jwt.sign({user},"masaisecretkey")
+    if (!process.env.SECRET_KEY) {
+        throw new Error("SECRET_KEY is not defined in environment variables");
+    }
+    return jwt.sign({user}, process.env.SECRET_KEY)
 }
 const register = async (req, res) => {
     try{
