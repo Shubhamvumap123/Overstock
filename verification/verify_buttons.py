@@ -1,40 +1,33 @@
+from playwright.sync_api import sync_playwright
 
-from playwright.sync_api import sync_playwright, expect
-
-def verify_trending_buttons():
+def run():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch()
         page = browser.new_page()
+        # Since this is a static site, we can verify by loading the file directly
+        # But we need to serve it to avoid cross-origin issues with modules if any
+        # However, for this simple verification of button rendering, file:// might work or we start a server.
+        # Let starts a python server in background
 
-        # Navigate to the page
         page.goto("http://localhost:3000/index.html")
 
-        # Locate the trendingdiv
-        trending_div = page.locator("#trendingdiv")
+        # Check if the buttons in #bannertwo exist and are visible
+        # bannertwo has buttons as direct children now
 
-        # Check if buttons are present
-        buttons = trending_div.locator("button")
+        buttons = page.locator("#bannertwo > button")
         count = buttons.count()
-        print(f"Found {count} buttons in #trendingdiv")
+        print(f"Found {count} buttons in #bannertwo")
 
         if count == 0:
-            print("Error: No buttons found!")
-            browser.close()
-            return
+            print("No buttons found in #bannertwo!")
+            exit(1)
 
-        # Check the text of the first button
-        first_button = buttons.first
-        print(f"First button text: {first_button.inner_text()}")
-        expect(first_button).to_have_text("Home Office Furniture")
+        # Focus on the first button to check outline
+        buttons.first.focus()
 
-        # Focus the first button to verify focusability
-        first_button.focus()
-
-        # Take a screenshot
-        page.screenshot(path="verification/trending_buttons.png")
-        print("Screenshot saved to verification/trending_buttons.png")
-
+        page.screenshot(path="verification/bannertwo_buttons.png")
+        print("Screenshot saved to verification/bannertwo_buttons.png")
         browser.close()
 
 if __name__ == "__main__":
-    verify_trending_buttons()
+    run()
