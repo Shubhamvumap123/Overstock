@@ -1,3 +1,3 @@
-## 2024-05-24 - Accessibility Patterns for Navigation
-**Learning:** In this vanilla JS project, replacing `div` elements that use `onclick` with native semantic HTML elements (`<a>` or `<button>`) is the most robust way to ensure keyboard accessibility (tab order, enter key activation) without writing custom event handlers.
-**Action:** Always prefer refactoring to native elements over adding `role="button"` and `tabindex="0"` to divs, as the latter requires additional JS for keyboard support.
+## 2024-05-24 - Semantic Navigation in Grids
+**Learning:** When refactoring grid items (e.g., in `#bannertwo`) from non-semantic elements to `<a>` tags for accessibility, explicit CSS resets (`display: block`, `width: 100%`, `text-decoration: none`, `color: inherit`) are critical to maintain the grid layout and visual style.
+**Action:** Always verify that block-level styling is applied to `<a>` tags when they replace block-level elements like `<div>` or `<button>` within a CSS Grid container.
