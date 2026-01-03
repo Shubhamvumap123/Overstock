@@ -17,8 +17,6 @@ passport.use(new GoogleStrategy({
     role :["customer"]
   });
     }
-    console.log(accessToken,refreshToken,profile)
-    console.log(user)
     return cb(null, user);
  
   }

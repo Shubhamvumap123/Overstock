@@ -1,4 +1,4 @@
-## 2024-12-25 - Hardcoded JWT Secret Key
-**Vulnerability:** The JWT signing key was hardcoded as `"masaisecretkey"` in `Authentication/src/controllers/auth.controller.js` and `Authentication/src/middlewares/authenticate.js`.
-**Learning:** Hardcoded secrets in source code allow anyone with access to the repo (even read-only) to forge authentication tokens and impersonate any user.
-**Prevention:** Always use environment variables for secrets. Implement a startup check to fail fast if required secrets are missing from the environment.
+## 2024-04-12 - Sensitive Data Exposure in Logs
+**Vulnerability:** Found `console.log(accessToken, refreshToken, profile)` in `authentication_Oath-main/src/config/google.auth.js` and `console.log(decoded)` in `Authentication/src/middlewares/authenticate.js`.
+**Learning:** Developers likely used these logs for debugging during development but failed to remove them before committing, exposing sensitive OAuth tokens and user PII.
+**Prevention:** Implement a secure logging strategy that scrubs sensitive data (e.g., tokens, passwords, PII) and use a linter rule (e.g., `no-console`) to flag console logs in production code. Always review logs before pushing.
