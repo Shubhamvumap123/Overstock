@@ -4,7 +4,14 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config()
 
 const generateToken = (user) => {
-    return jwt.sign({user}, process.env.SECRET_KEY)
+    // SECURITY: Only include necessary fields in the token.
+    // Excluding the password (even hashed) and other sensitive data.
+    const payload = {
+        _id: user._id,
+        email: user.email,
+        // Add other safe fields if necessary, e.g., roles
+    };
+    return jwt.sign({user: payload}, process.env.SECRET_KEY)
 }
 const register = async (req, res) => {
     try{
@@ -45,4 +52,3 @@ const login = async (req, res) => {
 }
 
 module.exports = {register,login}
-
