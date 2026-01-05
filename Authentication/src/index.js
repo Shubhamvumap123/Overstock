@@ -15,7 +15,19 @@ app.post("/register", register);
 app.post("/login", login);
 
 app.use("/products", productController)
+
+if (!process.env.SECRET_KEY) {
+    console.error("FATAL ERROR: SECRET_KEY is not defined.");
+    process.exit(1);
+}
+
 const port = process.env.PORT ||5000
+
+if (!process.env.SECRET_KEY) {
+    console.error("FATAL ERROR: SECRET_KEY is not defined.");
+    process.exit(1);
+}
+
 app.listen(port, async () => {
     try{
         if (!process.env.SECRET_KEY) {
