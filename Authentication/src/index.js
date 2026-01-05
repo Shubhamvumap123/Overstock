@@ -30,10 +30,14 @@ if (!process.env.SECRET_KEY) {
 
 app.listen(port, async () => {
     try{
+        if (!process.env.SECRET_KEY) {
+            throw new Error("FATAL ERROR: SECRET_KEY is not defined.");
+        }
         await connect();
     }
     catch(err){
         console.log(err.message);
+        process.exit(1);
     }
     console.log("listening on port 5000")
 });
