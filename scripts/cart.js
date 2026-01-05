@@ -5,6 +5,9 @@ var right = document.getElementById("right");
 function display(cart)
 {
     left.innerHTML="";
+    // Performance optimization: Use DocumentFragment to batch DOM insertions
+    // This reduces reflows from N to 1
+    const fragment = document.createDocumentFragment();
     cart.map(function(el,index)
     {   
         let div = document.createElement("div");
@@ -34,9 +37,9 @@ function display(cart)
         div1.append(name,price,remove);
         div.append(image,div1);
         
-        left.append(div);
-        console.log(el);
+        fragment.append(div);
     })
+    left.append(fragment);
 }
 display(cart);
 function removeItem(index)
