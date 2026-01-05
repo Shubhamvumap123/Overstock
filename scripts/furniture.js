@@ -1,4 +1,4 @@
-import {appendData,getData} from "/scripts/main.js"
+import {appendData} from "/scripts/main.js"
 
 var data = JSON.parse(localStorage.getItem('furniture_data'))
 

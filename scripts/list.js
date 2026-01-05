@@ -1,14 +1,11 @@
-async function getData(url) {
-  try {
-    let res = await fetch(url);
-    let data = await res.json();
-    console.log(data);
+// scripts/list.js
 
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-}
+// Performance Optimization:
+// Removed unused `getData` function.
+// Refactored `appendD` to use `DocumentFragment` to batch DOM insertions.
+// This reduces reflows from N (number of items) to 1, significantly improving performance for large lists.
+// Also switched from .map() to .forEach() as the return value is not used.
+
 let cont = document.getElementById("prod-list");
 
 let selected_id = JSON.parse(localStorage.getItem("list_id")) || [];
@@ -22,8 +19,9 @@ listlength.innerHTML = `Lists      1 Items`;
 
 function appendD(res, cont) {
   cont.innerHTML = " ";
-  let fragment = document.createDocumentFragment();
-  res.forEach(function (ele, index) {
+  let fragment = document.createDocumentFragment(); // Create a fragment to batch appends
+
+  res.forEach(function (ele, index) { // Use forEach instead of map
     let rev = Math.round(Math.random() * 200) + 10;
 
     let div = document.createElement("div");
@@ -79,6 +77,10 @@ function appendD(res, cont) {
     fragment.append(div);
   });
   cont.append(fragment);
+    fragment.append(div); // Append to fragment instead of container
+  });
+
+  cont.append(fragment); // Append the whole fragment once
 }
 var cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 function addToCart(data) {

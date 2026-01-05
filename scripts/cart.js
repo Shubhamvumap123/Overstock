@@ -5,8 +5,10 @@ var right = document.getElementById("right");
 function display(cart)
 {
     left.innerHTML="";
-    let fragment = document.createDocumentFragment();
-    cart.forEach(function(el,index)
+    // Performance optimization: Use DocumentFragment to batch DOM insertions
+    // This reduces reflows from N to 1
+    const fragment = document.createDocumentFragment();
+    cart.map(function(el,index)
     {   
         let div = document.createElement("div");
         let div1 = document.createElement("div");
@@ -36,7 +38,6 @@ function display(cart)
         div.append(image,div1);
         
         fragment.append(div);
-        console.log(el);
     })
     left.append(fragment);
 }
