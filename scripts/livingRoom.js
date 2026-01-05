@@ -1,4 +1,4 @@
-import {getData, appendData,appendD} from "/scripts/main.js"
+import {appendData,appendD} from "/scripts/main.js"
 
 let category = JSON.parse(localStorage.getItem("category")) || []
 let parent = document.getElementById("main")
@@ -12,10 +12,11 @@ let ourSty = JSON.parse(localStorage.getItem("ourstyle")) || []
 let parent1 = document.getElementById("main2")
 if (parent1) appendData(ourSty,parent1)
 
-// ⚡ Bolt Optimization: Removed blocking top-level await on dead API.
-// "https://overstockapi.herokuapp.com/products/" is 404ing and blocking the main thread.
-// Initializing res to empty array to prevent blocking.
-let res = []
+// ⚡ Bolt Optimization: Removed blocking top-level await for dead API.
+// Previous call to https://overstockapi.herokuapp.com/products/ was returning 404,
+// causing unnecessary network delay and blocking main thread execution.
+// Using empty array as fallback since API is permanently down.
+let res = [];
 
 let cont = document.getElementById("prod-list")
 let sortElement = document.getElementById("priceSort");
