@@ -1,4 +1,4 @@
-## 2024-05-22 - [Exposed Secrets in .env]
-**Vulnerability:** Hardcoded `SECRET_KEY`, `GOOGLE_CLIENT_ID`, and `GOOGLE_CLIENT_SECRET` found in committed `authentication_Oath-main/.env` file.
-**Learning:** Even if a file is typically ignored (like `.env`), it can be accidentally committed if not explicitly added to `.gitignore` before the first commit.
-**Prevention:** Always initialize a repo with a standard `.gitignore` template for the language/framework being used. Use tools like `git-secrets` or pre-commit hooks to scan for high-entropy strings or known key patterns before allowing a commit.
+## 2024-12-25 - Hardcoded JWT Secret Key
+**Vulnerability:** The JWT signing key was hardcoded as `"masaisecretkey"` in `Authentication/src/controllers/auth.controller.js` and `Authentication/src/middlewares/authenticate.js`.
+**Learning:** Hardcoded secrets in source code allow anyone with access to the repo (even read-only) to forge authentication tokens and impersonate any user.
+**Prevention:** Always use environment variables for secrets. Implement a startup check to fail fast if required secrets are missing from the environment.
