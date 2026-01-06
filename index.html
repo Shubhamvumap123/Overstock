@@ -727,14 +727,20 @@
   navbar_div.innerHTML = navbar();
 
   let sectionDiv = document.querySelector(".section-div > div");
-  sectionDiv.addEventListener("mouseover", function () {
-    let dropDownContainer = document.querySelector(".dropdown-content-part");
-    dropDownContainer.style.display = "flex";
+  let dropDownContainer = document.querySelector(".dropdown-content-part");
+
+  // ⚡ Bolt Optimization: Fixed redundant event listener pattern.
+  // Previously, a new mouseout listener was added on every mouseover.
+  // Now listeners are attached once.
+  if (sectionDiv && dropDownContainer) {
+    sectionDiv.addEventListener("mouseover", function () {
+      dropDownContainer.style.display = "flex";
+    });
 
     dropDownContainer.addEventListener("mouseout", function () {
       dropDownContainer.style.display = "none";
     });
-  });
+  }
   document.querySelector("#footer").innerHTML = footer();
   document.querySelector("#end").innerHTML = end();
 </script>
