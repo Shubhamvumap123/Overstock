@@ -74,6 +74,9 @@ function appendD(res, cont) {
     buttons.append(addCart_btn, remove);
     buttons.id = "buttons";
     div.append(image, price, rating, name, buttons);
+    fragment.append(div);
+  });
+  cont.append(fragment);
     fragment.append(div); // Append to fragment instead of container
   });
 
