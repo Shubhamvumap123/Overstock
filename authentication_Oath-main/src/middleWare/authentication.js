@@ -30,7 +30,6 @@ const authenticate = async (req, res, next) => {
         return res.status(403).send({message:"authorization is not found please check again"});
     }
 
-    console.log(decoded);
     req.user =decoded.user;
     next();
 }
