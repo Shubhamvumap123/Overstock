@@ -741,6 +741,19 @@
       dropDownContainer.style.display = "none";
     });
   }
+
+  // 🎨 Palette: Make trending buttons populate search
+  const trendingDiv = document.getElementById("trendingdiv");
+  const searchInput = document.getElementById("search-input");
+  if (trendingDiv && searchInput) {
+    trendingDiv.addEventListener("click", (e) => {
+      if (e.target.tagName === "BUTTON") {
+        searchInput.value = e.target.textContent.trim();
+        searchInput.focus();
+      }
+    });
+  }
+
   document.querySelector("#footer").innerHTML = footer();
   document.querySelector("#end").innerHTML = end();
 </script>
