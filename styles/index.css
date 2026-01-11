@@ -4,6 +4,16 @@ title{
 body{
     margin-top:110px;
 }
+/* 🎨 Palette: Global focus styles for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid rgb(47, 51, 55);
+    outline-offset: 2px;
+}
+
 #flashsale{
     width: 100%;
     height: 20px;
@@ -62,10 +72,6 @@ body{
     color: rgb(47,51,55);
 }#bannertwo>a:hover{
     cursor: pointer;
-}
-#bannertwo>a:focus-visible {
-    outline: 2px solid rgb(47, 51, 55);
-    outline-offset: 2px;
 }
 
 #bannerthird>img{
@@ -214,13 +220,6 @@ margin-left: 30px;
 }
 #trendingdiv>button:hover{
     background-color: rgb(235, 236, 237);
-}
-#trendingdiv>button:hover{
-    background-color: rgb(235, 236, 237);
-}
-#trendingdiv>button:focus-visible {
-    outline: 2px solid rgb(47, 51, 55);
-    outline-offset: 2px;
 }
 
 #footer{
@@ -403,5 +402,3 @@ color:  rgb(199, 32, 44);
         background-color: white;
         border: none;
     }
-
-
