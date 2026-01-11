@@ -153,17 +153,22 @@
 <script type="module">
     import {apiCall, appendArticles} from "./scripts/productPage.js";
 
-    let selected_id = JSON.parse(localStorage.getItem("selected_id"));
-//https://overstockapi.herokuapp.com/products/mainCategory=${selected_cat}
+    // ⚡ Bolt Optimization: Wrapped in async IIFE to prevent top-level await from blocking
+    // the subsequent module script (navbar/footer rendering).
+    (async () => {
+        let selected_id = JSON.parse(localStorage.getItem("selected_id"));
+        if (!selected_id) return;
 
-    // let res = await apiCall(`https://overstockapi.herokuapp.com/products/id=${selected_id}`);
+        //https://overstockapi.herokuapp.com/products/mainCategory=${selected_cat}
+        // let res = await apiCall(`https://overstockapi.herokuapp.com/products/id=${selected_id}`);
 
-    let res = await apiCall(`http://localhost:5000/products/${selected_id}`)
-    console.log(res);
+        let res = await apiCall(`http://localhost:5000/products/${selected_id}`);
 
-    let parent = document.getElementById("main1");
-
-    appendArticles(res,parent);
+        let parent = document.getElementById("main1");
+        if (parent && res) {
+            appendArticles(res,parent);
+        }
+    })();
 </script>
 <script type="module">
  import navbar from './components/navbar.js'
