@@ -23,6 +23,9 @@ function appendData(data,parent){
         let image = document.createElement('img');
         image.src = e.imgUrl
         image.id = "poster";
+        // ⚡ Bolt: Lazy load images to improve initial page load and data usage
+        image.loading = "lazy";
+        image.decoding = "async";
 
         let rating = document.createElement('p')
         rating.id='rating';
@@ -69,6 +72,9 @@ function appendD(res,cont){
        let image = document.createElement("img")
        image.src = ele.imageURL;
        image.id = "poster";
+       // ⚡ Bolt: Lazy load images to improve initial page load and data usage
+       image.loading = "lazy";
+       image.decoding = "async";
        
        let name = document.createElement("p")
        name.className = "name"
