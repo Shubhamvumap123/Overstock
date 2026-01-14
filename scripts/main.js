@@ -22,6 +22,8 @@ function appendData(data,parent){
 
         let image = document.createElement('img');
         image.src = e.imgUrl
+        image.loading = "lazy";
+        image.decoding = "async";
         image.id = "poster";
 
         let rating = document.createElement('p')
@@ -68,6 +70,8 @@ function appendD(res,cont){
 
        let image = document.createElement("img")
        image.src = ele.imageURL;
+       image.loading = "lazy";
+       image.decoding = "async";
        image.id = "poster";
        
        let name = document.createElement("p")
