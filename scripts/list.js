@@ -25,11 +25,11 @@ function appendD(res, cont) {
     let rev = Math.round(Math.random() * 200) + 10;
 
     let div = document.createElement("div");
-    div.id = "box";
+    div.className = "box";
 
     let image = document.createElement("img");
     image.src = ele.imageURL;
-    image.id = "poster";
+    image.className = "poster";
 
     let name = document.createElement("p");
     name.className = "name";
@@ -41,16 +41,17 @@ function appendD(res, cont) {
 
     let rating = document.createElement("p");
     rating.className = "rating";
+    // ⚡ Bolt Optimization: Use textContent with Unicode stars instead of innerHTML
     if (ele.rating > 0 && ele.rating <= 1.4) {
-      rating.innerHTML = `${ele.rating} &#11088 `;
+      rating.textContent = `${ele.rating} ⭐ `;
     } else if (ele.rating >= 1.5 && ele.rating < 2.4) {
-      rating.innerHTML = `${ele.rating} &#11088 &#11088 `;
+      rating.textContent = `${ele.rating} ⭐ ⭐ `;
     } else if (ele.rating >= 2.5 && ele.rating <= 3.4) {
-      rating.innerHTML = `${ele.rating} &#11088 &#11088 &#11088`;
+      rating.textContent = `${ele.rating} ⭐ ⭐ ⭐`;
     } else if (ele.rating >= 3.5 && ele.rating <= 4.4) {
-      rating.innerHTML = `${ele.rating} &#11088&#11088 &#11088 &#11088 (${rev})`;
+      rating.textContent = `${ele.rating} ⭐⭐ ⭐ ⭐ (${rev})`;
     } else if (ele.rating >= 4.5) {
-      rating.innerHTML = `${ele.rating} &#11088  &#11088 &#11088 &#11088 &#11088 (${rev})`;
+      rating.textContent = `${ele.rating} ⭐  ⭐ ⭐ ⭐ ⭐ (${rev})`;
     }
     let buttons = document.createElement("div");
     let addCart_btn = document.createElement("button");
