@@ -3,9 +3,14 @@ const User = require("../model/user.model")
 const jwt = require("jsonwebtoken");
 require('dotenv').config()
 const generateToken = (user) =>{
-//    console.log(process.env.SECRET_KEY)
-    return jwt.sign({ user}, process.env.SECRET_KEY)
-
+    // SENTINEL: Fix sensitive data exposure in token by selecting only public fields
+    const payload = {
+        _id: user._id,
+        email: user.email,
+        name: user.name,
+        role: user.role
+    };
+    return jwt.sign({ user: payload }, process.env.SECRET_KEY)
 }
 
 const register = async (req,res) =>{
@@ -18,10 +23,26 @@ const register = async (req,res) =>{
             
             return res.status(400).send("User already exists plesae choose different id ");
         }
-        user = await User.create(req.body)
+
+        // SENTINEL: Fix Mass Assignment vulnerability by explicitly selecting fields
+        user = await User.create({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+            role: ["customer"] // Force role to be customer
+        });
 
         const token = generateToken(user)
-       return res.status(200).send({user,token});
+
+        // SENTINEL: Fix sensitive data exposure in response (exclude password)
+        const userResponse = {
+            _id: user._id,
+            email: user.email,
+            name: user.name,
+            role: user.role
+        };
+
+       return res.status(200).send({user: userResponse, token});
     }catch(err){
         res.status(500).send({message:err.message});
     }
@@ -39,7 +60,16 @@ const login = async (req,res) =>{
         if (!match) return res.status(400).send("Wrong email and password please check again");
 
         const token = generateToken(user)
-        return res.status(200).send({user,token});
+
+        // SENTINEL: Fix sensitive data exposure in response (exclude password)
+        const userResponse = {
+            _id: user._id,
+            email: user.email,
+            name: user.name,
+            role: user.role
+        };
+
+        return res.status(200).send({user: userResponse, token});
 
        
     }catch(err){
