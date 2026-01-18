@@ -15,6 +15,8 @@ function display(cart)
 
         let image = document.createElement("img");
         image.src = el.imageURL;
+        image.loading = "lazy";
+        image.decoding = "async";
 
         let name = document.createElement("p");
         name.innerText = el.name;
