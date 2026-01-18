@@ -2,16 +2,17 @@
 const User = require("../model/user.model")
 const jwt = require("jsonwebtoken");
 require('dotenv').config()
+
 const generateToken = (user) =>{
-//    console.log(process.env.SECRET_KEY)
-    // Secure: Only include necessary public fields. Exclude password hash.
+    // SENTINEL FIX: Only include necessary public fields in the token payload
+    // Exclude sensitive data like password hash
     const payload = {
         _id: user._id,
         email: user.email,
+        name: user.name,
         role: user.role
     };
     return jwt.sign({ user: payload }, process.env.SECRET_KEY)
-
 }
 
 const register = async (req,res) =>{
@@ -24,13 +25,12 @@ const register = async (req,res) =>{
             
             return res.status(400).send("User already exists plesae choose different id ");
         }
-
-        // Secure: Whitelist fields to prevent Mass Assignment (e.g. role elevation)
+        // SENTINEL FIX: Prevent Mass Assignment by explicitly selecting fields
         user = await User.create({
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
-            role: ["customer"] // Force default role
+            role: ["customer"] // Enforce default role
         })
 
         const token = generateToken(user)
