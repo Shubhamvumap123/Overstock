@@ -3,7 +3,7 @@
 **Learning:** Hardcoded secrets in source code allow anyone with access to the repo (even read-only) to forge authentication tokens and impersonate any user.
 **Prevention:** Always use environment variables for secrets. Implement a startup check to fail fast if required secrets are missing from the environment.
 
-## 2026-01-17 - Sensitive Data Exposure & Mass Assignment in Auth
-**Vulnerability:** The `generateToken` function included the entire user object (including password hash) in the JWT payload. Additionally, the `register` endpoint allowed Mass Assignment by passing `req.body` directly to `User.create`.
-**Learning:** Convenience methods like `jwt.sign({ user })` or `User.create(req.body)` often lead to security gaps. Explicitly selecting fields for tokens and database operations is crucial for security.
-**Prevention:** Always whitelist fields for JWT payloads and database writes. Never serialize full database objects to clients or tokens.
+## 2025-02-18 - JWT Password Hash Leak
+**Vulnerability:** The `generateToken` function in `authentication_Oath-main` was signing the entire Mongoose document (including the hashed password) into the JWT payload.
+**Learning:** `jwt.sign` does not automatically filter objects. Mongoose documents, even when stringified or passed directly, may contain internal fields or sensitive data unless explicitly sanitized (e.g., via `.lean()` or manual selection).
+**Prevention:** Always explicitly construct the JWT payload with only the necessary public fields (allowlisting) rather than passing the whole user object.

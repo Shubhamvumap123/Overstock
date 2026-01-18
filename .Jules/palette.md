@@ -9,3 +9,7 @@
 ## 2024-05-24 - Enhancing Static UI
 **Learning:** Static lists of "trending" items or tags are often dead ends in prototypes. Making them interactive (populating a search bar or filtering) significantly improves the perceived quality of the prototype with minimal code (event delegation).
 **Action:** When seeing static "tag clouds" or lists, add simple click-to-search functionality using event delegation to handle all items with a single listener.
+
+## 2026-01-18 - Form Label Association
+**Learning:** Found checkboxes where the descriptive text was in a sibling `<p>` tag instead of the `<label>`, making the text unclickable and breaking accessibility association.
+**Action:** Always verify that form labels wrap their descriptive text or use `for`/`id` association correctly with the text content inside the label, especially for checkboxes/radios where click target size matters.
