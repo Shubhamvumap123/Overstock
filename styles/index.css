@@ -4,7 +4,18 @@ title{
 body{
     margin-top:110px;
 }
+/* 🎨 Palette: Global focus styles for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid rgb(47, 51, 55);
+    outline-offset: 2px;
+}
+
 #flashsale{
+    display: block;
     width: 100%;
     height: 20px;
     background-color: rgb(255,70,147);
@@ -14,6 +25,7 @@ body{
     padding-top: 7px;
     font-weight:700;
     font-family :"Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-decoration: none;
 }
 #container{
     width: 1300px;
@@ -62,10 +74,6 @@ body{
     color: rgb(47,51,55);
 }#bannertwo>a:hover{
     cursor: pointer;
-}
-#bannertwo>a:focus-visible {
-    outline: 2px solid rgb(47, 51, 55);
-    outline-offset: 2px;
 }
 
 #bannerthird>img{
@@ -177,7 +185,11 @@ margin-left: 30px;
     cursor: pointer;
 }
 
-#btn>button{
+#btn>a{
+    display: block;
+    text-decoration: none;
+    line-height: 45px;
+    text-align: center;
     border: 0px;
 
     margin: 1% 43.5% 0% 43.1%;
@@ -186,9 +198,19 @@ margin-left: 30px;
     height: 45px;
     width: 13% ;
     border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13.3333px; /* Default button font size */
 }
-#btn>button:hover{
+#btn>a:hover{
     cursor: pointer;
+}
+#btn>a:focus-visible {
+    outline: 2px solid rgb(47, 51, 55);
+    outline-offset: 2px;
 }
 
 #trendingdiv{
@@ -214,13 +236,6 @@ margin-left: 30px;
 }
 #trendingdiv>button:hover{
     background-color: rgb(235, 236, 237);
-}
-#trendingdiv>button:hover{
-    background-color: rgb(235, 236, 237);
-}
-#trendingdiv>button:focus-visible {
-    outline: 2px solid rgb(47, 51, 55);
-    outline-offset: 2px;
 }
 
 #footer{
@@ -398,10 +413,13 @@ color:  rgb(199, 32, 44);
        font-size: 100;
         color:rgb(47, 51, 55);   
        }
-    #tagbannertext>button{
+    #tagbannertext>a{
+        display: inline-block;
+        text-decoration: none;
+        color: black;
+        line-height: 30px;
+        padding: 0 10px;
         height: 30px;
         background-color: white;
         border: none;
     }
-
-

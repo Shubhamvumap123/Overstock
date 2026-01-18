@@ -17,6 +17,7 @@ passport.use(new GoogleStrategy({
     role :["customer"]
   });
     }
+    // Security: Removed sensitive logging of accessToken, refreshToken, and user profile
     return cb(null, user);
  
   }
