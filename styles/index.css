@@ -97,18 +97,18 @@ height: 100%;
    
 
 }
-#procategoryrow1{
+.procategoryrow1{
     display: grid;
     grid-template-columns: repeat(6,1fr) ;
     gap: 60px;
     
 }
-#procategoryrow1>div>img{
+.procategoryrow1>div>img{
     width: 100%;
     /* border: 1px solid; */
    
 }
-#procategoryrow1>div>p{
+.procategoryrow1>div>p{
     font-size: 18px;
     font-weight: 400;
     font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -139,21 +139,21 @@ height: 100%;
     
 }
 
-#bannersixtext{
+.bannersixtext{
    margin-top: 0px;
    
     flex: 3;
     text-align: center;
 
 }
-#bannersixtext>div>h2{
+.bannersixtext>div>h2{
     font-size: 16px;
     text-align: center;
     margin-bottom: 0px;
 
 }
 
-#bannersixtext>div>h4{
+.bannersixtext>div>h4{
     margin-top: 0px;
     font-size: 16px;
     font-weight: 400;
