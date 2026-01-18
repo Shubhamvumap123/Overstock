@@ -5,6 +5,7 @@ body{
     margin-top:110px;
 }
 #flashsale{
+    display: block;
     width: 100%;
     height: 20px;
     background-color: rgb(255,70,147);
@@ -14,6 +15,7 @@ body{
     padding-top: 7px;
     font-weight:700;
     font-family :"Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-decoration: none;
 }
 #container{
     width: 1300px;
@@ -178,6 +180,10 @@ margin-left: 30px;
 }
 
 #btn>a{
+    display: block;
+    text-decoration: none;
+    line-height: 45px;
+    text-align: center;
     border: 0px;
 
     margin: 1% 43.5% 0% 43.1%;
@@ -408,7 +414,12 @@ color:  rgb(199, 32, 44);
        font-size: 100;
         color:rgb(47, 51, 55);   
        }
-    #tagbannertext>button{
+    #tagbannertext>a{
+        display: inline-block;
+        text-decoration: none;
+        color: black;
+        line-height: 30px;
+        padding: 0 10px;
         height: 30px;
         background-color: white;
         border: none;
