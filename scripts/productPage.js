@@ -35,27 +35,27 @@ function appendArticles(articles, main)
             let rating = Math.round(articles.rating);
             if(rating==1)
             {
-                star.innerText = "★";
-                grey.innerText = "★★★★";
+                star.textContent = "⭐";
+                grey.textContent = "⭐⭐⭐⭐";
             }
             else if(rating==2)
             {
-                star.innerText = "★★";
-                grey.innerText = "★★★";
+                star.textContent = "⭐⭐";
+                grey.textContent = "⭐⭐⭐";
             }
             else if(rating==3)
             {
-                star.innerText = "★★★";
-                grey.innerText = "★★";
+                star.textContent = "⭐⭐⭐";
+                grey.textContent = "⭐⭐";
             }
             else if(rating==4)
             {
-                star.innerText = "★★★★";
-                grey.innerText = "★";
+                star.textContent = "⭐⭐⭐⭐";
+                grey.textContent = "⭐";
             }
             else
             {
-                star.innerText = "★★★★★";
+                star.textContent = "⭐⭐⭐⭐⭐";
             }
             star.id = "star";
             grey.id = "grey";

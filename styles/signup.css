@@ -79,10 +79,12 @@ body {
   border-radius: 3px;
   padding: 4px 15px;
 }
-.checkboxDiv p {
+.signUp .checkboxDiv label {
   font-size: 12px;
   margin: 5px;
   margin-right: 0px;
+  cursor: pointer;
+  color: #626669;
 }
 .User label {
   margin-top: 14px;

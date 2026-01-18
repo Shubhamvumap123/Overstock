@@ -17,7 +17,7 @@ passport.use(new GoogleStrategy({
     role :["customer"]
   });
     }
-    // Sentinel: Removed sensitive logging (accessToken, refreshToken, user data) to prevent credential leakage
+    // Security: Removed sensitive logging of accessToken, refreshToken, and user profile
     return cb(null, user);
  
   }
