@@ -99,14 +99,14 @@
     margin:auto;
     
 }
-#poster{
+.poster{
     width: 100%;
 }
-#div1{
+.div1{
     background-color: #8080801a;
     text-align: center;
 }
-#div1:hover{
+.div1:hover{
    cursor: pointer;
 }
 p{
@@ -164,7 +164,7 @@ li{
     list-style-type: none;
     margin-top:2%;
 }
-#rating{
+.rating{
     height: 15px;
     font-size:15px;
     margin-top:2px;
