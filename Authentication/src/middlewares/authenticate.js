@@ -24,12 +24,11 @@ const authenticate = async (req,res,next) => {
         decoded = await verifyToken(token)
     }
     catch(err){
-        console.log(err)
+        // Security: Do not log error details or stack traces to console
         return res.status(400).send({message : "Authorization token not found or incorrect"})
     }
 
-    console.log(decoded)
-
+    // Security: Do not log decoded token payload
     req.userID = decoded.user._id;
 
     return next();
