@@ -2,10 +2,17 @@
 const User = require("../model/user.model")
 const jwt = require("jsonwebtoken");
 require('dotenv').config()
-const generateToken = (user) =>{
-//    console.log(process.env.SECRET_KEY)
-    return jwt.sign({ user}, process.env.SECRET_KEY)
 
+const generateToken = (user) =>{
+    // SENTINEL FIX: Only include necessary public fields in the token payload
+    // Exclude sensitive data like password hash
+    const payload = {
+        _id: user._id,
+        email: user.email,
+        name: user.name,
+        role: user.role
+    };
+    return jwt.sign({ user: payload }, process.env.SECRET_KEY)
 }
 
 const register = async (req,res) =>{
