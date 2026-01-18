@@ -1,3 +1,11 @@
-## 2024-05-24 - Frontend DOM Manipulation Optimization
-**Learning:** Frequent DOM manipulation in loops (e.g., `parent.append(div)` inside `forEach`) causes unnecessary reflows and repaints, degrading performance especially with large datasets.
-**Action:** Use `DocumentFragment` to batch DOM nodes in memory and append them to the DOM in a single operation (`parent.append(fragment)`). This reduces reflows to just one.
+## 2024-05-22 - [Pattern: Redundant Event Listeners]
+**Learning:** Found 15 identical event listeners and a 15-block global click handler. This creates bloated code and unnecessary condition checks on every click.
+**Action:** Use event delegation or a single loop to attach listeners. Use generic selectors for global handlers.
+
+## 2024-05-24 - [Pattern: Blocking Top-Level Await]
+**Learning:** `scripts/furniture.js` used a top-level `await` to fetch data from a slow/broken API, blocking the rendering of locally available content. The fetched data was also unused (dead code).
+**Action:** Remove unused blocking calls. Ensure critical/local content is rendered before awaiting external data.
+
+## 2026-01-02 - [Pattern: Recurring Blocking Await]
+**Learning:** Encountered the blocking top-level `await` anti-pattern again in `scripts/livingRoom.js`. This blocks the main thread when the API (overstockapi) fails.
+**Action:** When working in this codebase, assume external API calls are blocking and potentially broken. Always verify page load with network offline or API failures.
