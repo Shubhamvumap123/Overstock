@@ -2,9 +2,10 @@
 let errorMessage = (err) => {
   const errorDiv = document.querySelector("#errorMessage");
   errorDiv.style.display = "block";
+  errorDiv.innerHTML = ""; // Clear previous errors
   const error = document.createElement("p");
   error.textContent = err;
-
+  errorDiv.appendChild(error);
 };
 
 const signUpBtn = document.querySelector(".signUp button");
@@ -18,43 +19,37 @@ signUpBtn.addEventListener("click", async (e) => {
     email === "" 
   
   ) {
-    alert("Please enter a valid email ");
+    errorMessage("Please enter a valid email ");
+    e.preventDefault();
     return;
   }else if (
     
     password === "" ||
     confirmPassword === "" 
   ) {
-    alert("Please enter a valid password");
+    errorMessage("Please enter a valid password");
+    e.preventDefault();
     return;
   }
   else if(!isEmail(email)){
 
     e.preventDefault();
 
-    errorMessage(
-      alert("Email is not Valid")
-    );
+    errorMessage("Email is not Valid");
     return;
   }
   else if (password != confirmPassword) {
     e.preventDefault();
     
-      alert("The passwords you have entered do not match. Please try again.")
-
-      alert("Password must contain at least 1 Uppercase , 1 lowercase , 1 number and 1 special Character.")
+      errorMessage("The passwords you have entered do not match. Please try again.")
     return;
   } else if (password.length < 8 && password.length != 0) {
     e.preventDefault();
-    errorMessage(
-      alert("Password must be a minimum of 8 characters and cannot exceed 70 characters")
-    );
-    errorMessage(
-      alert("Password must contain at least 1 Uppercase , 1 lowercase , 1 number and 1 special Character.")
-    );
+    errorMessage("Password must be a minimum of 8 characters and cannot exceed 70 characters");
     return;
   }else if(checkbox==false){
-    alert("please select checkbox");
+    errorMessage("please select checkbox");
+    e.preventDefault();
     return;
   }
 
@@ -75,10 +70,7 @@ signUpBtn.addEventListener("click", async (e) => {
   }
   if (Object.keys(passResult).length != 4) {
     e.preventDefault();
-    errorMessage(
-     alert ("Password must be a minimum of 8 characters and cannot exceed 70 characters")
-    );
-    alert("Password must contain at least 1 Uppercase , 1 lowercase , 1 number and 1 special Character.");
+    errorMessage("Password must contain at least 1 Uppercase , 1 lowercase , 1 number and 1 special Character.");
     return;
   }
 
@@ -123,12 +115,9 @@ signUpBtn.addEventListener("click", async (e) => {
   let data = await response.json();
   console.log("data: ", data);
   if (data.token) {
-    alert("create account succesfuly")
-   
-    // errorMessage(data.message);
+    errorMessage("Account created successfully");
   } else {
-    alert("user already exist")
-    // errorMessage(data.message);
+    errorMessage("User already exists");
   }
 });
 
@@ -157,7 +146,7 @@ signInBtn.addEventListener("click", async (e) => {
       localStorage.setItem("token", data.token)
       window.location.href = "cart.html"
     }else{
-      alert("email or password incorrect")
+      errorMessage("email or password incorrect");
     }
    
   } catch (error) {
@@ -215,12 +204,8 @@ signInBtn.addEventListener("click", async (e) => {
  });
 var guest = document.querySelector(".guest button");
 guest.addEventListener("click", () => {
-  
-   alert ("successfuly login with google")
-  
-  window.location.href = "cart.html"
-  
-  console.log("success")
+  window.location.href = "cart.html";
+  console.log("success");
 });
 
 
