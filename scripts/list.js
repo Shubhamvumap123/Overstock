@@ -1,14 +1,11 @@
-async function getData(url) {
-  try {
-    let res = await fetch(url);
-    let data = await res.json();
-    console.log(data);
+// scripts/list.js
 
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-}
+// Performance Optimization:
+// Removed unused `getData` function.
+// Refactored `appendD` to use `DocumentFragment` to batch DOM insertions.
+// This reduces reflows from N (number of items) to 1, significantly improving performance for large lists.
+// Also switched from .map() to .forEach() as the return value is not used.
+
 let cont = document.getElementById("prod-list");
 
 let selected_id = JSON.parse(localStorage.getItem("list_id")) || [];
@@ -22,15 +19,21 @@ listlength.innerHTML = `Lists      1 Items`;
 
 function appendD(res, cont) {
   cont.innerHTML = " ";
-  res.map(function (ele, index) {
+  let fragment = document.createDocumentFragment(); // Create a fragment to batch appends
+
+  res.forEach(function (ele, index) { // Use forEach instead of map
     let rev = Math.round(Math.random() * 200) + 10;
 
     let div = document.createElement("div");
-    div.id = "box";
+    div.className = "box";
 
     let image = document.createElement("img");
     image.src = ele.imageURL;
+    image.loading = "lazy";
+    image.decoding = "async";
     image.id = "poster";
+    image.loading = "lazy";
+    image.decoding = "async";
 
     let name = document.createElement("p");
     name.className = "name";
@@ -42,16 +45,17 @@ function appendD(res, cont) {
 
     let rating = document.createElement("p");
     rating.className = "rating";
+    // ⚡ Bolt Optimization: Use textContent with Unicode stars instead of innerHTML
     if (ele.rating > 0 && ele.rating <= 1.4) {
-      rating.innerHTML = `${ele.rating} &#11088 `;
+      rating.textContent = `${ele.rating} ⭐ `;
     } else if (ele.rating >= 1.5 && ele.rating < 2.4) {
-      rating.innerHTML = `${ele.rating} &#11088 &#11088 `;
+      rating.textContent = `${ele.rating} ⭐ ⭐ `;
     } else if (ele.rating >= 2.5 && ele.rating <= 3.4) {
-      rating.innerHTML = `${ele.rating} &#11088 &#11088 &#11088`;
+      rating.textContent = `${ele.rating} ⭐ ⭐ ⭐`;
     } else if (ele.rating >= 3.5 && ele.rating <= 4.4) {
-      rating.innerHTML = `${ele.rating} &#11088&#11088 &#11088 &#11088 (${rev})`;
+      rating.textContent = `${ele.rating} ⭐⭐ ⭐ ⭐ (${rev})`;
     } else if (ele.rating >= 4.5) {
-      rating.innerHTML = `${ele.rating} &#11088  &#11088 &#11088 &#11088 &#11088 (${rev})`;
+      rating.textContent = `${ele.rating} ⭐  ⭐ ⭐ ⭐ ⭐ (${rev})`;
     }
     let buttons = document.createElement("div");
     let addCart_btn = document.createElement("button");
@@ -75,8 +79,10 @@ function appendD(res, cont) {
     buttons.append(addCart_btn, remove);
     buttons.id = "buttons";
     div.append(image, price, rating, name, buttons);
-    cont.append(div);
+    fragment.append(div); // Append to fragment instead of container
   });
+
+  cont.append(fragment); // Append the whole fragment once
 }
 var cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 function addToCart(data) {

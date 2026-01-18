@@ -1,6 +1,5 @@
 
-
-var obj1 = [
+const furnitureData = [
           {
        
             
@@ -51,12 +50,11 @@ var obj1 = [
                 "name": "Kids & Toddler Furniture",
                 "imgUrl": "https://i.postimg.cc/TwbVxhWS/09062021-FALL2021-Furni-Pop-Cat-12.jpg"
             }
-        ]
+        ];
+// Legacy support for scripts relying on localStorage
+localStorage.setItem("furniture_data",JSON.stringify(furnitureData))
 
-        localStorage.setItem("furniture_data",JSON.stringify(obj1))
-
-
-      var  moreCategory= [
+      const moreCategory = [
             {
                 "name": "Sofas & Couches",
                 "imgUrl": "https://i.postimg.cc/W19CFYfV/03232020-furniture-other-Popular1.jpg"
@@ -109,7 +107,7 @@ var obj1 = [
 
         localStorage.setItem("moreCategory",JSON.stringify(moreCategory))
 
-var obj3 = [
+const categoryData = [
     {
         "name": "Sofas & Couches" ,
         "imgUrl": "https://ak1.ostkcdn.com/images/products/is/images/direct/da8e341a52b0b4168f5531527177130eec875ca8/Carson-Carrington-Odhult-Tufted-Contemporary-Tuxedo-Sofa.jpg?imWidth=320&impolicy=medium",
@@ -136,8 +134,8 @@ var obj3 = [
     },
    
 ]
-localStorage.setItem("category",JSON.stringify(obj3))
-var obj4 = [
+localStorage.setItem("category",JSON.stringify(categoryData))
+const trendingData = [
 {
         "name": "Living Room Chairs" ,
         "imgUrl": "https://ak1.ostkcdn.com/images/products/is/images/direct/dfd768dd6f5ec2fc877af8695096a5ff4e9942e4/Copper-Grove-Dhi-Upholstered-Armchair.jpg?imWidth=320&impolicy=medium",
@@ -163,9 +161,9 @@ var obj4 = [
         "imgUrl": "https://ak1.ostkcdn.com/images/products/is/images/direct/bf33b0970649fedab76cbe0913b1911ddc4ea7f6/Morgan-Creek-Antique-White-Storage-Hall-Bench.jpg?imWidth=320&impolicy=medium",
     },
 ]
-localStorage.setItem("trending",JSON.stringify(obj4))
+localStorage.setItem("trending",JSON.stringify(trendingData))
 
-var obj5 = [
+const styleData = [
     {
         "name": "Modern & Contemporary Living Room Furniture ",
         "imgUrl": "https://ak1.ostkcdn.com/img/mxc/10222019_LRFurni_z_ThirdBMOD1_ModernandContemporaryLivingRoomFurniture.jpg?imWidth=320&impolicy=medium ",
@@ -192,4 +190,6 @@ var obj5 = [
     },
 ]
 
-localStorage.setItem("ourstyle",JSON.stringify(obj5))
+localStorage.setItem("ourstyle",JSON.stringify(styleData))
+
+export { furnitureData, moreCategory, categoryData, trendingData, styleData };
