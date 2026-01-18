@@ -4,7 +4,13 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config()
 
 const generateToken = (user) => {
-    return jwt.sign({user},"masaisecretkey")
+    // Only include necessary public fields in the token payload
+    // Exclude sensitive data like password hash
+    const payload = {
+        _id: user._id,
+        email: user.email,
+    };
+    return jwt.sign({ user: payload }, process.env.SECRET_KEY);
 }
 const register = async (req, res) => {
     try{

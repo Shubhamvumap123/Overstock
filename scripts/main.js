@@ -13,7 +13,7 @@ catch(err){
 }
 
 function appendData(data,parent){
-    
+    let fragment = document.createDocumentFragment();
     data.forEach((e)=>{
        
         let rat =(Math.random()*5).toFixed(1);
@@ -23,6 +23,8 @@ function appendData(data,parent){
         let image = document.createElement('img');
         image.src = e.imgUrl
         image.id = "poster";
+        image.loading = "lazy";
+        image.decoding = "async";
 
         let rating = document.createElement('p')
         rating.id='rating';
@@ -50,14 +52,16 @@ function appendData(data,parent){
         div.onclick= ()=>{
             window.location.href="livingRoom.html"
         }
-        parent.append(div)
+        fragment.append(div)
     })
+    parent.append(fragment);
 }
 
 function appendD(res,cont){ 
     cont.innerHTML=" ";
+    let fragment = document.createDocumentFragment();
    res.forEach(ele => {
-      console.log("Done")
+
        let rev = Math.round(Math.random()*200)+10
        
     
@@ -67,6 +71,8 @@ function appendD(res,cont){
        let image = document.createElement("img")
        image.src = ele.imageURL;
        image.id = "poster";
+       image.loading = "lazy";
+       image.decoding = "async";
        
        let name = document.createElement("p")
        name.className = "name"
@@ -98,11 +104,10 @@ function appendD(res,cont){
           window.location.href="productPage.html"
       }
        div.append(image,price,rating,name)
-       cont.append(div)
+       fragment.append(div)
    
    });
+   cont.append(fragment);
 }
 
 export {getData, appendData,appendD}
-
-  
