@@ -100,7 +100,6 @@ signUpBtn.addEventListener("click", async (e) => {
    
   };
   signup_data = JSON.stringify(signup_data);
-  console.log(signup_data);
 
   let register_api = ` https://overstock-dubli.herokuapp.com/register`;
 
@@ -113,7 +112,6 @@ signUpBtn.addEventListener("click", async (e) => {
   });
 
   let data = await response.json();
-  console.log("data: ", data);
   if (data.token) {
     errorMessage("Account created successfully");
   } else {
@@ -141,7 +139,6 @@ signInBtn.addEventListener("click", async (e) => {
 
     })
     let data = await res.json();
-    console.log(data)
     if(data.token){
       localStorage.setItem("token", data.token)
       window.location.href = "cart.html"
@@ -182,7 +179,6 @@ signInBtn.addEventListener("click", async (e) => {
   });
   
   let data = await response.json();
-  console.log("data: ", data);
   if (data.error === true) {
     errorMessage(data.message);
   } else {
@@ -199,7 +195,6 @@ signInBtn.addEventListener("click", async (e) => {
       },
     });
     let data = await response.json();
-    console.log("data: ", data);
   }
  });
 var guest = document.querySelector(".guest button");
