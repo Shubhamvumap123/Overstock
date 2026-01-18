@@ -25,7 +25,13 @@ const register = async (req,res) =>{
             
             return res.status(400).send("User already exists plesae choose different id ");
         }
-        user = await User.create(req.body)
+        // SENTINEL FIX: Prevent Mass Assignment by explicitly selecting fields
+        user = await User.create({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+            role: ["customer"] // Enforce default role
+        })
 
         const token = generateToken(user)
        return res.status(200).send({user,token});
