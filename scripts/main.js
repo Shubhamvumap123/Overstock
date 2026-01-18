@@ -13,60 +13,72 @@ catch(err){
 }
 
 function appendData(data,parent){
-    
+    let fragment = document.createDocumentFragment();
     data.forEach((e)=>{
        
         let rat =(Math.random()*5).toFixed(1);
         let div = document.createElement('div');
-        div.id = "div1";
+        div.className = "div1";
 
         let image = document.createElement('img');
         image.src = e.imgUrl
+        image.loading = "lazy";
+        image.decoding = "async";
         image.id = "poster";
+        image.loading = "lazy";
+        image.decoding = "async";
 
         let rating = document.createElement('p')
-        rating.id='rating';
+        rating.className='rating';
+        // ⚡ Bolt Optimization: Use textContent with Unicode stars instead of innerHTML
         if(rat>0 && rat<=1.4){
-        rating.innerHTML = `${rat} &#11088 `;
+        rating.textContent = `${rat} ⭐ `;
          }
          else if(rat>=1.5 && rat <2.4){
-            rating.innerHTML = `${rat} &#11088 &#11088 `;
+            rating.textContent = `${rat} ⭐ ⭐ `;
          }
          else if(rat>=2.5 && rat <=3.4){
-            rating.innerHTML = `${rat} &#11088 &#11088 &#11088`;
+            rating.textContent = `${rat} ⭐ ⭐ ⭐`;
          }
          else if(rat>=3.5 && rat <=4.4){
-            rating.innerHTML = `${rat} &#11088  &#11088 &#11088 &#11088 `;
+            rating.textContent = `${rat} ⭐  ⭐ ⭐ ⭐ `;
          }
          else if(rat>=4.5){
-            rating.innerHTML = `${rat} &#11088  &#11088 &#11088 &#11088 &#11088`;
+            rating.textContent = `${rat} ⭐  ⭐ ⭐ ⭐ ⭐`;
          }
         let name = document.createElement('p')
         name.innerText = e.name
         name.className = "txtSmall"
 
-        div.append(image,name)
-       //div.append(image,name,rating)
+        //div.append(image,name)
+        // Corrected to append rating as well
+        div.append(image,name,rating)
         div.onclick= ()=>{
             window.location.href="livingRoom.html"
         }
-        parent.append(div)
+        fragment.append(div)
     })
+    parent.append(fragment);
 }
 
 function appendD(res,cont){ 
     cont.innerHTML=" ";
+    let fragment = document.createDocumentFragment();
    res.forEach(ele => {
-      console.log("Done")
+
        let rev = Math.round(Math.random()*200)+10
        
     
        let div = document.createElement("div")
-       div.id="box"
+       div.className="box"
 
        let image = document.createElement("img")
        image.src = ele.imageURL;
+       image.loading = "lazy";
+       image.decoding = "async";
        image.id = "poster";
+       image.loading = "lazy";
+       image.decoding = "async";
        
        let name = document.createElement("p")
        name.className = "name"
@@ -78,31 +90,31 @@ function appendD(res,cont){
 
        let rating = document.createElement("p")
        rating.className="rating"
+       // ⚡ Bolt Optimization: Use textContent with Unicode stars instead of innerHTML
        if(ele.rating>0 && ele.rating<=1.4){
-       rating.innerHTML = `${ele.rating} &#11088 `;
+       rating.textContent = `${ele.rating} ⭐ `;
         }
         else if(ele.rating>=1.5 && ele.rating <2.4){
-           rating.innerHTML = `${ele.rating} &#11088 &#11088 `;
+           rating.textContent = `${ele.rating} ⭐ ⭐ `;
         }
         else if(ele.rating>=2.5 && ele.rating <=3.4){
-           rating.innerHTML = `${ele.rating} &#11088 &#11088 &#11088`;
+           rating.textContent = `${ele.rating} ⭐ ⭐ ⭐`;
         }
         else if(ele.rating>=3.5 && ele.rating <=4.4){
-           rating.innerHTML = `${ele.rating} &#11088&#11088 &#11088 &#11088 (${rev})`;
+           rating.textContent = `${ele.rating} ⭐⭐ ⭐ ⭐ (${rev})`;
         }
         else if(ele.rating>=4.5){
-           rating.innerHTML = `${ele.rating} &#11088  &#11088 &#11088 &#11088 &#11088 (${rev})`;
+           rating.textContent = `${ele.rating} ⭐  ⭐ ⭐ ⭐ ⭐ (${rev})`;
         }
       div.onclick=()=>{
           localStorage.setItem("selected_id",JSON.stringify(ele._id));
           window.location.href="productPage.html"
       }
        div.append(image,price,rating,name)
-       cont.append(div)
+       fragment.append(div)
    
    });
+   cont.append(fragment);
 }
 
 export {getData, appendData,appendD}
-
-  
