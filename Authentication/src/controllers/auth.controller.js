@@ -36,7 +36,7 @@ const login = async (req, res) => {
             return res.status(400).send("Wrong Email or Password111")
         }
         //if email exists, check password;
-        const match = user.checkPassword(req.body.password)
+        const match = await user.checkPassword(req.body.password)
         // if it doesn't match
         if(!match){
             return res.status(400).send({message : "Wrong Email or Password222"})
