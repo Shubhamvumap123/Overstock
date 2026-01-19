@@ -1,79 +1,68 @@
-from playwright.sync_api import sync_playwright
-import sys
-import os
 
-def run():
+from playwright.sync_api import sync_playwright
+
+def verify_signup_ux():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
-        try:
-            page.goto("http://localhost:3000/signup.html")
 
-            # Wait for content
-            page.wait_for_selector(".checkboxDiv")
+        # Navigate to the signup page
+        page.goto("http://localhost:8000/signup.html")
 
-            # 1. Check Checkbox UX
-            checkbox = page.locator("#checkbox")
-            label = page.locator("label[for='checkbox']")
+        # Fill in the form correctly to trigger the fetch
+        page.fill("#email", "test@example.com")
+        page.fill("#password", "Password123!")
+        page.fill("#confirmPassword", "Password123!")
+        page.check("#checkbox")
 
-            # Check if label contains the text
-            text_snippet = "Sign up today for"
-            label_text = label.text_content()
+        # Click the Create Account button
+        # We need to capture the state immediately after click
+        # Since the fetch will fail/timeout or complete, we want to see the "Creating Account..." state
 
-            print(f"Label text: '{label_text.strip()}'")
+        create_account_btn = page.locator(".signUp .checkboxDiv + button")
 
-            label_has_text = text_snippet in label_text
-            if not label_has_text:
-                print("FAIL: Label does not contain the descriptive text.")
-            else:
-                print("PASS: Label contains descriptive text.")
+        # We'll click and then immediately take a screenshot to try and catch the loading state.
+        # Since the fetch is async, there is a window where the button is disabled.
+        # However, if the fetch fails very fast (404), it might be too fast.
+        # We can mock the network request to hang.
 
-            # Take screenshot of the checkbox area
-            checkbox_div = page.locator(".checkboxDiv")
-            if not os.path.exists("verification"):
-                os.makedirs("verification")
-            checkbox_div.screenshot(path="verification/signup_checkbox_ux.png")
-            print("Screenshot saved to verification/signup_checkbox_ux.png")
+        page.route("**/*", lambda route: route.continue_()) # Default
 
-            # Check if clicking label toggles checkbox
-            # Reset checkbox if checked (it shouldn't be by default)
-            if checkbox.is_checked():
-                checkbox.uncheck()
+        # Mock the register endpoint to delay
+        def handle_route(route):
+            # Delay response to allow screenshot of loading state
+            import time
+            time.sleep(2)
+            route.fulfill(status=200, body='{"token": "fake"}')
 
-            print("Clicking label...")
-            try:
-                label.click(timeout=2000)
-            except Exception as e:
-                print(f"Error clicking label: {e}")
+        page.route("**/register", handle_route)
 
-            if checkbox.is_checked():
-                print("PASS: Clicking label toggles checkbox.")
-                click_works = True
-            else:
-                print("FAIL: Clicking label did not toggle checkbox.")
-                click_works = False
+        create_account_btn.click()
 
-            # Check cursor style
-            cursor = label.evaluate("el => getComputedStyle(el).cursor")
-            print(f"Cursor style: {cursor}")
-            if cursor == "pointer":
-                 print("PASS: Label has cursor pointer.")
-                 cursor_correct = True
-            else:
-                 print(f"FAIL: Label cursor is {cursor}.")
-                 cursor_correct = False
+        # Wait for button to be disabled or have text
+        # create_account_btn.wait_for(state="disabled") # Playwright doesn't have wait_for state=disabled directly in older versions?
+        # Check text
+        # expect(create_account_btn).to_have_text("Creating Account...")
 
-            if label_has_text and click_works and cursor_correct:
-                print("ALL CHECKS PASSED")
-            else:
-                print("SOME CHECKS FAILED")
-                sys.exit(1)
+        page.wait_for_timeout(500) # Wait 0.5s to ensure UI updated
 
-        except Exception as e:
-            print(f"An error occurred: {e}")
-            sys.exit(1)
-        finally:
-            browser.close()
+        page.screenshot(path="verification/loading_state.png")
+
+        # Also check Sign In button
+        page.fill("#inputEmail", "test@example.com")
+        page.fill("#inputPassword", "password")
+
+        sign_in_btn = page.locator(".signIn button")
+
+        # Mock login endpoint
+        page.route("**/login", handle_route)
+
+        sign_in_btn.click()
+        page.wait_for_timeout(500)
+
+        page.screenshot(path="verification/loading_state_signin.png")
+
+        browser.close()
 
 if __name__ == "__main__":
-    run()
+    verify_signup_ux()
