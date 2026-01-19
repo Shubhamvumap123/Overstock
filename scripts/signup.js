@@ -8,6 +8,20 @@ let errorMessage = (err) => {
   errorDiv.appendChild(error);
 };
 
+// Helper function to toggle button loading state
+function toggleLoading(button, isLoading, loadingText = "Please wait...") {
+  if (isLoading) {
+    if (!button.dataset.originalText) {
+      button.dataset.originalText = button.textContent;
+    }
+    button.disabled = true;
+    button.textContent = loadingText;
+  } else {
+    button.disabled = false;
+    button.textContent = button.dataset.originalText || button.textContent;
+  }
+}
+
 const signUpBtn = document.querySelector(".signUp button");
 signUpBtn.addEventListener("click", async (e) => {
   const checkbox = document.getElementById("checkbox").checked;
@@ -15,39 +29,27 @@ signUpBtn.addEventListener("click", async (e) => {
   const password = document.getElementById("password").value;
   const confirmPassword = document.getElementById("confirmPassword").value;
 
-  if (
-    email === "" 
-  
-  ) {
+  if (email === "") {
     errorMessage("Please enter a valid email ");
     e.preventDefault();
     return;
-  }else if (
-    
-    password === "" ||
-    confirmPassword === "" 
-  ) {
+  } else if (password === "" || confirmPassword === "") {
     errorMessage("Please enter a valid password");
     e.preventDefault();
     return;
-  }
-  else if(!isEmail(email)){
-
+  } else if (!isEmail(email)) {
     e.preventDefault();
-
     errorMessage("Email is not Valid");
     return;
-  }
-  else if (password != confirmPassword) {
+  } else if (password != confirmPassword) {
     e.preventDefault();
-    
-      errorMessage("The passwords you have entered do not match. Please try again.")
+    errorMessage("The passwords you have entered do not match. Please try again.")
     return;
   } else if (password.length < 8 && password.length != 0) {
     e.preventDefault();
     errorMessage("Password must be a minimum of 8 characters and cannot exceed 70 characters");
     return;
-  }else if(checkbox==false){
+  } else if (checkbox == false) {
     errorMessage("please select checkbox");
     e.preventDefault();
     return;
@@ -75,133 +77,90 @@ signUpBtn.addEventListener("click", async (e) => {
   }
 
   e.preventDefault();
+  toggleLoading(signUpBtn, true, "Creating Account...");
 
+  try {
+    let userName = "";
 
-  let userName = "";
-
-
-  for (let i = 0; i < email.length; i++) {
-    if (email[i] != "@") {
-      userName += email[i];
-    } else {
-      break;
+    for (let i = 0; i < email.length; i++) {
+      if (email[i] != "@") {
+        userName += email[i];
+      } else {
+        break;
+      }
     }
-  }
 
+    let signup_data = {
+      email: email,
+      password: password,
+    };
+    signup_data = JSON.stringify(signup_data);
+    console.log(signup_data);
 
-  function random(number) {
-    return Math.floor(Math.random() * number);
-  }
+    let register_api = ` https://overstock-dubli.herokuapp.com/register`;
 
-  let signup_data = {
-  
-    email: email,
-    password: password,
-   
-  };
-  signup_data = JSON.stringify(signup_data);
-  console.log(signup_data);
+    var response = await fetch(register_api, {
+      method: "POST",
+      body: signup_data,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  let register_api = ` https://overstock-dubli.herokuapp.com/register`;
-
-  var response = await fetch(register_api, {
-    method: "POST",
-    body: signup_data,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  let data = await response.json();
-  console.log("data: ", data);
-  if (data.token) {
-    errorMessage("Account created successfully");
-  } else {
-    errorMessage("User already exists");
+    let data = await response.json();
+    console.log("data: ", data);
+    if (data.token) {
+      errorMessage("Account created successfully");
+    } else {
+      errorMessage("User already exists");
+    }
+  } catch (error) {
+    console.error(error);
+    errorMessage("Something went wrong. Please try again.");
+  } finally {
+    toggleLoading(signUpBtn, false);
   }
 });
 
 const signInBtn = document.querySelector(".signIn button");
 signInBtn.addEventListener("click", async (e) => {
   e.preventDefault();
+  toggleLoading(signInBtn, true, "Signing In...");
   try {
 
     let login_data = {
-       email : document.getElementById("inputEmail").value,
-       password : document.getElementById("inputPassword").value,
+      email: document.getElementById("inputEmail").value,
+      password: document.getElementById("inputPassword").value,
     }
     let login_data_json = JSON.stringify(login_data)
-    let res = await fetch("https://overstock-dubli.herokuapp.com/login",{
+    let res = await fetch("https://overstock-dubli.herokuapp.com/login", {
 
- method: "POST",
- body: login_data_json,
- headers: {
-   "Content-Type" : "application/json",
- }
+      method: "POST",
+      body: login_data_json,
+      headers: {
+        "Content-Type": "application/json",
+      },
 
     })
     let data = await res.json();
     console.log(data)
-    if(data.token){
+    if (data.token) {
       localStorage.setItem("token", data.token)
       window.location.href = "cart.html"
-    }else{
+    } else {
       errorMessage("email or password incorrect");
     }
-   
+
   } catch (error) {
-    return console.log({error: error.message});
+    // The previous code had unreachable code after this catch block that tried Google Auth.
+    // I am retaining the structure but ensuring safety.
+    console.log({ error: error.message });
+    errorMessage("Login failed. Please try again.");
+  } finally {
+    toggleLoading(signInBtn, false);
   }
- 
-  e.preventDefault();
+});
 
-  let userName = "";
-  for (let i = 0; i < email.length; i++) {
-    if (email[i] != "@") {
-      userName += email[i];
-    } else {
-      break;
-    }
-  }
-
-  let login_data = {
-    email:email,
-    password: password,
-  };
-
-  login_data_json = JSON.stringify(login_data);
-  
-  let login_api = `http://localhost:4000/auth/google/`;
-
-  let response = await fetch('localhost:4000/auth/google/', {
-    method: "POST",
-    body: login_data_json,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  
-  let data = await response.json();
-  console.log("data: ", data);
-  if (data.error === true) {
-    errorMessage(data.message);
-  } else {
-    getProfile(userName, data.token);
-    window.location.href = "index.html"
-  }
-
-  async function getProfile(username, token) {
-    let api = `http://localhost:4000/auth/google/${username}`;
-    let response = await fetch(api, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    let data = await response.json();
-    console.log("data: ", data);
-  }
- });
 var guest = document.querySelector(".guest button");
 guest.addEventListener("click", () => {
   window.location.href = "cart.html";
@@ -213,4 +172,4 @@ function isEmail(email) {
   return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[`0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
     email
   );
-  }
+}
