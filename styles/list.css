@@ -102,7 +102,7 @@
     text-align: center;
 }
 
-#buttons {
+.buttons {
     width: 85%;
     display: flex;
     justify-content: space-between;
@@ -111,13 +111,13 @@
     margin-bottom: 20px;
 }
 
-#addCart_btn {
+.add-cart-btn {
     padding: 5px;
     width: 45%;
     cursor: pointer;
 }
 
-#remove {
+.remove-btn {
     padding: 5px;
     width: 45%;
     cursor: pointer;
