@@ -122,14 +122,19 @@
  navbar_div.innerHTML = navbar();
 
  let sectionDiv = document.querySelector(".section-div > div");
- sectionDiv.addEventListener("mouseover", function () {
-   let dropDownContainer = document.querySelector(".dropdown-content-part");
-   dropDownContainer.style.display = "flex";
+ let dropDownContainer = document.querySelector(".dropdown-content-part");
+
+ if (sectionDiv && dropDownContainer) {
+   // ⚡ Bolt Optimization: Fixed redundant event listener pattern.
+   // Attached listeners once instead of inside each other to prevent memory leaks.
+   sectionDiv.addEventListener("mouseover", function () {
+     dropDownContainer.style.display = "flex";
+   });
 
    dropDownContainer.addEventListener("mouseout", function () {
      dropDownContainer.style.display = "none";
    });
- });
+ }
  document.querySelector("#footer").innerHTML = footer();
  document.querySelector("#end").innerHTML = end();
 </script>

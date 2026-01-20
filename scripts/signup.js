@@ -55,26 +55,21 @@ signUpBtn.addEventListener("click", async (e) => {
     return;
   }
 
-  let passResult = {};
-  for (let i = 0; i < password.length; i++) {
-    if (password.charCodeAt(i) > 64 && password.charCodeAt(i) < 90) {
-      passResult[0] = "yes1";
-    } else if (password.charCodeAt(i) > 96 && password.charCodeAt(i) < 123) {
-      passResult[1] = "yes2";
-    } else if (password.charCodeAt(i) > 47 && password.charCodeAt(i) < 58) {
-      passResult[2] = "yes3";
-    } else if (
-      (password.charCodeAt(i) > 57 && password.charCodeAt(i) < 65) ||
-      (password.charCodeAt(i) > 32 && password.charCodeAt(i) < 48)
-    ) {
-      passResult[3] = "yes4";
-    }
-  }
-  if (Object.keys(passResult).length != 4) {
+  // ⚡ Bolt Optimization: Replaced manual loop with Regex for better performance and readability
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasLowerCase = /[a-z]/.test(password);
+  const hasNumber = /\d/.test(password);
+  // Using \W or _ to match special characters, which covers the previous manual range and more
+  const hasSpecial = /[\W_]/.test(password);
+
+  if (!hasUpperCase || !hasLowerCase || !hasNumber || !hasSpecial) {
     e.preventDefault();
     errorMessage("Password must contain at least 1 Uppercase , 1 lowercase , 1 number and 1 special Character.");
     return;
   }
+
+  // Clear previous error messages if validation passes
+  document.querySelector("#errorMessage").style.display = "none";
 
   e.preventDefault();
   toggleLoading(signUpBtn, true, "Creating Account...");
