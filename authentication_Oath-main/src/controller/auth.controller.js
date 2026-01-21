@@ -48,7 +48,7 @@ const login = async (req,res) =>{
 
         if (!user) return res.status(400).send("Wrong email and password please check again");
         
-        const match =  user.checkPassword(req.body.password);
+        const match = await user.checkPassword(req.body.password);
         if (!match) return res.status(400).send("Wrong email and password please check again");
 
         const token = generateToken(user)
