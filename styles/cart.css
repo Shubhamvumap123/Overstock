@@ -23,7 +23,7 @@
         display: flex;
         margin-bottom: 10px;
     }
-    #name{
+    .item-name{
         font-size: 16px;
     }
     #right
@@ -50,14 +50,24 @@
         width: 33%;
         margin: 10px;
     }
-    #remove
+    .remove-btn
     {
         font-size: 16px;
         margin-left:30px;
-    }
-    #remove:hover
-    {
+        background: none;
+        border: none;
+        text-decoration: underline;
         cursor: pointer;
+        padding: 5px;
+        color: inherit;
+        font-family: inherit;
+    }
+    .remove-btn:hover, .remove-btn:focus-visible
+    {
+        color: rgb(172,27,37);
+        text-decoration: none;
+        outline: 2px solid rgb(47, 51, 55);
+        outline-offset: 2px;
     }
     #showTotal{
        text-align: center;
