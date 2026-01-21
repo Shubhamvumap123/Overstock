@@ -13,3 +13,7 @@
 ## 2026-01-18 - Form Label Association
 **Learning:** Found checkboxes where the descriptive text was in a sibling `<p>` tag instead of the `<label>`, making the text unclickable and breaking accessibility association.
 **Action:** Always verify that form labels wrap their descriptive text or use `for`/`id` association correctly with the text content inside the label, especially for checkboxes/radios where click target size matters.
+
+## 2026-01-24 - Semantic Actions
+**Learning:** Found usage of `<u>` tags with `onclick` handlers for "Remove" actions, which are inaccessible and non-semantic.
+**Action:** Replace `<u>` tags used for actions with `<button>` elements styled to look like links (if desired), ensuring keyboard focus, screen reader support, and proper semantics.
