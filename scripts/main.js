@@ -17,8 +17,13 @@ function appendData(data,parent){
     data.forEach((e)=>{
        
         let rat =(Math.random()*5).toFixed(1);
-        let div = document.createElement('div');
+        // ⚡ Bolt Optimization: Use <a> tag for semantic navigation and better accessibility
+        let div = document.createElement('a');
         div.className = "div1";
+        div.href = "livingRoom.html";
+        div.style.display = "block";
+        div.style.textDecoration = "none";
+        div.style.color = "inherit";
 
         let image = document.createElement('img');
         image.src = e.imgUrl
@@ -53,9 +58,7 @@ function appendData(data,parent){
         //div.append(image,name)
         // Corrected to append rating as well
         div.append(image,name,rating)
-        div.onclick= ()=>{
-            window.location.href="livingRoom.html"
-        }
+        // div.onclick removed in favor of href
         fragment.append(div)
     })
     parent.append(fragment);
@@ -69,8 +72,13 @@ function appendD(res,cont){
        let rev = Math.round(Math.random()*200)+10
        
     
-       let div = document.createElement("div")
+       // ⚡ Bolt Optimization: Use <a> tag for semantic navigation
+       let div = document.createElement("a")
        div.className="box"
+       div.href = `productPage.html?id=${ele._id}`;
+       div.style.display = "block";
+       div.style.textDecoration = "none";
+       div.style.color = "inherit";
 
        let image = document.createElement("img")
        image.src = ele.imageURL;
@@ -107,8 +115,8 @@ function appendD(res,cont){
            rating.textContent = `${ele.rating} ⭐  ⭐ ⭐ ⭐ ⭐ (${rev})`;
         }
       div.onclick=()=>{
+          // Fallback for pages that might still rely on localStorage
           localStorage.setItem("selected_id",JSON.stringify(ele._id));
-          window.location.href="productPage.html"
       }
        div.append(image,price,rating,name)
        fragment.append(div)
