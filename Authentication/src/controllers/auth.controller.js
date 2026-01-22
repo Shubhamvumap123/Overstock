@@ -12,6 +12,17 @@ const generateToken = (user) => {
     };
     return jwt.sign({ user: payload }, process.env.SECRET_KEY);
 }
+
+const sanitizeUser = (user) => {
+    // Sentinel: Whitelist fields to return to client (prevent sensitive data leak)
+    return {
+        _id: user._id,
+        email: user.email,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt
+    };
+}
+
 const register = async (req, res) => {
     try{
         let user = await User.findOne({email : req.body.email})
@@ -20,9 +31,13 @@ const register = async (req, res) => {
             return res.status(400).send({message : "Email already exists" })
         }
         // if new user, create it or allow to register;
-        user = await User.create(req.body);
+        // Sentinel: Prevent Mass Assignment by picking fields explicitly
+        user = await User.create({
+            email: req.body.email,
+            password: req.body.password
+        });
         const token = generateToken(user)
-        return res.status(200).send({user, token});
+        return res.status(200).send({user: sanitizeUser(user), token});
     }
     catch(err){
         res.status(400).send({message : err.message})
@@ -43,7 +58,7 @@ const login = async (req, res) => {
         }
         // if it matches
         const token = generateToken(user)
-        return res.status(200).send({user, token});
+        return res.status(200).send({user: sanitizeUser(user), token});
     }
     catch(err){
         res.status(400).send({message : err.message})
@@ -51,4 +66,3 @@ const login = async (req, res) => {
 }
 
 module.exports = {register,login}
-
