@@ -160,7 +160,8 @@ body {
     width: 100%;
     cursor: pointer;
   }
-  .dropdown-content-main > div div {
+  .dropdown-content-main > div div,
+  .dropdown-content-main > div a {
     font-size: 14px;
     cursor: pointer;
     color: #626669;
@@ -170,8 +171,11 @@ body {
     border-bottom: 1px solid transparent;
     line-height: normal;
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    text-decoration: none;
+    display: block;
   }
-  .dropdown-content-main > div > div > div:hover {
+  .dropdown-content-main > div > div > div:hover,
+  .dropdown-content-main > div > div > a:hover {
     border-bottom: 1px solid #2f3337;
   }
   .dropdown-content-main .dark-div {
@@ -185,7 +189,8 @@ body {
     line-height: normal;
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   }
-  .dropdown-content-main > div:nth-child(4) > div > div:hover {
+  .dropdown-content-main > div:nth-child(4) > div > div:hover,
+  .dropdown-content-main > div:nth-child(4) > div > a:hover {
     border-bottom: 1px solid transparent;
   }
   .dropdown-content-main .red-div {
