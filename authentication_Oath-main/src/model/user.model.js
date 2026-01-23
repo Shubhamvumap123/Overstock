@@ -11,18 +11,23 @@ const userSchema = new mongoose.Schema({
 });
 
 
-userSchema.pre("save", function(next){
-   
-    const hash = bcrypt.hashSync(this.password, 10);
+userSchema.pre("save", async function(next){
+    // Sentinel Fix: Prevent re-hashing if not modified
+    if (!this.isModified("password")) return next();
 
-    this.password =hash;
-    next();
-
+    // Sentinel Fix: Use async hash to prevent blocking event loop
+    try {
+        const hash = await bcrypt.hash(this.password, 10);
+        this.password = hash;
+        return next();
+    } catch(err) {
+        return next(err);
+    }
 })
 
 userSchema.methods.checkPassword = function (password) {
-
-    return bcrypt.compareSync(password, this.password)
+    // Sentinel Fix: Use async compare to return a Promise
+    return bcrypt.compare(password, this.password);
 }
 
 
