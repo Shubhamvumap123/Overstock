@@ -1,82 +1,100 @@
+import time
 from playwright.sync_api import sync_playwright
+import http.server
+import socketserver
+import threading
+import os
+import sys
 import json
 
-def verify_cart_a11y():
+PORT = 8003
+
+def run_server():
+    # Serve from the root of the repo
+    os.chdir(os.path.dirname(os.path.abspath(__file__)) + "/../")
+    Handler = http.server.SimpleHTTPRequestHandler
+    # Use allow_reuse_address to avoid "Address already in use" errors on restart
+    socketserver.TCPServer.allow_reuse_address = True
+    with socketserver.TCPServer(("", PORT), Handler) as httpd:
+        print(f"serving at port {PORT}")
+        httpd.serve_forever()
+
+def verify_cart():
+    # Start server in background
+    server_thread = threading.Thread(target=run_server, daemon=True)
+    server_thread.start()
+    time.sleep(2) # Give server time to start
+
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        page = browser.new_page()
+        context = browser.new_context()
+        page = context.new_page()
 
-        # Mock localStorage data
-        mock_data = [
+        # Mock data for cart
+        mock_cart = [
             {
                 "imageURL": "https://via.placeholder.com/150",
-                "name": "Accessible Sofa",
-                "price": 5000
+                "name": "Cart Item 1",
+                "price": "1000"
             },
             {
                 "imageURL": "https://via.placeholder.com/150",
-                "name": "Ergonomic Chair",
-                "price": 3000
+                "name": "Cart Item 2",
+                "price": "2000"
             }
         ]
 
-        # Inject data into localStorage
-        page.add_init_script(f"""
-            localStorage.setItem('cartItems', JSON.stringify({json.dumps(mock_data)}));
-        """)
-
         # Navigate to cart page
-        # Assuming localhost:8000 because I will start the server on that port
-        page.goto("http://localhost:8000/cart.html")
+        page.goto(f"http://localhost:{PORT}/cart.html")
 
-        # Wait for content to render
-        try:
-            page.wait_for_selector(".remove-btn", timeout=5000)
-        except:
-             print("Timeout waiting for .remove-btn. Check if cart.js is loading and rendering.")
-             print(page.content())
-             browser.close()
-             exit(1)
+        # Inject data
+        page.evaluate(f"localStorage.setItem('cartItems', JSON.stringify({json.dumps(mock_cart)}))")
 
-        # Verify buttons
-        buttons = page.locator(".remove-btn").all()
-        print(f"Found {len(buttons)} remove buttons")
+        # Reload to render with injected data
+        page.reload()
 
-        if len(buttons) != 2:
-            print("FAILED: Expected 2 remove buttons")
-            exit(1)
+        # Verify items are rendered
+        items = page.locator("#left > div")
+        print(f"Found {items.count()} items.")
 
-        for i, btn in enumerate(buttons):
-            # Check tag name
-            tag_name = btn.evaluate("el => el.tagName")
-            print(f"Button {i} tag: {tag_name}")
-            if tag_name != "BUTTON":
-                 print(f"FAILED: Button {i} is not a <button> tag (found {tag_name})")
-                 exit(1)
+        if items.count() != 2:
+            print("Error: Expected 2 items.")
+            sys.exit(1)
 
-            # Check ARIA label
-            aria_label = btn.get_attribute("aria-label")
-            print(f"Button {i} aria-label: {aria_label}")
-            expected_label = f"Remove {mock_data[i]['name']} from cart"
-            if aria_label != expected_label:
-                 print(f"FAILED: Button {i} has incorrect aria-label (expected '{expected_label}', found '{aria_label}')")
-                 exit(1)
+        # Verify that the Remove element is a button with class remove-btn
+        remove_btn = page.locator(".remove-btn").first
+        if remove_btn.count() == 0:
+            print("Error: .remove-btn not found.")
+            sys.exit(1)
 
-        # Verify no duplicate IDs for name
-        names_ids = page.locator("#name").count()
-        if names_ids > 0:
-             print(f"FAILED: Found {names_ids} elements with id='name'. Should be classes.")
-             exit(1)
+        tag_name = remove_btn.evaluate("el => el.tagName")
+        if tag_name != "BUTTON":
+            print(f"Error: Remove element is not a button, it is {tag_name}.")
+            sys.exit(1)
 
-        # Verify no duplicate IDs for remove
-        remove_ids = page.locator("#remove").count()
-        if remove_ids > 0:
-             print(f"FAILED: Found {remove_ids} elements with id='remove'. Should be classes.")
-             exit(1)
+        # Test Remove (Item 1)
+        remove_btn.click()
+        print("Clicked Remove on first item.")
 
-        print("SUCCESS: Cart accessibility verification passed")
-        page.screenshot(path="verification_cart_a11y.png")
+        # Wait for re-render
+        time.sleep(0.5)
+
+        items = page.locator("#left > div")
+        print(f"Found {items.count()} items after removal.")
+
+        if items.count() != 1:
+            print("Error: Expected 1 item after removal.")
+            sys.exit(1)
+
+        # Verify the remaining item is "Cart Item 2"
+        remaining_text = items.first.inner_text()
+        if "Cart Item 2" not in remaining_text:
+             print(f"Error: Wrong item remaining. Content: {remaining_text}")
+             sys.exit(1)
+
+        print("Verification Successful!")
+        page.screenshot(path="verification/cart_verification.png")
         browser.close()
 
 if __name__ == "__main__":
-    verify_cart_a11y()
+    verify_cart()

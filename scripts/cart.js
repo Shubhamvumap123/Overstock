@@ -2,6 +2,17 @@ var cart = JSON.parse(localStorage.getItem("cartItems"))||[];
 let left = document.getElementById("left");
 var right = document.getElementById("right");
 
+// Event Delegation for Remove buttons
+// ⚡ Bolt Optimization: Use event delegation to reduce event listeners (O(N) -> O(1))
+if (left) {
+    left.addEventListener('click', function(event) {
+        if (event.target.classList.contains('remove-btn')) {
+            const index = parseInt(event.target.dataset.index);
+            removeItem(index);
+        }
+    });
+}
+
 function display(cart)
 {
     left.innerHTML="";
@@ -20,7 +31,7 @@ function display(cart)
 
         let name = document.createElement("p");
         name.innerText = el.name;
-        name.className="item-name"
+        name.className="item-name"; // Use class instead of duplicate ID
 
         let price = document.createElement("h2");
         price.innerText = `Sale INR ${el.price}`;
@@ -28,14 +39,13 @@ function display(cart)
         price.style.marginLeft="30px"
 
 
+        // Use button for semantics and accessibility
         let remove = document.createElement("button");
         remove.innerText="Remove";
         remove.className = "remove-btn";
+        remove.dataset.index = index;
+        // Add aria-label for better accessibility
         remove.setAttribute("aria-label", `Remove ${el.name} from cart`);
-        remove.addEventListener("click",function()
-        {
-            removeItem(index);
-        })
 
         div1.append(name,price,remove);
         div.append(image,div1);

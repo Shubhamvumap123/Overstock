@@ -1,7 +1,7 @@
-127.0.0.1 - - [23/Jan/2026 06:18:47] "GET /cart.html HTTP/1.1" 200 -
-127.0.0.1 - - [23/Jan/2026 06:18:47] "GET /styles/navbar.css HTTP/1.1" 200 -
-127.0.0.1 - - [23/Jan/2026 06:18:47] "GET /styles/index.css HTTP/1.1" 200 -
-127.0.0.1 - - [23/Jan/2026 06:18:47] "GET /scripts/cart.js HTTP/1.1" 200 -
-127.0.0.1 - - [23/Jan/2026 06:18:47] "GET /styles/cart.css HTTP/1.1" 200 -
-127.0.0.1 - - [23/Jan/2026 06:18:48] "GET /components/navbar.js HTTP/1.1" 200 -
-127.0.0.1 - - [23/Jan/2026 06:18:48] "GET /components/footer.js HTTP/1.1" 200 -
+127.0.0.1 - - [20/Jan/2026 06:08:41] "GET /signup.html HTTP/1.1" 200 -
+127.0.0.1 - - [20/Jan/2026 06:08:41] "GET /styles/index.css HTTP/1.1" 200 -
+127.0.0.1 - - [20/Jan/2026 06:08:41] "GET /styles/signup.css HTTP/1.1" 200 -
+127.0.0.1 - - [20/Jan/2026 06:08:41] "GET /scripts/signup.js HTTP/1.1" 200 -
+127.0.0.1 - - [20/Jan/2026 06:08:41] "GET /styles/navbar.css HTTP/1.1" 200 -
+127.0.0.1 - - [20/Jan/2026 06:08:41] "GET /components/footer.js HTTP/1.1" 200 -
+127.0.0.1 - - [20/Jan/2026 06:08:41] "GET /components/navbar.js HTTP/1.1" 200 -

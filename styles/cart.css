@@ -52,6 +52,17 @@
     }
     .remove-btn
     {
+        font-size: 16px;
+        margin-left:30px;
+        background: none;
+        border: none;
+        text-decoration: underline;
+        color: inherit;
+        padding: 0;
+        font-family: inherit;
+    }
+    .remove-btn:hover
+    {
         background: transparent;
         border: none;
         text-decoration: underline;
