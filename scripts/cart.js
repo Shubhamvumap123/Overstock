@@ -20,7 +20,7 @@ function display(cart)
 
         let name = document.createElement("p");
         name.innerText = el.name;
-        name.id="name"
+        name.className="item-name"
 
         let price = document.createElement("h2");
         price.innerText = `Sale INR ${el.price}`;
@@ -28,9 +28,10 @@ function display(cart)
         price.style.marginLeft="30px"
 
 
-        let remove = document.createElement("u");
+        let remove = document.createElement("button");
         remove.innerText="Remove";
-        remove.id = "remove";
+        remove.className = "remove-btn";
+        remove.setAttribute("aria-label", `Remove ${el.name} from cart`);
         remove.addEventListener("click",function()
         {
             removeItem(index);

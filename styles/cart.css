@@ -23,7 +23,7 @@
         display: flex;
         margin-bottom: 10px;
     }
-    #name{
+    .item-name{
         font-size: 16px;
     }
     #right
@@ -50,14 +50,15 @@
         width: 33%;
         margin: 10px;
     }
-    #remove
+    .remove-btn
     {
-        font-size: 16px;
-        margin-left:30px;
-    }
-    #remove:hover
-    {
+        background: transparent;
+        border: none;
+        text-decoration: underline;
         cursor: pointer;
+        font-size: 16px;
+        margin-left: 30px;
+        padding: 0;
     }
     #showTotal{
        text-align: center;
