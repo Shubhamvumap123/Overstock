@@ -9,3 +9,7 @@
 ## 2026-01-02 - [Pattern: Recurring Blocking Await]
 **Learning:** Encountered the blocking top-level `await` anti-pattern again in `scripts/livingRoom.js`. This blocks the main thread when the API (overstockapi) fails.
 **Action:** When working in this codebase, assume external API calls are blocking and potentially broken. Always verify page load with network offline or API failures.
+
+## 2026-01-23 - [Pattern: Duplicate IDs in Loop]
+**Learning:** `scripts/cart.js` created elements with `id="remove"` and `id="name"` inside a loop, resulting in invalid HTML and potential selector issues.
+**Action:** Use classes (e.g., `.remove-btn`, `.item-name`) for repeated elements. Use event delegation for interactions on these elements.
