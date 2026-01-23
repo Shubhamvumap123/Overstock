@@ -63,7 +63,13 @@
     }
     .remove-btn:hover
     {
+        background: transparent;
+        border: none;
+        text-decoration: underline;
         cursor: pointer;
+        font-size: 16px;
+        margin-left: 30px;
+        padding: 0;
     }
     #showTotal{
        text-align: center;
