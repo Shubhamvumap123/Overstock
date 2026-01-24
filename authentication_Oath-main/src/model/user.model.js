@@ -11,18 +11,21 @@ const userSchema = new mongoose.Schema({
 });
 
 
-userSchema.pre("save", function(next){
+userSchema.pre("save", async function(next){
    
-    const hash = bcrypt.hashSync(this.password, 10);
-
-    this.password =hash;
-    next();
-
+    if (!this.isModified("password")) return next();
+    try {
+        const hash = await bcrypt.hash(this.password, 10);
+        this.password = hash;
+        return next();
+    } catch (err) {
+        return next(err);
+    }
 })
 
 userSchema.methods.checkPassword = function (password) {
 
-    return bcrypt.compareSync(password, this.password)
+    return bcrypt.compare(password, this.password)
 }
 
 
