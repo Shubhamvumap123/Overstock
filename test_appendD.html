@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test AppendD</title>
+</head>
+<body>
+    <div id="container"></div>
+    <script type="module">
+        import { appendD } from "./scripts/main.js";
+
+        const mockData = [
+            {
+                _id: "test-id-123",
+                imageURL: "mock.jpg",
+                name: "Test Product",
+                price: 100,
+                rating: 4.5
+            }
+        ];
+
+        const container = document.getElementById("container");
+        appendD(mockData, container);
+    </script>
+</body>
+</html>
