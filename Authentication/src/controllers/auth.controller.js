@@ -20,7 +20,11 @@ const register = async (req, res) => {
             return res.status(400).send({message : "Email already exists" })
         }
         // if new user, create it or allow to register;
-        user = await User.create(req.body);
+        // SENTINEL FIX: Prevent Mass Assignment by explicitly selecting fields
+        user = await User.create({
+            email: req.body.email,
+            password: req.body.password,
+        });
         const token = generateToken(user)
         return res.status(200).send({user, token});
     }
