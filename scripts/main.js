@@ -17,16 +17,20 @@ function appendData(data,parent){
     data.forEach((e)=>{
        
         let rat =(Math.random()*5).toFixed(1);
-        let div = document.createElement('div');
+        // ⚡ Bolt Optimization: Use <a> tag for SEO, accessibility and native navigation
+        let div = document.createElement('a');
+        div.href = "livingRoom.html";
         div.className = "div1";
+        div.style.display = "block";
+        div.style.textDecoration = "none";
+        div.style.color = "inherit";
 
         let image = document.createElement('img');
         image.src = e.imgUrl
         image.loading = "lazy";
         image.decoding = "async";
-        image.id = "poster";
-        image.loading = "lazy";
-        image.decoding = "async";
+        // ⚡ Bolt Optimization: Use class instead of duplicate ID
+        image.className = "poster";
 
         let rating = document.createElement('p')
         rating.className='rating';
@@ -53,9 +57,6 @@ function appendData(data,parent){
         //div.append(image,name)
         // Corrected to append rating as well
         div.append(image,name,rating)
-        div.onclick= ()=>{
-            window.location.href="livingRoom.html"
-        }
         fragment.append(div)
     })
     parent.append(fragment);
@@ -68,17 +69,20 @@ function appendD(res,cont){
 
        let rev = Math.round(Math.random()*200)+10
        
-    
-       let div = document.createElement("div")
-       div.className="box"
+       // ⚡ Bolt Optimization: Use <a> tag for deep linking and native navigation
+       let div = document.createElement("a");
+       div.href = `productPage.html?id=${ele._id}`;
+       div.className="box";
+       div.style.display = "block";
+       div.style.textDecoration = "none";
+       div.style.color = "inherit";
 
        let image = document.createElement("img")
        image.src = ele.imageURL;
        image.loading = "lazy";
        image.decoding = "async";
-       image.id = "poster";
-       image.loading = "lazy";
-       image.decoding = "async";
+       // ⚡ Bolt Optimization: Use class instead of duplicate ID
+       image.className = "poster";
        
        let name = document.createElement("p")
        name.className = "name"
@@ -106,10 +110,6 @@ function appendD(res,cont){
         else if(ele.rating>=4.5){
            rating.textContent = `${ele.rating} ⭐  ⭐ ⭐ ⭐ ⭐ (${rev})`;
         }
-      div.onclick=()=>{
-          localStorage.setItem("selected_id",JSON.stringify(ele._id));
-          window.location.href="productPage.html"
-      }
        div.append(image,price,rating,name)
        fragment.append(div)
    

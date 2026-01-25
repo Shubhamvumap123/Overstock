@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify Main Refactor</title>
+</head>
+<body>
+    <div id="category-container"></div>
+    <div id="product-container"></div>
+
+    <script type="module">
+        import { appendData, appendD } from "../scripts/main.js";
+
+        // Mock data for appendData
+        const categories = [
+            { imgUrl: "cat1.jpg", name: "Category 1" },
+            { imgUrl: "cat2.jpg", name: "Category 2" }
+        ];
+
+        // Mock data for appendD
+        const products = [
+            { _id: "prod1", imageURL: "prod1.jpg", name: "Product 1", price: 100, rating: 4.5 },
+            { _id: "prod2", imageURL: "prod2.jpg", name: "Product 2", price: 200, rating: 3.5 }
+        ];
+
+        const catContainer = document.getElementById("category-container");
+        const prodContainer = document.getElementById("product-container");
+
+        appendData(categories, catContainer);
+        appendD(products, prodContainer);
+    </script>
+</body>
+</html>
