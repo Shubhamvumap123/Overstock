@@ -13,9 +13,63 @@ if (left) {
     });
 }
 
+// 🎨 Palette: Render a friendly empty state when cart is empty
+function renderEmptyState() {
+  left.innerHTML = "";
+  // Clear the right side (Total section) as it's not needed for empty state
+  right.style.display = "none";
+  left.style.width = "100%";
+  left.style.border = "none";
+
+  const emptyContainer = document.createElement("div");
+  // Override inherited #left > div styles (which enforces flex row and 300px height)
+  emptyContainer.style.display = "flex";
+  emptyContainer.style.flexDirection = "column";
+  emptyContainer.style.alignItems = "center";
+  emptyContainer.style.justifyContent = "center";
+  emptyContainer.style.height = "400px"; // Give it some space
+  emptyContainer.style.border = "none";  // Remove the border defined in CSS
+  emptyContainer.style.textAlign = "center";
+  // emptyContainer.style.marginTop = "50px"; // Flex centering handles this
+
+  const emptyTitle = document.createElement("h2");
+  emptyTitle.innerText = "Your Cart is Empty";
+  emptyTitle.style.marginBottom = "20px";
+
+  const emptyText = document.createElement("p");
+  emptyText.innerText = "Looks like you haven't added anything to your cart yet.";
+  emptyText.style.marginBottom = "30px";
+
+  const startShoppingBtn = document.createElement("a");
+  startShoppingBtn.href = "index.html";
+  startShoppingBtn.innerText = "Start Shopping";
+  // Inline styles to match the look and feel without modifying global CSS
+  startShoppingBtn.style.display = "inline-block";
+  startShoppingBtn.style.backgroundColor = "black";
+  startShoppingBtn.style.color = "white";
+  startShoppingBtn.style.padding = "15px 30px";
+  startShoppingBtn.style.textDecoration = "none";
+  startShoppingBtn.style.borderRadius = "5px";
+  startShoppingBtn.style.fontWeight = "bold";
+
+  emptyContainer.append(emptyTitle, emptyText, startShoppingBtn);
+  left.append(emptyContainer);
+}
+
 function display(cart)
 {
     left.innerHTML="";
+
+    if (cart.length === 0) {
+        renderEmptyState();
+        return;
+    }
+
+    // Restore layout if cart has items
+    right.style.display = "";
+    left.style.width = "";
+    left.style.border = "";
+
     // Performance optimization: Use DocumentFragment to batch DOM insertions
     // This reduces reflows from N to 1
     const fragment = document.createDocumentFragment();
@@ -54,7 +108,10 @@ function display(cart)
     })
     left.append(fragment);
 }
+
+// Initial display call
 display(cart);
+
 function removeItem(index)
 {
     cart.splice(index,1);
@@ -65,6 +122,9 @@ function removeItem(index)
 
 function displayTotal()
 {   
+    // Only display total if cart has items
+    if (cart.length === 0) return;
+
     right.innerHTML = "";
     var total = 0;
     for(var i =0;i<cart.length;i++)
@@ -103,4 +163,5 @@ function checkout(){
     }
 }
 
+// Initial total display call
 displayTotal();
