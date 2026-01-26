@@ -16,6 +16,43 @@ if (left) {
 function display(cart)
 {
     left.innerHTML="";
+
+    // 🎨 Palette: Add Empty State
+    if (cart.length === 0) {
+        const emptyState = document.createElement('div');
+        emptyState.style.textAlign = "center";
+        emptyState.style.padding = "40px";
+        emptyState.style.width = "100%";
+        // 🎨 Palette: Fix layout issues caused by #left > div flex styles
+        emptyState.style.display = "flex";
+        emptyState.style.flexDirection = "column";
+        emptyState.style.alignItems = "center";
+        emptyState.style.justifyContent = "center";
+
+        emptyState.innerHTML = `
+            <h2>Your Cart is Empty</h2>
+            <p style="margin: 20px 0;">Looks like you haven't added anything to your cart yet.</p>
+        `;
+
+        const shopBtn = document.createElement("button");
+        shopBtn.innerText = "Start Shopping";
+        shopBtn.id = "check_out"; // Reuse existing checkout button styles
+        shopBtn.style.width = "auto";
+        shopBtn.style.padding = "0 30px";
+        shopBtn.style.marginLeft = "0";
+        shopBtn.onclick = () => window.location.href = "index.html";
+
+        emptyState.appendChild(shopBtn);
+        left.appendChild(emptyState);
+
+        // Hide right column
+        if (right) {
+            right.innerHTML = "";
+            right.style.border = "none";
+        }
+        return;
+    }
+
     // Performance optimization: Use DocumentFragment to batch DOM insertions
     // This reduces reflows from N to 1
     const fragment = document.createDocumentFragment();
@@ -65,7 +102,12 @@ function removeItem(index)
 
 function displayTotal()
 {   
+    if (cart.length === 0) return;
+
     right.innerHTML = "";
+    // Ensure border is visible if it was hidden
+    right.style.border = "solid rgb(218,220,223) 1px";
+
     var total = 0;
     for(var i =0;i<cart.length;i++)
     {
