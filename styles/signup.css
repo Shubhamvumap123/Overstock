@@ -209,3 +209,32 @@ body {
     display: none;
   }
 }
+
+/* Palette: Password Visibility Toggle */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+.password-wrapper input {
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: 40px;
+}
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #626669;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.password-toggle:focus {
+  outline: 2px solid #0272a2;
+  border-radius: 4px;
+}

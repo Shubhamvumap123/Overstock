@@ -168,3 +168,26 @@ function isEmail(email) {
     email
   );
 }
+
+// Palette: Password Visibility Toggle
+document.querySelectorAll('.password-toggle').forEach(button => {
+  button.addEventListener('click', () => {
+    // Find the input within the same wrapper
+    const wrapper = button.closest('.password-wrapper');
+    const input = wrapper.querySelector('input');
+    const eyeIcon = button.querySelector('.eye-icon');
+    const eyeOffIcon = button.querySelector('.eye-off-icon');
+
+    if (input.type === 'password') {
+      input.type = 'text';
+      button.setAttribute('aria-label', 'Hide password');
+      eyeIcon.style.display = 'none';
+      eyeOffIcon.style.display = 'block';
+    } else {
+      input.type = 'password';
+      button.setAttribute('aria-label', 'Show password');
+      eyeIcon.style.display = 'block';
+      eyeOffIcon.style.display = 'none';
+    }
+  });
+});
