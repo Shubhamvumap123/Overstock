@@ -210,31 +210,39 @@ body {
   }
 }
 
-/* Palette: Password Visibility Toggle */
+/* 🎨 Palette: Password Visibility Toggle Styles */
 .password-wrapper {
   position: relative;
   width: 100%;
+  display: flex;
+  align-items: center;
 }
+
 .password-wrapper input {
   width: 100%;
-  box-sizing: border-box;
-  padding-right: 40px;
+  padding-right: 40px; /* Make space for the button */
+  box-sizing: border-box; /* Ensure padding doesn't affect total width */
 }
-.password-toggle {
+
+.password-wrapper .password-toggle {
   position: absolute;
-  right: 10px;
+  right: 5px;
   top: 50%;
   transform: translateY(-50%);
-  background: none;
+  background: transparent;
   border: none;
   cursor: pointer;
-  color: #626669;
-  padding: 0;
+  padding: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #626669;
+  width: auto;
+  height: auto;
+  margin: 0;
 }
-.password-toggle:focus {
-  outline: 2px solid #0272a2;
-  border-radius: 4px;
+
+.password-wrapper .password-toggle:hover {
+  color: #0272a2;
+  background: transparent;
 }
