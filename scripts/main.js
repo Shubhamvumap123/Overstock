@@ -1,16 +1,45 @@
 
-async function getData(url){
-    try{
-    let res = await fetch(url);
-    let data = await res.json();
-    console.log(data)
+function appendData(data, parent) {
+  let fragment = document.createDocumentFragment();
+  data.forEach((e) => {
+    let rat = (Math.random() * 5).toFixed(1);
 
-   return data
-}
-catch(err){
-    console.log(err)
-}
-}
+    // ⚡ Bolt Optimization: Use <a> tag instead of div + onclick for better semantics and accessibility.
+    let anchor = document.createElement("a");
+    anchor.className = "div1";
+    anchor.href = "livingRoom.html";
+
+    // Inline styles to match previous behavior and ensure block display
+    anchor.style.display = "block";
+    anchor.style.textDecoration = "none";
+    anchor.style.color = "inherit";
+    anchor.style.marginTop = "0"; // Reset potentially inherited margin from global 'a'
+
+    let image = document.createElement("img");
+    image.src = e.imgUrl;
+    image.loading = "lazy";
+    image.decoding = "async";
+    // ⚡ Bolt Optimization: Use class instead of duplicate ID to ensure valid HTML.
+    image.className = "poster";
+
+    let rating = document.createElement("p");
+    rating.className = "rating";
+    // ⚡ Bolt Optimization: Use textContent with Unicode stars instead of innerHTML
+    if (rat > 0 && rat <= 1.4) {
+      rating.textContent = `${rat} ⭐ `;
+    } else if (rat >= 1.5 && rat < 2.4) {
+      rating.textContent = `${rat} ⭐ ⭐ `;
+    } else if (rat >= 2.5 && rat <= 3.4) {
+      rating.textContent = `${rat} ⭐ ⭐ ⭐`;
+    } else if (rat >= 3.5 && rat <= 4.4) {
+      rating.textContent = `${rat} ⭐  ⭐ ⭐ ⭐ `;
+    } else if (rat >= 4.5) {
+      rating.textContent = `${rat} ⭐  ⭐ ⭐ ⭐ ⭐`;
+    }
+
+    let name = document.createElement("p");
+    name.textContent = e.name;
+    name.className = "txtSmall";
 
 function appendData(data,parent){
     let fragment = document.createDocumentFragment();
@@ -67,8 +96,10 @@ function appendD(res,cont){
     let fragment = document.createDocumentFragment();
    res.forEach(ele => {
 
-       let rev = Math.round(Math.random()*200)+10
-       
+    // ⚡ Bolt Optimization: Use <a> tag instead of div + onclick for better semantics and accessibility.
+    let anchor = document.createElement("a");
+    anchor.className = "box";
+    anchor.href = "productPage.html";
     
        let div = document.createElement("a")
        div.className="box"
@@ -117,4 +148,5 @@ function appendD(res,cont){
    cont.append(fragment);
 }
 
-export {getData, appendData,appendD}
+// ⚡ Bolt Optimization: Removed unused `getData` function.
+export { appendData, appendD };
