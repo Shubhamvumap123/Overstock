@@ -15,6 +15,12 @@ const generateToken = (user) => {
 
 const register = async (req, res) => {
     try{
+        // SENTINEL FIX: Validate password strength
+        const passwordError = validatePassword(req.body.password);
+        if (passwordError) {
+            return res.status(400).send({ message: passwordError });
+        }
+
         let user = await User.findOne({email : req.body.email})
         //checking email
         if(user){
