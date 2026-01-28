@@ -33,23 +33,22 @@ def verify_lazy_loading():
         # Navigate to page
         page.goto("http://localhost:3000/livingRoom.html")
 
-        # Wait for images to appear (using the id assigned in main.js, which is duplicated but usable for selection)
-        # Note: duplicate IDs are bad, but that's what the code produces. Playwright handles it by selecting first or all.
+        # Wait for images to appear (using the class assigned in main.js)
         try:
-            page.wait_for_selector("#poster", timeout=5000)
+            page.wait_for_selector(".poster", timeout=5000)
         except:
-            print("Timeout waiting for #poster. Page content:")
+            print("Timeout waiting for .poster. Page content:")
             print(page.content())
             browser.close()
             exit(1)
 
         # Check attributes
-        # locator("#poster") matches all elements with id="poster" if using .all()
-        images = page.locator("#poster").all()
+        # locator(".poster") matches all elements with class="poster" if using .all()
+        images = page.locator(".poster").all()
         print(f"Found {len(images)} images")
 
         if len(images) == 0:
-             print("No images found with id poster")
+             print("No images found with class poster")
              exit(1)
 
         for i, img in enumerate(images):
