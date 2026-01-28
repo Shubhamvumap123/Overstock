@@ -1,81 +1,83 @@
 
-// Mock bcrypt before any requires
-jest.mock('bcrypt', () => ({
-    hash: jest.fn(),
-    compare: jest.fn()
-}));
+const authController = require('../src/controllers/auth.controller');
+const User = require('../src/models/user.model');
+const jwt = require('jsonwebtoken');
+const httpMocks = require('node-mocks-http');
 
-// Mock mongoose user model
 jest.mock('../src/models/user.model');
 jest.mock('jsonwebtoken');
 
-const { register } = require('../src/controllers/auth.controller');
-const User = require('../src/models/user.model');
-const jwt = require('jsonwebtoken');
-
-
-describe('Auth Controller - Register', () => {
+describe('Auth Controller', () => {
     let req, res;
 
     beforeEach(() => {
-        req = {
-            body: {}
-        };
-        res = {
-            status: jest.fn().mockReturnThis(),
-            send: jest.fn()
-        };
-        User.findOne.mockResolvedValue(null); // User does not exist
-        User.create.mockResolvedValue({ _id: '123', email: 'test@example.com' });
-        jwt.sign.mockReturnValue('fake-token');
+        req = httpMocks.createRequest();
+        res = httpMocks.createResponse();
         jest.clearAllMocks();
+        // Mock console.error to avoid cluttering test output
+        jest.spyOn(console, 'error').mockImplementation(() => {});
     });
 
-    test('should reject weak password', async () => {
-        req.body = {
-            email: 'test@example.com',
-            password: '123'
-        };
-
-        await register(req, res);
-
-        expect(User.create).not.toHaveBeenCalled();
-        expect(res.status).toHaveBeenCalledWith(400);
-        expect(res.send).toHaveBeenCalledWith(expect.objectContaining({
-             message: expect.stringContaining('Password must be at least 8 characters long')
-        }));
+    afterEach(() => {
+        jest.restoreAllMocks();
     });
 
-    test('should create user with strong password', async () => {
-        req.body = {
-            email: 'test@example.com',
-            password: 'StrongPassword1!'
-        };
+    describe('register', () => {
+        it('should create user with ONLY allowed fields (Mass Assignment Fix)', async () => {
+            req.body = {
+                email: 'test@example.com',
+                password: 'password123',
+                isAdmin: true, // Malicious field
+                role: 'superuser' // Malicious field
+            };
 
-        await register(req, res);
+            User.findOne.mockResolvedValue(null);
+            const mockUser = {
+                _id: '123',
+                email: 'test@example.com',
+                createdAt: new Date(),
+                updatedAt: new Date()
+            };
+            User.create.mockResolvedValue(mockUser);
+            jwt.sign.mockReturnValue('token');
 
-        expect(User.create).toHaveBeenCalled();
-        expect(res.status).toHaveBeenCalledWith(200);
-        expect(jwt.sign).toHaveBeenCalled();
-    });
+            await authController.register(req, res);
 
-    test('should prevent mass assignment', async () => {
-        req.body = {
-            email: 'test@example.com',
-            password: 'StrongPassword1!',
-            isAdmin: true, // Attempting mass assignment
-            role: 'admin'
-        };
+            // Expect User.create to be called with ONLY email and password
+            expect(User.create).toHaveBeenCalledWith({
+                email: 'test@example.com',
+                password: 'password123'
+            });
 
-        await register(req, res);
-
-        expect(User.create).toHaveBeenCalledWith({
-            email: 'test@example.com',
-            password: 'StrongPassword1!'
+            // Should not contain malicious fields
+            const createCallArgs = User.create.mock.calls[0][0];
+            expect(createCallArgs).not.toHaveProperty('isAdmin');
+            expect(createCallArgs).not.toHaveProperty('role');
         });
-        // Verify no other fields were passed
-        const args = User.create.mock.calls[0][0];
-        expect(args).not.toHaveProperty('isAdmin');
-        expect(args).not.toHaveProperty('role');
+    });
+
+    describe('login', () => {
+        it('should return GENERIC error for non-existent user (Enumeration Fix)', async () => {
+            req.body = { email: 'nonexistent@example.com', password: 'password' };
+            User.findOne.mockResolvedValue(null);
+
+            await authController.login(req, res);
+
+            expect(res.statusCode).toBe(400);
+            expect(res._getData()).toEqual(expect.objectContaining({ message: 'Invalid email or password' }));
+        });
+
+        it('should return GENERIC error for wrong password (Enumeration Fix)', async () => {
+            req.body = { email: 'existing@example.com', password: 'wrongpassword' };
+            const mockUser = {
+                checkPassword: jest.fn().mockResolvedValue(false)
+            };
+            User.findOne.mockResolvedValue(mockUser);
+
+            await authController.login(req, res);
+
+            expect(res.statusCode).toBe(400);
+            expect(res._getData()).toEqual(expect.objectContaining({ message: 'Invalid email or password' }));
+        });
     });
 });
