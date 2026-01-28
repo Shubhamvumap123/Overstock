@@ -17,14 +17,20 @@ function appendData(data,parent){
     data.forEach((e)=>{
        
         let rat =(Math.random()*5).toFixed(1);
-        let div = document.createElement('div');
+        let div = document.createElement('a');
         div.className = "div1";
+        div.href = "livingRoom.html";
+        div.style.display = "block";
+        div.style.textDecoration = "none";
+        div.style.color = "inherit";
+        // Ensure marginTop is reset if it conflicts with global 'a' styles
+        div.style.marginTop = "0";
 
         let image = document.createElement('img');
         image.src = e.imgUrl
-        image.className = "poster";
         image.loading = "lazy";
         image.decoding = "async";
+        image.className = "poster";
 
         let rating = document.createElement('p')
         rating.className='rating';
@@ -45,44 +51,46 @@ function appendData(data,parent){
             rating.textContent = `${rat} ⭐  ⭐ ⭐ ⭐ ⭐`;
          }
         let name = document.createElement('p')
-        name.innerText = e.name
+        name.textContent = e.name
         name.className = "txtSmall"
 
         //div.append(image,name)
         // Corrected to append rating as well
         div.append(image,name,rating)
-        div.onclick= ()=>{
-            window.location.href="livingRoom.html"
-        }
         fragment.append(div)
     })
     parent.append(fragment);
 }
 
 function appendD(res,cont){ 
-    cont.innerHTML=" ";
+    cont.textContent = "";
     let fragment = document.createDocumentFragment();
    res.forEach(ele => {
 
        let rev = Math.round(Math.random()*200)+10
        
     
-       let div = document.createElement("div")
+       let div = document.createElement("a")
        div.className="box"
+       div.href = `productPage.html?id=${ele._id}`;
+       div.style.display = "block";
+       div.style.textDecoration = "none";
+       div.style.color = "inherit";
+       div.style.marginTop = "0";
 
        let image = document.createElement("img")
        image.src = ele.imageURL;
-       image.className = "poster";
        image.loading = "lazy";
        image.decoding = "async";
+       image.className = "poster";
        
        let name = document.createElement("p")
        name.className = "name"
-       name.innerText = ele.name
+       name.textContent = ele.name
        
        let price = document.createElement("p")
        price.className = "price"
-       price.innerText = `Sale Starts at INR ${ele.price}`;
+       price.textContent = `Sale Starts at INR ${ele.price}`;
 
        let rating = document.createElement("p")
        rating.className="rating"
@@ -102,10 +110,6 @@ function appendD(res,cont){
         else if(ele.rating>=4.5){
            rating.textContent = `${ele.rating} ⭐  ⭐ ⭐ ⭐ ⭐ (${rev})`;
         }
-      div.onclick=()=>{
-          localStorage.setItem("selected_id",JSON.stringify(ele._id));
-          window.location.href="productPage.html"
-      }
        div.append(image,price,rating,name)
        fragment.append(div)
    
