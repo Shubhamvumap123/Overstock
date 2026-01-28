@@ -209,3 +209,40 @@ body {
     display: none;
   }
 }
+
+/* 🎨 Palette: Password Visibility Toggle Styles */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px; /* Make space for the button */
+  box-sizing: border-box; /* Ensure padding doesn't affect total width */
+}
+
+.password-wrapper .password-toggle {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #626669;
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+.password-wrapper .password-toggle:hover {
+  color: #0272a2;
+  background: transparent;
+}
