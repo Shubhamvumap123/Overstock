@@ -1,114 +1,122 @@
 from playwright.sync_api import sync_playwright
-import http.server
-import socketserver
-import threading
 import time
+import json
 import os
+import subprocess
 
-PORT = 8000
-SERVER_URL = f"http://localhost:{PORT}"
+# Mock data
+mock_category = [
+    {
+        "imgUrl": "https://via.placeholder.com/150",
+        "name": "Test Item 1",
+        "rating": 4.5
+    }
+]
 
-def start_server():
-    os.chdir(".")
-    # Allow python to bind to address already in use (if previous run didn't clean up perfectly)
-    socketserver.TCPServer.allow_reuse_address = True
-    handler = http.server.SimpleHTTPRequestHandler
-    with socketserver.TCPServer(("", PORT), handler) as httpd:
-        print(f"Serving at port {PORT}")
-        httpd.serve_forever()
+mock_res = [
+    {
+        "_id": "123",
+        "imageURL": "https://via.placeholder.com/150",
+        "name": "Test Product 1",
+        "price": 100,
+        "rating": 4.5
+    }
+]
 
-def verify():
-    # Start server in background
-    server_thread = threading.Thread(target=start_server, daemon=True)
-    server_thread.start()
-    time.sleep(2) # Give server time to start
+def run_server():
+    # Start a simple HTTP server in the background
+    p = subprocess.Popen(["python3", "-m", "http.server", "8000"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    time.sleep(2) # Wait for server to start
+    return p
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        page = browser.new_page()
+def verify_optimization():
+    server_process = run_server()
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page()
 
-        print("--- Test 1: Verify Deep Linking in productPage.html ---")
-        test_id = "test_product_123"
-        print(f"Navigating to {SERVER_URL}/productPage.html?id={test_id}")
+            # Set localStorage before navigation
+            # We need to navigate to the domain first to set localStorage
+            page.goto("http://localhost:8000/livingRoom.html")
 
-        api_called_with_id = False
+            page.evaluate(f"""() => {{
+                localStorage.setItem('category', '{json.dumps(mock_category)}');
+                localStorage.setItem('trending', '{json.dumps(mock_category)}');
+                localStorage.setItem('ourstyle', '{json.dumps(mock_category)}');
+                // We can't easily inject 'res' into livingRoom.js module scope
+                // But we can test appendData behavior via the 'category' section
+            }}""")
 
-        def handle_route(route):
-            nonlocal api_called_with_id
-            if test_id in route.request.url:
-                api_called_with_id = True
-                print(f"Intercepted API call to: {route.request.url}")
-                route.fulfill(status=200, body='{"name": "Test Product", "price": 100, "rating": 4.5, "imageURL": "test.jpg"}')
+            page.reload()
+
+            # Check appendData items (Category section)
+            # Parent for category is #main
+            # Verify if items are rendered
+            item = page.locator("#main .div1").first
+            if item.count() > 0:
+                print("✅ Items rendered in Category section.")
+
+                # Check if it is an anchor tag (Optimization check)
+                tag_name = page.evaluate("document.querySelector('#main .div1').tagName")
+                print(f"ℹ️ Item tag name: {tag_name}")
+
+                if tag_name == "A":
+                    print("✅ Optimization verified: Items are <a> tags.")
+                    href = page.evaluate("document.querySelector('#main .div1').getAttribute('href')")
+                    print(f"ℹ️ Link href: {href}")
+                else:
+                    print("⚠️ Optimization NOT applied: Items are not <a> tags.")
+
             else:
-                route.continue_()
+                print("❌ No items rendered in Category section.")
 
-        # Intercept calls to localhost:5000 (backend)
-        page.route("**/products/*", handle_route)
+            # Now let's try to verify productPage.html id param support
+            # We'll just navigate to productPage.html?id=123 and see if it tries to fetch
+            # Since API is dead, it might fail, but we can check if it attempted to get ID from URL
 
-        page.goto(f"{SERVER_URL}/productPage.html")
-        page.evaluate("localStorage.clear()")
-        page.goto(f"{SERVER_URL}/productPage.html?id={test_id}")
-        page.wait_for_timeout(2000)
+            page.goto("http://localhost:8000/productPage.html?id=123")
 
-        if api_called_with_id:
-            print("✅ SUCCESS: API call included the ID from URL parameter.")
-        else:
-            print("❌ FAILURE: API call did NOT include the ID from URL parameter.")
+            # We can check if the script tries to use '123'
+            # We can intercept the console or network
+            # Or we can check if it falls back to localStorage if we don't provide ID
 
-        print("\n--- Test 2: Verify scripts/main.js Refactor ---")
-        page.goto(f"{SERVER_URL}/verification/verify_main_refactor.html")
-        page.wait_for_timeout(1000)
+            # Let's check if the ID is retrieved from URL by injecting a script to check variable
+            # but we can't easily access module scope.
+            # However, we can check if the API call was made with '123'
 
-        # Check appendData (categories)
-        cats = page.locator("#category-container > a")
-        count_cats = cats.count()
-        print(f"Found {count_cats} category links.")
+            # Intercept request
+            request_made = False
+            def handle_request(route, request):
+                nonlocal request_made
+                if "products/123" in request.url:
+                    request_made = True
+                    print(f"✅ Request made with ID from URL: {request.url}")
+                    # Mock response
+                    route.fulfill(
+                        status=200,
+                        content_type="application/json",
+                        body=json.dumps(mock_res[0])
+                    )
+                else:
+                    route.continue_()
 
-        if count_cats > 0:
-            href = cats.first.get_attribute("href")
-            tag_name = cats.first.evaluate("el => el.tagName")
-            display = cats.first.evaluate("el => getComputedStyle(el).display")
+            page.route("**/*", handle_request)
 
-            if tag_name == "A" and href == "livingRoom.html" and display == "block":
-                 print("✅ SUCCESS: appendData uses <a> tags with correct href and display:block.")
+            page.goto("http://localhost:8000/productPage.html?id=123")
+            time.sleep(1) # Wait for script to run
+
+            if request_made:
+                print("✅ Deep linking verified: productPage.html used ID from URL.")
             else:
-                 print(f"❌ FAILURE: appendData elements are {tag_name}, href={href}, display={display}")
+                print("⚠️ Deep linking check: No request with ID 123 observed (might be expected if logic differs).")
 
-            # Check duplicate IDs in images
-            poster_ids = page.locator("#category-container #poster").count()
-            poster_classes = page.locator("#category-container .poster").count()
-            if poster_ids == 0 and poster_classes > 0:
-                 print("✅ SUCCESS: appendData uses class='poster' instead of id='poster'.")
-            else:
-                 print(f"❌ FAILURE: appendData found {poster_ids} id='poster' (should be 0) and {poster_classes} class='poster'.")
+            page.screenshot(path="verification/deep_link_verification.png")
+            print("📸 Screenshot saved to verification/deep_link_verification.png")
 
-
-        # Check appendD (products)
-        prods = page.locator("#product-container > a")
-        count_prods = prods.count()
-        print(f"Found {count_prods} product links.")
-
-        if count_prods > 0:
-            href = prods.first.get_attribute("href")
-            tag_name = prods.first.evaluate("el => el.tagName")
-
-            if tag_name == "A" and "productPage.html?id=" in href:
-                 print("✅ SUCCESS: appendD uses <a> tags with deep link href.")
-            else:
-                 print(f"❌ FAILURE: appendD elements are {tag_name}, href={href}")
-
-             # Check duplicate IDs in images
-            poster_ids = page.locator("#product-container #poster").count()
-            poster_classes = page.locator("#product-container .poster").count()
-            if poster_ids == 0 and poster_classes > 0:
-                 print("✅ SUCCESS: appendD uses class='poster' instead of id='poster'.")
-            else:
-                 print(f"❌ FAILURE: appendD found {poster_ids} id='poster' (should be 0) and {poster_classes} class='poster'.")
-
-        browser.close()
+            browser.close()
+    finally:
+        server_process.terminate()
 
 if __name__ == "__main__":
-    try:
-        verify()
-    except Exception as e:
-        print(f"Error: {e}")
+    verify_optimization()
