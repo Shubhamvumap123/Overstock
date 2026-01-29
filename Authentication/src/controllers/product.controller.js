@@ -5,27 +5,40 @@ const router = express.Router();
 const authenticate = require("../middlewares/authenticate")
 const Product = require("../models/product.model")
 
-router.post("", authenticate, async (req, res) => {
+const createProduct = async (req, res) => {
+    // FIX: Prevent Mass Assignment by explicitly selecting fields
+    const { title, price } = req.body;
 
-    req.body.user_id = req.userID;
     try{
-        const product = await Product.create(req.body)
+        const product = await Product.create({
+            title,
+            price,
+            user_id: req.userID
+        })
         return res.status(200).send(product)
     }
     catch(err){
-        return res.status(400).send({message : err.message})
+        // FIX: Don't leak error details
+        console.error("Product creation error:", err);
+        return res.status(500).send({message : "Product creation failed"})
     }
- 
-})
+}
 
-router.get("", async (req, res) => {
+const getProducts = async (req, res) => {
     try{
         const product = await Product.find()
         return res.status(200).send(product)
     }
     catch(err){
-        return res.status(400).send({message : err.message})
+        console.error("Get products error:", err);
+        return res.status(500).send({message : "Failed to retrieve products"})
     }
-})
+}
+
+router.post("", authenticate, createProduct)
+
+router.get("", getProducts)
 
 module.exports = router;
+module.exports.createProduct = createProduct;
+module.exports.getProducts = getProducts;
