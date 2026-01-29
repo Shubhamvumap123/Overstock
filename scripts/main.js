@@ -1,16 +1,17 @@
 
-async function getData(url){
-    try{
-    let res = await fetch(url);
-    let data = await res.json();
-    console.log(data)
-
-   return data
-}
-catch(err){
-    console.log(err)
-}
-}
+// ⚡ Bolt Optimization: Removed unused `getData` function to reduce bundle size.
+// Previous code:
+// async function getData(url){
+//    try{
+//    let res = await fetch(url);
+//    let data = await res.json();
+//    console.log(data)
+//    return data
+// }
+// catch(err){
+//    console.log(err)
+// }
+// }
 
 function appendData(data,parent){
     let fragment = document.createDocumentFragment();
@@ -117,4 +118,5 @@ function appendD(res,cont){
    cont.append(fragment);
 }
 
-export {getData, appendData,appendD}
+// ⚡ Bolt Optimization: Removed unused getData export
+export {appendData,appendD}
