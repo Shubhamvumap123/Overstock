@@ -17,3 +17,7 @@
 ## 2026-05-23 - Refactoring Dropdowns to Semantic HTML
 **Learning:** Changing dropdown items from `<div>` to `<a>` for accessibility requires careful auditing of CSS selectors. Generic selectors like `.parent > div div` will often break or misapply styles when one layer changes type.
 **Action:** When refactoring for semantics, grep for the class names or parent selectors in CSS to identify fragile descendant combinators that need updating to include the new element type (e.g., `.parent > div a`).
+
+## 2026-05-24 - Focus Management in Lists
+**Learning:** When removing items from a list that triggers a re-render, keyboard focus is typically lost (reset to body), causing disorientation for keyboard and screen reader users.
+**Action:** Always capture the intended focus index (current or previous) before re-rendering, and explicitly call `.focus()` on the corresponding new element after the DOM update.
