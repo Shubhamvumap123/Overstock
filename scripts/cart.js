@@ -96,8 +96,29 @@ function removeItem(index)
 {
     cart.splice(index,1);
     localStorage.setItem("cartItems",JSON.stringify(cart));
+
+    // 🎨 Palette: Calculate focus target before re-render
+    // If we remove the last item, focus the previous one.
+    // Otherwise focus the item taking the removed item's place (same index).
+    const focusIndex = Math.min(index, cart.length - 1);
+
     display(cart);
     displayTotal();
+
+    // 🎨 Palette: Restore focus to prevent context loss for keyboard users
+    if (cart.length > 0) {
+        const buttons = document.querySelectorAll('.remove-btn');
+        if (buttons[focusIndex]) {
+            buttons[focusIndex].focus();
+        }
+    } else {
+        // If cart is empty, focus the "Start Shopping" button
+        // Note: display() creates this button with id "check_out" in the empty state
+        const shopBtn = document.querySelector("#left #check_out");
+        if (shopBtn) {
+            shopBtn.focus();
+        }
+    }
 }
 
 function displayTotal()
