@@ -87,67 +87,67 @@ let navbar = () =>{
       <div>
         <div>
           <div class="dark-div">Living Room Furniture</div>
-          <div>Sofas & Couches</div>
-          <div>Sectionals</div>
-          <div>Benches</div>
-          <div>Ottomans & Poufs</div>
-          <div>Accent Chairs</div>
-          <div>Recliners</div>
-          <div>Coffee & Accent Tables</div>
-          <div>TV Stands</div>
+          <a href="livingRoom.html">Sofas & Couches</a>
+          <a href="livingRoom.html">Sectionals</a>
+          <a href="livingRoom.html">Benches</a>
+          <a href="livingRoom.html">Ottomans & Poufs</a>
+          <a href="livingRoom.html">Accent Chairs</a>
+          <a href="livingRoom.html">Recliners</a>
+          <a href="livingRoom.html">Coffee & Accent Tables</a>
+          <a href="livingRoom.html">TV Stands</a>
         </div>
         <div>
           <div class="dark-div">Patio & Outdoor Furniture</div>
-          <div>Patio Furniture Sets</div>
-          <div>Sofas, Chairs & Sectionals</div>
-          <div>Dining Sets</div>
-          <div>Coffee & Side Tables</div>
-          <div>Chaise Lounges</div>
-          <div>Adirondack Chairs</div>
+          <a href="furniture.html">Patio Furniture Sets</a>
+          <a href="furniture.html">Sofas, Chairs & Sectionals</a>
+          <a href="furniture.html">Dining Sets</a>
+          <a href="furniture.html">Coffee & Side Tables</a>
+          <a href="furniture.html">Chaise Lounges</a>
+          <a href="furniture.html">Adirondack Chairs</a>
         </div>
       </div>
       <div>
         <div>
           <div class="dark-div">Bedroom Furniture</div>
-          <div>Beds</div>
-          <div>Bedroom Sets</div>
-          <div>Headboards</div>
-          <div>Bed Frames</div>
-          <div>Dressers & Chests</div>
-          <div>Nightstands</div>
-          <div>Armoires & Wardrobes</div>
-          <div>Mattresses</div>
-          <div>Kids Beds</div>
+          <a href="furniture.html">Beds</a>
+          <a href="furniture.html">Bedroom Sets</a>
+          <a href="furniture.html">Headboards</a>
+          <a href="furniture.html">Bed Frames</a>
+          <a href="furniture.html">Dressers & Chests</a>
+          <a href="furniture.html">Nightstands</a>
+          <a href="furniture.html">Armoires & Wardrobes</a>
+          <a href="furniture.html">Mattresses</a>
+          <a href="furniture.html">Kids Beds</a>
         </div>
         <div>
           <div class="dark-div">Office Furniture</div>
-          <div>Desks</div>
-          <div>Office Chairs</div>
-          <div>Small Space Desks</div>
-          <div>Office Shelves & Storage</div>
-          <div>File Cabinets</div>
+          <a href="furniture.html">Desks</a>
+          <a href="furniture.html">Office Chairs</a>
+          <a href="furniture.html">Small Space Desks</a>
+          <a href="furniture.html">Office Shelves & Storage</a>
+          <a href="furniture.html">File Cabinets</a>
         </div>
       </div>
       <div>
         <div>
           <div class="dark-div">Dining, Kitchen & Bar</div>
-          <div>Kitchen & Dining Sets</div>
-          <div>Kitchen & Dining Chairs</div>
-          <div>Kitchen & Dining Tables</div>
-          <div>Counter & Bar Stools</div>
-          <div>Bar Tables</div>
-          <div>Buffets & Sideboards</div>
-          <div>Home Bars</div>
-          <div>Kitchen Islands & Carts</div>
-          <div>Kitchen Furniture</div>
+          <a href="furniture.html">Kitchen & Dining Sets</a>
+          <a href="furniture.html">Kitchen & Dining Chairs</a>
+          <a href="furniture.html">Kitchen & Dining Tables</a>
+          <a href="furniture.html">Counter & Bar Stools</a>
+          <a href="furniture.html">Bar Tables</a>
+          <a href="furniture.html">Buffets & Sideboards</a>
+          <a href="furniture.html">Home Bars</a>
+          <a href="furniture.html">Kitchen Islands & Carts</a>
+          <a href="furniture.html">Kitchen Furniture</a>
         </div>
         <div>
           <div class="dark-div">More</div>
-          <div>Entryway</div>
-          <div>Bathroom</div>
-          <div>Home Gym</div>
-          <div>Rec Room</div>
-          <div>Small Space Living</div>
+          <a href="furniture.html">Entryway</a>
+          <a href="furniture.html">Bathroom</a>
+          <a href="furniture.html">Home Gym</a>
+          <a href="furniture.html">Rec Room</a>
+          <a href="furniture.html">Small Space Living</a>
         </div>
       </div>
       <div>
@@ -155,7 +155,7 @@ let navbar = () =>{
           <div>
             <img
               src="https://i.postimg.cc/tg7z1Kz4/Warrenton-Boho-Handcrafted-2-Door-Acacia-Wood-Sideboard-by-Christopher-Knight-Home.jpg"
-              alt=""
+              alt="Warrenton Boho Handcrafted 2-Door Acacia Wood Sideboard by Christopher Knight Home"
             />
           </div>
           <div>extra 15% off</div>
@@ -163,10 +163,10 @@ let navbar = () =>{
         </div>
         <div>
           <div class="dark-div">More Ways to Shop</div>
-          <div class="red-div">Featured Sales</div>
-          <div class="red-div">New Arrivals</div>
-          <div class="red-div">Clearance</div>
-          <div class="red-div">Furniture Advice</div>
+          <a href="furniture.html" class="red-div">Featured Sales</a>
+          <a href="furniture.html" class="red-div">New Arrivals</a>
+          <a href="furniture.html" class="red-div">Clearance</a>
+          <a href="furniture.html" class="red-div">Furniture Advice</a>
         </div>
       </div>
     </div>

@@ -14,6 +14,6 @@
 **Learning:** Found checkboxes where the descriptive text was in a sibling `<p>` tag instead of the `<label>`, making the text unclickable and breaking accessibility association.
 **Action:** Always verify that form labels wrap their descriptive text or use `for`/`id` association correctly with the text content inside the label, especially for checkboxes/radios where click target size matters.
 
-## 2026-01-24 - Semantic Actions
-**Learning:** Found usage of `<u>` tags with `onclick` handlers for "Remove" actions, which are inaccessible and non-semantic.
-**Action:** Replace `<u>` tags used for actions with `<button>` elements styled to look like links (if desired), ensuring keyboard focus, screen reader support, and proper semantics.
+## 2026-05-23 - Refactoring Dropdowns to Semantic HTML
+**Learning:** Changing dropdown items from `<div>` to `<a>` for accessibility requires careful auditing of CSS selectors. Generic selectors like `.parent > div div` will often break or misapply styles when one layer changes type.
+**Action:** When refactoring for semantics, grep for the class names or parent selectors in CSS to identify fragile descendant combinators that need updating to include the new element type (e.g., `.parent > div a`).

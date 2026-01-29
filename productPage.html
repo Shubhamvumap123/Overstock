@@ -156,7 +156,12 @@
     // ⚡ Bolt Optimization: Wrapped in async IIFE to prevent top-level await from blocking
     // the subsequent module script (navbar/footer rendering).
     (async () => {
-        let selected_id = JSON.parse(localStorage.getItem("selected_id"));
+        const urlParams = new URLSearchParams(window.location.search);
+        let selected_id = urlParams.get('id');
+        if (!selected_id) {
+             selected_id = JSON.parse(localStorage.getItem("selected_id"));
+        }
+
         if (!selected_id) return;
 
         //https://overstockapi.herokuapp.com/products/mainCategory=${selected_cat}
