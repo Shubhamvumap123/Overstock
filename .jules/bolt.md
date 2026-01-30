@@ -13,3 +13,7 @@
 ## 2026-01-23 - [Pattern: Duplicate IDs in Loop]
 **Learning:** `scripts/cart.js` created elements with `id="remove"` and `id="name"` inside a loop, resulting in invalid HTML and potential selector issues.
 **Action:** Use classes (e.g., `.remove-btn`, `.item-name`) for repeated elements. Use event delegation for interactions on these elements.
+
+## 2026-01-30 - [Pattern: Mongoose Hydration Overhead]
+**Learning:** `Product.find()` was used in `Authentication/src/controllers/product.controller.js` without `.lean()`, causing full Mongoose document hydration for read-only data.
+**Action:** Always use `.lean()` for read-only Mongoose queries to return POJOs, significantly reducing memory usage and serialization time.
