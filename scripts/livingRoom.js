@@ -47,7 +47,18 @@ function handler() {
     }
 }
 
-if (cont) appendD(res,cont)
+if (cont) {
+    // ⚡ Bolt Optimization: Added Event Delegation for product clicks.
+    // Handles clicks for dynamically added items from appendD.
+    cont.addEventListener('click', (e) => {
+        const box = e.target.closest('.box');
+        if (box && box.dataset.id) {
+            localStorage.setItem("selected_id", JSON.stringify(box.dataset.id));
+            window.location.href = "productPage.html";
+        }
+    });
+    appendD(res,cont)
+}
 
 // ⚡ Bolt Optimization: Replaced 15 repetitive event listeners with a single loop.
 // Fixed bug where buttons 9-14 opened the wrong dropdown (myDropdown3).
