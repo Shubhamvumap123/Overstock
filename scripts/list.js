@@ -29,12 +29,14 @@ cont.addEventListener('click', (event) => {
 });
 
 function updateHeader(data) {
-    if (fav) fav.innerHTML = `Favorites     ${data.length} Items`;
-    if (listlength) listlength.innerHTML = `Lists      1 Items`;
+    // ⚡ Bolt Optimization: Use textContent instead of innerHTML
+    if (fav) fav.textContent = `Favorites     ${data.length} Items`;
+    if (listlength) listlength.textContent = `Lists      1 Items`;
 }
 
 function appendD(data, container) {
-  container.innerHTML = " ";
+  // ⚡ Bolt Optimization: Use textContent for clearing (faster than innerHTML)
+  container.textContent = "";
   let fragment = document.createDocumentFragment();
 
   data.forEach(function (ele, index) {
@@ -51,11 +53,12 @@ function appendD(data, container) {
 
     let name = document.createElement("p");
     name.className = "name";
-    name.innerText = ele.name;
+    // ⚡ Bolt Optimization: Use textContent instead of innerText
+    name.textContent = ele.name;
 
     let price = document.createElement("p");
     price.className = "price";
-    price.innerText = `Sale Starts at INR ${ele.price}`;
+    price.textContent = `Sale Starts at INR ${ele.price}`;
 
     let rating = document.createElement("p");
     rating.className = "rating";
@@ -82,7 +85,7 @@ function appendD(data, container) {
     addCart_btn.textContent = "Add to Cart";
 
     let remove = document.createElement("button");
-    remove.innerText = "Remove";
+    remove.textContent = "Remove";
     remove.className = "remove-btn"; // Class for styling and selection
     remove.dataset.index = index;
 
