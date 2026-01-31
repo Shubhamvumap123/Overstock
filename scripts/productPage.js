@@ -97,7 +97,7 @@ function appendArticles(articles, main)
             addCart_btn.textContent="Add to Cart";
             addCart_btn.addEventListener("click",function()
             {
-                addToCart(articles);
+                addToCart(articles, addCart_btn);
             })
 
             let addCart_btn1 = document.createElement("button");
@@ -105,7 +105,7 @@ function appendArticles(articles, main)
             addCart_btn1.textContent="Favorites";
             addCart_btn1.addEventListener("click",function()
             {
-                addToCart1(articles);
+                addToCart1(articles, addCart_btn1);
             })
 
             select.append(option,option2,option3);
@@ -122,21 +122,47 @@ function appendArticles(articles, main)
 }
 
 var cart = JSON.parse(localStorage.getItem("cartItems"))||[];
-    function addToCart(data)
+    // 🎨 Palette: Improved UX - No redirect, visual feedback
+    function addToCart(data, button)
     {
         cart.push(data);
         localStorage.setItem("cartItems",JSON.stringify(cart));
-        window.location.href = "cart.html";
+
+        if (button) {
+            const originalText = button.textContent;
+            button.textContent = "Added to Cart!";
+            button.style.backgroundColor = "#1b5e20"; // Dark Green
+            button.disabled = true;
+
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.backgroundColor = ""; // Reset to CSS default
+                button.disabled = false;
+            }, 2000);
+        }
     }
 
     var cart1 = JSON.parse(localStorage.getItem("list_id")) || []
-    function addToCart1(data)
+    // 🎨 Palette: Improved UX - No alert, visual feedback
+    function addToCart1(data, button)
     {   
-        
         cart1.push(data);
         localStorage.setItem("list_id",JSON.stringify(cart1));
-        //  window.location.href = "list.html";
-        alert("Product Successfully added to list");
+
+        if (button) {
+            const originalText = button.textContent;
+            button.textContent = "Saved to Favorites!";
+            button.style.backgroundColor = "#1b5e20"; // Dark Green
+            button.style.color = "white";
+            button.disabled = true;
+
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.backgroundColor = "";
+                button.style.color = "";
+                button.disabled = false;
+            }, 2000);
+        }
     }
 
 export { apiCall, appendArticles }
