@@ -95,17 +95,17 @@ function appendArticles(articles, main)
             let addCart_btn = document.createElement("button");
             addCart_btn.id = "addCart_btn";
             addCart_btn.textContent="Add to Cart";
-            addCart_btn.addEventListener("click",function()
+            addCart_btn.addEventListener("click",function(e)
             {
-                addToCart(articles);
+                addToCart(articles, e.target);
             })
 
             let addCart_btn1 = document.createElement("button");
             addCart_btn1.id = "addCart_btn1";
             addCart_btn1.textContent="Favorites";
-            addCart_btn1.addEventListener("click",function()
+            addCart_btn1.addEventListener("click",function(e)
             {
-                addToCart1(articles);
+                addToCart1(articles, e.target);
             })
 
             select.append(option,option2,option3);
@@ -122,21 +122,58 @@ function appendArticles(articles, main)
 }
 
 var cart = JSON.parse(localStorage.getItem("cartItems"))||[];
-    function addToCart(data)
+    function addToCart(data, button)
     {
         cart.push(data);
         localStorage.setItem("cartItems",JSON.stringify(cart));
-        window.location.href = "cart.html";
+
+        // 🎨 Palette: Improve UX by showing feedback instead of redirecting
+        if (button) {
+            const originalText = button.textContent;
+            const originalBg = button.style.backgroundColor;
+
+            button.textContent = "✔ Added!";
+            // Use a darker green or success color
+            button.style.backgroundColor = "#2E8B57";
+            button.disabled = true;
+
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.backgroundColor = originalBg;
+                button.disabled = false;
+            }, 2000);
+        } else {
+            window.location.href = "cart.html";
+        }
     }
 
     var cart1 = JSON.parse(localStorage.getItem("list_id")) || []
-    function addToCart1(data)
+    function addToCart1(data, button)
     {   
         
         cart1.push(data);
         localStorage.setItem("list_id",JSON.stringify(cart1));
-        //  window.location.href = "list.html";
-        alert("Product Successfully added to list");
+
+        // 🎨 Palette: Improve UX by showing feedback instead of alert
+        if (button) {
+            const originalText = button.textContent;
+            const originalBg = button.style.backgroundColor;
+            const originalBorder = button.style.border;
+
+            button.textContent = "❤ Saved!";
+            button.style.backgroundColor = "#ffcccb"; // Light red
+            button.style.border = "1px solid #d32f2f";
+            button.disabled = true;
+
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.backgroundColor = originalBg;
+                button.style.border = originalBorder;
+                button.disabled = false;
+            }, 2000);
+        } else {
+             alert("Product Successfully added to list");
+        }
     }
 
 export { apiCall, appendArticles }
