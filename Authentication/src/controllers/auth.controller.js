@@ -13,8 +13,25 @@ const generateToken = (user) => {
     return jwt.sign({ user: payload }, process.env.SECRET_KEY);
 }
 
+const validatePassword = (password) => {
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSpecial = /[\W_]/.test(password);
+    const isLengthValid = password && password.length >= 8;
+
+    return isLengthValid && hasUpperCase && hasLowerCase && hasNumber && hasSpecial;
+}
+
 const register = async (req, res) => {
     try{
+        // SENTINEL FIX: Enforce strong password policy
+        if (!validatePassword(req.body.password)) {
+            return res.status(400).send({
+                message: "Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, and 1 special character."
+            });
+        }
+
         let user = await User.findOne({email : req.body.email})
         //checking email
         if(user){
