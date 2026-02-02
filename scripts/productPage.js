@@ -97,7 +97,7 @@ function appendArticles(articles, main)
             addCart_btn.textContent="Add to Cart";
             addCart_btn.addEventListener("click",function()
             {
-                addToCart(articles);
+                addToCart(articles, addCart_btn);
             })
 
             let addCart_btn1 = document.createElement("button");
@@ -105,7 +105,7 @@ function appendArticles(articles, main)
             addCart_btn1.textContent="Favorites";
             addCart_btn1.addEventListener("click",function()
             {
-                addToCart1(articles);
+                addToCart1(articles, addCart_btn1);
             })
 
             select.append(option,option2,option3);
@@ -122,21 +122,42 @@ function appendArticles(articles, main)
 }
 
 var cart = JSON.parse(localStorage.getItem("cartItems"))||[];
-    function addToCart(data)
+    // ⚡ Bolt Optimization: Prevented full page reload on "Add to Cart".
+    // Added visual feedback (button text change) instead of redirect.
+    function addToCart(data, btn)
     {
         cart.push(data);
         localStorage.setItem("cartItems",JSON.stringify(cart));
-        window.location.href = "cart.html";
+
+        if (btn) {
+            const originalText = btn.textContent;
+            btn.textContent = "Added!";
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }, 1000);
+        }
     }
 
     var cart1 = JSON.parse(localStorage.getItem("list_id")) || []
-    function addToCart1(data)
+    // ⚡ Bolt Optimization: Removed blocking alert and added inline feedback.
+    function addToCart1(data, btn)
     {   
-        
         cart1.push(data);
         localStorage.setItem("list_id",JSON.stringify(cart1));
-        //  window.location.href = "list.html";
-        alert("Product Successfully added to list");
+
+        if (btn) {
+            const originalText = btn.textContent;
+            btn.textContent = "Saved!";
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }, 1000);
+        } else {
+             alert("Product Successfully added to list");
+        }
     }
 
 export { apiCall, appendArticles }
