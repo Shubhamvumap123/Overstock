@@ -34,9 +34,21 @@ const register = async (req,res) =>{
         })
 
         const token = generateToken(user)
-       return res.status(200).send({user,token});
+
+        // SENTINEL FIX: Exclude sensitive data (password) from response
+        const safeUser = {
+            _id: user._id,
+            email: user.email,
+            name: user.name,
+            role: user.role,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt
+        };
+
+       return res.status(200).send({user: safeUser, token});
     }catch(err){
-        res.status(500).send({message:err.message});
+        console.error("Registration error:", err); // SENTINEL FIX: Log error internally
+        res.status(500).send({message: "Registration failed"}); // SENTINEL FIX: Don't leak error details
     }
 }
 
@@ -52,11 +64,23 @@ const login = async (req,res) =>{
         if (!match) return res.status(400).send("Wrong email and password please check again");
 
         const token = generateToken(user)
-        return res.status(200).send({user,token});
+
+        // SENTINEL FIX: Exclude sensitive data (password) from response
+        const safeUser = {
+            _id: user._id,
+            email: user.email,
+            name: user.name,
+            role: user.role,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt
+        };
+
+        return res.status(200).send({user: safeUser, token});
 
        
     }catch(err){
-        res.status(500).send({message:err.message});
+        console.error("Login error:", err); // SENTINEL FIX: Log error internally
+        res.status(500).send({message: "Login failed"}); // SENTINEL FIX: Don't leak error details
     }
 }
 
