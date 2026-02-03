@@ -26,7 +26,7 @@ describe('Auth Controller', () => {
         it('should create user with ONLY allowed fields (Mass Assignment Fix)', async () => {
             req.body = {
                 email: 'test@example.com',
-                password: 'password123',
+                password: 'Password123!',
                 isAdmin: true, // Malicious field
                 role: 'superuser' // Malicious field
             };
@@ -46,7 +46,7 @@ describe('Auth Controller', () => {
             // Expect User.create to be called with ONLY email and password
             expect(User.create).toHaveBeenCalledWith({
                 email: 'test@example.com',
-                password: 'password123'
+                password: 'Password123!'
             });
 
             // Should not contain malicious fields
