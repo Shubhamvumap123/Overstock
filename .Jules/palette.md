@@ -21,3 +21,7 @@
 ## 2026-05-24 - Focus Management in Lists
 **Learning:** When removing items from a list that triggers a re-render, keyboard focus is typically lost (reset to body), causing disorientation for keyboard and screen reader users.
 **Action:** Always capture the intended focus index (current or previous) before re-rendering, and explicitly call `.focus()` on the corresponding new element after the DOM update.
+
+## 2024-05-25 - Smooth Feedback for Actions in MPAs
+**Learning:** In Multi-Page Applications without a complex state framework, replacing page redirects or `alert()` dialogs with temporary button state changes (text update + disable) provides a much smoother, "app-like" experience for actions like "Add to Cart".
+**Action:** Replace jarring confirmation patterns (redirects, alerts) with in-place button feedback (e.g., "Added ✓" for 1-2s) to keep users in the flow.
