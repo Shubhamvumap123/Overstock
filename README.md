@@ -1,5 +1,8 @@
 # Overstock
 overstock.com
+
+**[Deployed Live Here](https://overstock-clone.vercel.app)**
+
 # <span style="color:red"> <i class="fa-solid fa-italic">Cloning of [OVERSTOCK](https://overstockk.netlify.app/) WEBSITE</i></span>
 
 # <span style="color:red"> Welcome Here!</span>
