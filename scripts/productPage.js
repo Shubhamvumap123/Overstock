@@ -58,6 +58,10 @@ function appendArticles(articles, main)
                 star.textContent = "⭐⭐⭐⭐⭐";
             }
             star.id = "star";
+            // Palette UX: Add accessible labels
+            star.setAttribute("role", "img");
+            star.setAttribute("aria-label", `Rated ${rating} out of 5 stars`);
+
             grey.id = "grey";
 
             let cost = document.createElement("h3");
@@ -95,17 +99,17 @@ function appendArticles(articles, main)
             let addCart_btn = document.createElement("button");
             addCart_btn.id = "addCart_btn";
             addCart_btn.textContent="Add to Cart";
-            addCart_btn.addEventListener("click",function()
+            addCart_btn.addEventListener("click",function(e)
             {
-                addToCart(articles);
+                addToCart(articles, e.currentTarget);
             })
 
             let addCart_btn1 = document.createElement("button");
             addCart_btn1.id = "addCart_btn1";
             addCart_btn1.textContent="Favorites";
-            addCart_btn1.addEventListener("click",function()
+            addCart_btn1.addEventListener("click",function(e)
             {
-                addToCart1(articles);
+                addToCart1(articles, e.currentTarget);
             })
 
             select.append(option,option2,option3);
@@ -122,21 +126,40 @@ function appendArticles(articles, main)
 }
 
 var cart = JSON.parse(localStorage.getItem("cartItems"))||[];
-    function addToCart(data)
+    function addToCart(data, btn)
     {
         cart.push(data);
         localStorage.setItem("cartItems",JSON.stringify(cart));
-        window.location.href = "cart.html";
+
+        // Palette UX: Stay on page + visual feedback
+        if (btn) {
+            const originalText = btn.textContent;
+            btn.textContent = "Added to Cart";
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }, 1000);
+        } else {
+             window.location.href = "cart.html";
+        }
     }
 
     var cart1 = JSON.parse(localStorage.getItem("list_id")) || []
-    function addToCart1(data)
+    function addToCart1(data, btn)
     {   
         
         cart1.push(data);
         localStorage.setItem("list_id",JSON.stringify(cart1));
-        //  window.location.href = "list.html";
-        alert("Product Successfully added to list");
+
+        // Palette UX: Visual feedback + no alert
+        if (btn) {
+            btn.textContent = "Added to Favorites ❤️";
+            btn.disabled = true;
+        } else {
+            alert("Product Successfully added to list");
+        }
     }
 
 export { apiCall, appendArticles }
