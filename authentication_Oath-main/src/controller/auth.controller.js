@@ -15,6 +15,18 @@ const generateToken = (user) =>{
     return jwt.sign({ user: payload }, process.env.SECRET_KEY)
 }
 
+// SENTINEL FIX: Helper to sanitize user object
+const sanitizeUser = (user) => {
+    return {
+        _id: user._id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt
+    };
+};
+
 const register = async (req,res) =>{
 
     try{
@@ -22,8 +34,8 @@ const register = async (req,res) =>{
         let  user = await User.findOne({email:req.body.email})
 
         if (user){
-            
-            return res.status(400).send("User already exists plesae choose different id ");
+            // SENTINEL FIX: Improved error message (though enumeration is still possible, fixed typo)
+            return res.status(400).send({ message: "User already exists please choose different id" });
         }
         // SENTINEL FIX: Prevent Mass Assignment by explicitly selecting fields
         user = await User.create({
@@ -34,9 +46,12 @@ const register = async (req,res) =>{
         })
 
         const token = generateToken(user)
-       return res.status(200).send({user,token});
+        // SENTINEL FIX: Return sanitized user object
+        return res.status(200).send({user: sanitizeUser(user), token});
     }catch(err){
-        res.status(500).send({message:err.message});
+        // SENTINEL FIX: Log error server-side and return generic message to client
+        console.error("Registration error:", err);
+        res.status(500).send({message: "Registration failed"});
     }
 }
 
@@ -46,17 +61,23 @@ const login = async (req,res) =>{
     try{
         let user = await User.findOne({email:req.body.email});
 
-        if (!user) return res.status(400).send("Wrong email and password please check again");
+        // SENTINEL FIX: Generic error message to prevent User Enumeration
+        const invalidCredsMsg = "Wrong email or password please check again";
+
+        if (!user) return res.status(400).send({ message: invalidCredsMsg });
         
         const match = await user.checkPassword(req.body.password);
-        if (!match) return res.status(400).send("Wrong email and password please check again");
+        if (!match) return res.status(400).send({ message: invalidCredsMsg });
 
         const token = generateToken(user)
-        return res.status(200).send({user,token});
+        // SENTINEL FIX: Return sanitized user object
+        return res.status(200).send({user: sanitizeUser(user), token});
 
        
     }catch(err){
-        res.status(500).send({message:err.message});
+        // SENTINEL FIX: Log error server-side and return generic message to client
+        console.error("Login error:", err);
+        res.status(500).send({message: "Login failed"});
     }
 }
 
