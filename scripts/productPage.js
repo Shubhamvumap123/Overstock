@@ -95,17 +95,17 @@ function appendArticles(articles, main)
             let addCart_btn = document.createElement("button");
             addCart_btn.id = "addCart_btn";
             addCart_btn.textContent="Add to Cart";
-            addCart_btn.addEventListener("click",function()
+            addCart_btn.addEventListener("click",function(e)
             {
-                addToCart(articles);
+                addToCart(articles, e.target);
             })
 
             let addCart_btn1 = document.createElement("button");
             addCart_btn1.id = "addCart_btn1";
             addCart_btn1.textContent="Favorites";
-            addCart_btn1.addEventListener("click",function()
+            addCart_btn1.addEventListener("click",function(e)
             {
-                addToCart1(articles);
+                addToCart1(articles, e.target);
             })
 
             select.append(option,option2,option3);
@@ -122,21 +122,57 @@ function appendArticles(articles, main)
 }
 
 var cart = JSON.parse(localStorage.getItem("cartItems"))||[];
-    function addToCart(data)
+    function addToCart(data, btn)
     {
         cart.push(data);
         localStorage.setItem("cartItems",JSON.stringify(cart));
-        window.location.href = "cart.html";
+
+        // 🎨 Palette: Inline feedback instead of redirect
+        if (btn) {
+            const originalText = btn.textContent;
+            const originalBg = btn.style.backgroundColor;
+
+            btn.textContent = "Added to Cart!";
+            // Use a distinct color for success state if desired, or just rely on text
+            btn.disabled = true;
+            btn.style.cursor = "default";
+
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.backgroundColor = originalBg;
+                btn.disabled = false;
+                btn.style.cursor = "pointer";
+            }, 2000);
+        } else {
+            // Fallback if button not passed (though it should be)
+            window.location.href = "cart.html";
+        }
     }
 
     var cart1 = JSON.parse(localStorage.getItem("list_id")) || []
-    function addToCart1(data)
+    function addToCart1(data, btn)
     {   
-        
         cart1.push(data);
         localStorage.setItem("list_id",JSON.stringify(cart1));
-        //  window.location.href = "list.html";
-        alert("Product Successfully added to list");
+
+        // 🎨 Palette: Inline feedback instead of alert
+        if (btn) {
+            const originalText = btn.textContent;
+            const originalBg = btn.style.backgroundColor;
+
+            btn.textContent = "Added to Favorites!";
+            btn.disabled = true;
+            btn.style.cursor = "default";
+
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.backgroundColor = originalBg;
+                btn.disabled = false;
+                btn.style.cursor = "pointer";
+            }, 2000);
+        } else {
+            alert("Product Successfully added to list");
+        }
     }
 
 export { apiCall, appendArticles }
