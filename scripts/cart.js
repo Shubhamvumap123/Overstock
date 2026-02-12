@@ -15,7 +15,7 @@ if (left) {
 
 function display(cart)
 {
-    left.innerHTML="";
+    left.textContent = "";
 
     // 🎨 Palette: Add Empty State
     if (cart.length === 0) {
@@ -35,7 +35,7 @@ function display(cart)
         `;
 
         const shopBtn = document.createElement("button");
-        shopBtn.innerText = "Start Shopping";
+        shopBtn.textContent = "Start Shopping";
         shopBtn.id = "check_out"; // Reuse existing checkout button styles
         shopBtn.style.width = "auto";
         shopBtn.style.padding = "0 30px";
@@ -47,7 +47,7 @@ function display(cart)
 
         // Hide right column
         if (right) {
-            right.innerHTML = "";
+            right.textContent = "";
             right.style.border = "none";
         }
         return;
@@ -56,7 +56,8 @@ function display(cart)
     // Performance optimization: Use DocumentFragment to batch DOM insertions
     // This reduces reflows from N to 1
     const fragment = document.createDocumentFragment();
-    cart.map(function(el,index)
+    // ⚡ Bolt Optimization: Use forEach instead of map for side effects (avoids creating unused array)
+    cart.forEach(function(el,index)
     {   
         let div = document.createElement("div");
         let div1 = document.createElement("div");
@@ -67,18 +68,19 @@ function display(cart)
         image.decoding = "async";
 
         let name = document.createElement("p");
-        name.innerText = el.name;
+        // ⚡ Bolt Optimization: Use textContent instead of innerText for better performance (no layout reflow on write)
+        name.textContent = el.name;
         name.className="item-name"; // Use class instead of duplicate ID
 
         let price = document.createElement("h2");
-        price.innerText = `Sale INR ${el.price}`;
+        price.textContent = `Sale INR ${el.price}`;
         price.style.color="rgb(172,27,37)"
         price.style.marginLeft="30px"
 
 
         // Use button for semantics and accessibility
         let remove = document.createElement("button");
-        remove.innerText="Remove";
+        remove.textContent = "Remove";
         remove.className = "remove-btn";
         remove.dataset.index = index;
         // Add aria-label for better accessibility
@@ -125,7 +127,7 @@ function displayTotal()
 {   
     if (cart.length === 0) return;
 
-    right.innerHTML = "";
+    right.textContent = "";
     // Ensure border is visible if it was hidden
     right.style.border = "solid rgb(218,220,223) 1px";
 
@@ -137,12 +139,13 @@ function displayTotal()
 
     console.log(total);
     let show = document.createElement("h2");
-    show.innerText = `Your Total: INR ${total}`;
+    // ⚡ Bolt Optimization: Use textContent instead of innerText
+    show.textContent = `Your Total: INR ${total}`;
     show.id="showTotal"
 
     let checkOut = document.createElement("button");
     checkOut.id = "check_out";
-    checkOut.innerText="Check Out";
+    checkOut.textContent = "Check Out";
 
     
     checkOut.addEventListener("click",function()
