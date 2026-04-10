@@ -1,110 +1,96 @@
-# Overstock
-overstock.com
+# Job Tracker SaaS Platform
 
-**[Deployed Live Here](https://overstock-clone.vercel.app)**
+A production-ready full-stack application to track and manage job applications effectively. Organize your job search, track interview statuses, and analyze your job hunting progress.
 
-# <span style="color:red"> <i class="fa-solid fa-italic">Cloning of [OVERSTOCK](https://overstockk.netlify.app/) WEBSITE</i></span>
+## Features
 
-# <span style="color:red"> Welcome Here!</span>
+*   **User Authentication**: Secure sign-up, log-in, and log-out functionality utilizing JWT.
+*   **Job Application Management**: Complete CRUD (Create, Read, Update, Delete) operations for job applications.
+*   **Status Tracking**: Track the current status of each application (Applied, Interview, Offer, Rejected).
+*   **Search and Filter**: Easily search through job listings and filter them by status or company.
+*   **Dashboard Analytics**: Visual representations (charts) of your job application statistics.
+*   **Role-Based Access**: Infrastructure ready for differentiating between standard users and admins.
 
-Hello Readers,<br>
-It was during the final week which is depicted as the construct week. We have done this project with group of 6 members and build the clone of a very popular E-Commerce Website which deals in home appliances in the India <br> This Project is our construct week project in Unit-2 an we give a name to our project called Meanbuy Preoject. 
-<br> I hope you will enjoy the reading….
+## Tech Stack
 
-# <span style="color:red"> About Website: </span>
+**Frontend**
+*   React.js / Next.js
+*   TailwindCSS
+*   Recharts (for analytics)
+*   Axios
 
- [Overstok](https://overstockk.netlify.app/)Overstok, Overstok is the future of online Booking they have products ranging from Flight booking to flat booking.
- 
+**Backend**
+*   Node.js
+*   Express.js
+*   JSON Web Tokens (JWT) for authentication
+*   Bcrypt.js for password hashing
 
-# <span style="color:red"> Tech Stack Used: </span>
+**Database**
+*   MongoDB
+*   Mongoose ODM
 
-We have used Html5, CSS, Advance JavaScript,Local Storage for building this Project. We also used tools like GitHub for collaboration of our project, Slack & Zoom as means of a communication channel.
+## Screenshots
 
+*(Placeholders for future screenshots)*
 
-# <span style="color:red"> Details of Tech stack used: </span>
+| Dashboard Overview | Add New Job |
+| :---: | :---: |
+| ![Dashboard](https://via.placeholder.com/600x400?text=Dashboard+Analytics+Screenshot) | ![Add Job](https://via.placeholder.com/600x400?text=Add+Job+Modal+Screenshot) |
 
-<b>HTML5:</b>
+| Job List View | User Authentication |
+| :---: | :---: |
+| ![Job List](https://via.placeholder.com/600x400?text=Job+List+and+Filters+Screenshot) | ![Login](https://via.placeholder.com/600x400?text=Login/Signup+Screenshot) |
 
-we have used to build the basic structure of the website. All headings, Paragraphs, links, forms, etc. were structured by HTML.
+## Setup Instructions
 
- <b>CSS:</b>
+### Prerequisites
 
-We have used to add styling to the website. We used Advance CSS for Popup Modal window for login/Sign up, Payment, and all other styling.
+*   Node.js (v18+)
+*   MongoDB URI (Local or MongoDB Atlas)
 
- <b> Advance JavaScript:</b>
+### Local Development Setup
 
-We have used to add logical functionalities to the web pages like the on Click function. We have added all the functionalities.
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository-url>
+    cd <repository-name>
+    ```
 
-<b> Local storage:</b>
+2.  **Backend Setup:**
+    ```bash
+    cd server
+    npm install
+    ```
+    *   Create a `.env` file in the `server` directory.
+    *   Add the following variables:
+        ```env
+        PORT=5000
+        MONGO_URI=your_mongodb_connection_string
+        JWT_SECRET=your_super_secret_jwt_key
+        ```
+    *   Start the backend server:
+        ```bash
+        npm run dev
+        ```
 
-We have used local-storage as a database for storing users’ data, products details, and cart details.
+3.  **Frontend Setup:**
+    ```bash
+    cd ../client
+    npm install
+    ```
+    *   Create a `.env.local` file in the `client` directory.
+    *   Add the following variable:
+        ```env
+        NEXT_PUBLIC_API_URL=http://localhost:5000/api
+        ```
+    *   Start the frontend development server:
+        ```bash
+        npm run dev
+        ```
 
-Let us share our experience,<br>
-This entire journey of making the project was awesome. We have learned lots of things by applying to the real website and it gave us a lot of confidence. there were some more functionalities that could have been done, yeah the time didn’t permit us to go further. But we will surely improve it during the course of time in future .
+4.  **Access the application:**
+    Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## So jurney started from here!
+## Deployment
 
-### Snapshots of our project :- 
-
-- ## <span style="color:blue"> Home Page </span>
-
-<img width="377" alt="Home page" src="https://miro.medium.com/max/1400/0*mgTGTuOAKT9qio6s.png">
-
-
-
-- ## <span style="color:blue"> Product Pages</span>
-
-<img width="400" alt="zms 1" src="https://miro.medium.com/max/1400/0*kFaGsFmi_w38GF8p.png">
-<img width="400" alt="zms 1" src="https://miro.medium.com/max/1400/0*qAj7imIX0Aeo5YjM.png">
-<img width="400" alt="zms 1" src="https://miro.medium.com/max/1400/0*qAj7imIX0Aeo5YjM.png">
-
-
-- ## <span style="color:blue"> Payment Page</span>
-
- <img width="391" alt="zms footer" src="https://miro.medium.com/max/1400/1*XowV3KF5Q4YTxLzz2Unhbg.jpeg">
- 
-
- - ## <span style="color:blue"> Login Page</span>
-
- <img width="391" alt="zms footer" src="https://miro.medium.com/max/1400/1*pHuMCAsVtMTJgFFkvu6gfQ.jpeg">
- 
-<br>
- <hr>
-
- <br>
-
-# <span style="color:red">Our Journey: </span>
-As we are all new and never work on a project so our first day gone in discussion about how we start and who did which work, In evening finally we decide distribute our work.
-On the second day we start with our morning scrum and decide the deadline to complete the whole project and start working on it, the In evening stand-up we discussed our challenges and problem and try to resolve them.
-2 days we have the same routine and finally on the fourth day our given task is ready but when we merge the all parts the main problem came like many classes and ids are same due to that the structure of all products was very bad but our Team take it as a challenge and change and put comments on code in just one and half day.
-on the seventh day again we merge all our code and finally, we did it, There were some changes that need to be done and we all did it and finally, we record our presentation and Submit.
-<br>
-
-
-# <span style="color:rgb(255, 174, 0)">Conclusion: </span>
-We are very thankful for the support of my teammates and instructor for the completion of project in due time. We will looks forward to add some feature and functionality which we left in this project for future expensions.
-
-
-# <span style="color:rgb(255, 170, 0)"> Thank Your For Reading </span>
-
-
-## <span style="color:rgb(255, 200, 0)"> Team Members: </span>
-
-- ## Shubham
-[GitHub](https://github.com/Shubhamvumap123)
-
-- ## Krunal
-[GitHub](https://github.com/KrunalBorhade)
-
-- ## Amaan
-[GitHub](https://github.com/AmaanHaider)
-
-- ## Apoorva
-[GitHub](https://github.com/Apoorva0123)
-
-
-
-
-
-
-
+Refer to the `IMPLEMENTATION_GUIDE.md` for detailed instructions on deploying the backend to Render and the frontend to Vercel.
