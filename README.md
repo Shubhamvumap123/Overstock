@@ -8,13 +8,14 @@ A production-ready full-stack application to track and manage job applications e
 *   **Job Application Management**: Complete CRUD (Create, Read, Update, Delete) operations for job applications.
 *   **Status Tracking**: Track the current status of each application (Applied, Interview, Offer, Rejected).
 *   **Search and Filter**: Easily search through job listings and filter them by status or company.
-*   **Dashboard Analytics**: Visual representations (charts) of your job application statistics.
+*   **Dashboard Analytics**: Visual representations (charts) of your job application statistics using Recharts.
 *   **Role-Based Access**: Infrastructure ready for differentiating between standard users and admins.
 
 ## Tech Stack
 
 **Frontend**
-*   React.js / Next.js
+*   Next.js (App Router)
+*   React
 *   TailwindCSS
 *   Recharts (for analytics)
 *   Axios
@@ -61,16 +62,16 @@ A production-ready full-stack application to track and manage job applications e
     cd server
     npm install
     ```
-    *   Create a `.env` file in the `server` directory.
+    *   Create a `.env` file in the `server` directory (refer to `.env.example`).
     *   Add the following variables:
         ```env
         PORT=5000
-        MONGO_URI=your_mongodb_connection_string
+        MONGO_URI=mongodb://localhost:27017/job-tracker
         JWT_SECRET=your_super_secret_jwt_key
         ```
     *   Start the backend server:
         ```bash
-        npm run dev
+        node index.js
         ```
 
 3.  **Frontend Setup:**
@@ -78,11 +79,7 @@ A production-ready full-stack application to track and manage job applications e
     cd ../client
     npm install
     ```
-    *   Create a `.env.local` file in the `client` directory.
-    *   Add the following variable:
-        ```env
-        NEXT_PUBLIC_API_URL=http://localhost:5000/api
-        ```
+    *   Create a `.env.local` file in the `client` directory if needed.
     *   Start the frontend development server:
         ```bash
         npm run dev
