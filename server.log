@@ -1,21 +1,3 @@
-127.0.0.1 - - [31/Jan/2026 06:23:15] "GET /cart.html HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:23:15] "GET /styles/navbar.css HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:23:15] "GET /styles/index.css HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:23:15] "GET /scripts/cart.js HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:23:15] "GET /styles/cart.css HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:23:16] "GET /components/footer.js HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:23:16] "GET /components/navbar.js HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:24:38] "GET /cart.html HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:24:38] "GET /styles/index.css HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:24:38] "GET /styles/cart.css HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:24:38] "GET /styles/navbar.css HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:24:38] "GET /scripts/cart.js HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:24:38] "GET /components/footer.js HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:24:38] "GET /components/navbar.js HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:25:16] "GET /cart.html HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:25:16] "GET /styles/index.css HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:25:16] "GET /styles/cart.css HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:25:16] "GET /scripts/cart.js HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:25:16] "GET /styles/navbar.css HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:25:16] "GET /components/footer.js HTTP/1.1" 200 -
-127.0.0.1 - - [31/Jan/2026 06:25:16] "GET /components/navbar.js HTTP/1.1" 200 -
+◇ injected env (0) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+MongoDB Memory Server connected
+Server running on port 5000
