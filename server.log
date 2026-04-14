@@ -1,3 +1,8 @@
-◇ injected env (0) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
-MongoDB Memory Server connected
-Server running on port 5000
+127.0.0.1 - - [14/Apr/2026 05:23:32] "GET /livingRoom.html HTTP/1.1" 200 -
+127.0.0.1 - - [14/Apr/2026 05:23:32] "GET /styles/livingRoom.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Apr/2026 05:23:32] "GET /styles/index.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Apr/2026 05:23:32] "GET /scripts/livingRoom.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Apr/2026 05:23:32] "GET /styles/navbar.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Apr/2026 05:23:32] "GET /scripts/main.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Apr/2026 05:23:32] "GET /components/footer.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Apr/2026 05:23:32] "GET /components/navbar.js HTTP/1.1" 200 -
