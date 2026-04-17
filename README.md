@@ -91,3 +91,5 @@ A production-ready full-stack application to track and manage job applications e
 ## Deployment
 
 Refer to the `IMPLEMENTATION_GUIDE.md` for detailed instructions on deploying the backend to Render and the frontend to Vercel.
+## Acknowledgments
+- Inspired by modern job tracking workflows.
