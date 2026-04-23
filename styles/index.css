@@ -74,6 +74,11 @@ textarea:focus-visible {
     color: rgb(47,51,55);
 }#bannertwo>a:hover{
     cursor: pointer;
+
+}
+#bannertwo>button:focus-visible{
+    outline: 2px solid rgb(47, 51, 55);
+    outline-offset: 2px;
 }
 
 #bannerthird>img{
