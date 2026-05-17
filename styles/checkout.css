@@ -5,7 +5,6 @@
   width: 70%;
   height: 6rem;
   border-bottom: 1px solid #c3c3c3;
-  /* margin-bottom: 2rem; */
   margin: auto;
   margin-top: 2rem;
   margin-bottom: 0rem;
@@ -18,7 +17,6 @@
 
 .overstock_div > p {
   margin-left: 10px;
-  
   color: #000;
   font-family: helvetica, arial, sans-serif;
   font-size: 12px;
@@ -30,19 +28,15 @@
   flex-direction: row;
   width: 70%;
   height: 5rem;
-  /* border: 1px solid #C3C3C3; */
-  /* margin-bottom: 2rem; */
   margin: auto;
   margin-bottom: 2rem;
 }
 
 .overstock_div2 > img {
   height: 4.5rem;
-  /* margin-top : 2rem; */
 }
 
 .overstock_div2 > p {
-  /* margin-left: 0.5rem; */
   color: #000;
   font-family: helvetica, arial, sans-serif;
   font-size: 12px;
@@ -62,19 +56,17 @@
 }
 #addressContainer {
   width: 64%;
-  height: 29.5rem;
+  min-height: 29.5rem;
   background-color: white;
   margin: 0 auto;
   display: flex;
-  /* border: 1px solid black; */
 }
 
 .addressBox1 {
   width: 49%;
   display: flex;
   flex-direction: column;
-  height: 27.8rem;
-  /* border: 1px solid black; */
+  min-height: 27.8rem;
   border: 1px solid #c3c3c3;
 }
 
@@ -83,7 +75,6 @@
   margin-left: 2%;
   display: flex;
   flex-direction: column;
-  /* border: 1px solid black; */
   border: 1px solid #c3c3c3;
 }
 
@@ -102,39 +93,40 @@
   margin-left: 0.5rem;
 }
 
-.bilingInputDiv {
-  display: flex;
-  flex-direction: row;
-  /* border: 1px solid black; */
-  height: 100%;
-  width: 100%;
+/* Updated Form Styles */
+.checkout-form-group {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
 }
 
-.bilingLabel {
-  /* border: 1px solid black; */
-  height: 100%;
-  width: 100rem;
-  display: flex;
-  flex-direction: column;
+.form-row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.5rem;
+    align-items: center;
 }
-.bilingLabel label {
-  color: #000;
-  font-family: helvetica, arial, sans-serif;
-  font-size: 12px;
-  margin-left: 0.5rem;
-  margin-bottom: 1.2rem;
+
+.form-row label {
+    flex: 0 0 35%;
+    color: #000;
+    font-family: helvetica, arial, sans-serif;
+    font-size: 12px;
+    padding-left: 0.5rem;
+    box-sizing: border-box;
 }
-.topEle {
-  margin-top: 0.3rem;
+
+.form-row input, .form-row select {
+    flex: 1;
+    margin-right: 1rem;
+    height: 1.8rem;
+    border: 1px solid #c3c3c3;
+    padding: 0 0.5rem;
+    font-size: 14px;
 }
+
 .boldLabel {
-  font-weight: bold;
-}
-.bilingInput input {
-  width: 86%;
-  height: 1.2rem;
-  margin-bottom: 0.56rem;
-  border: 1px solid #c3c3c3;
+    font-weight: bold;
 }
 
 .interputer {
@@ -144,35 +136,18 @@
   margin-top: 0rem;
   margin-bottom: 0.3rem;
 }
-#shipping_address2 {
-  margin-bottom: 0rem;
-}
-
-.countrySelect {
-  width: 96%;
-  height: 1.5rem;
-  margin-bottom: 0.56rem;
-  border: 1px solid #c3c3c3;
-}
-.increaseDivWidth {
-  width: 60rem;
-}
 
 .paymentsItemInfo {
   width: 64.5%;
-  /* height: 29.4rem; */
   background-color: white;
   margin: 0.7rem auto;
-  display: flex;
-  /* border: 1px solid black; */
   display: flex;
   flex-direction: column;
 }
 
 .methodShipping {
   width: 100%;
-  height: 12rem;
-  /* border: 1px solid black; */
+  /* height: 12rem; */
   display: flex;
   flex-direction: column;
 }
@@ -195,104 +170,45 @@
 .shippingInfo {
   display: flex;
   flex-direction: row;
+  padding: 1rem;
 }
 
-.shippingDiv1 {
-  width: 15%;
-  height: 10rem;
-  /* border: 1px solid black; */
-  display: flex;
-  flex-direction: column;
+.shippingDiv2 {
+    display: flex;
+    flex-direction: column;
 }
-.shippingDiv1 input {
-  margin: 1rem 4rem 2.2rem;
+
+.shipping-option {
+    margin-bottom: 1.3rem;
+}
+
+.shipping-option label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.shipping-option input {
+    margin-right: 0.5rem;
 }
 
 .shippingDiv2 span {
   color: #000;
   font-family: helvetica, arial, sans-serif;
   font-size: 12px;
-  margin-left: 0.6rem;
-  margin-bottom: 0.3rem;
-}
-.shippingDiv2 > div {
-  margin-bottom: 1.3rem;
 }
 
 .shippingDiv2 .green {
   color: #00c928;
-}
-
-/* .shippingDiv1 input {
-      color:#00c928;
-      
-  } */
-.orderTotal {
-  width: 100%;
-  height: 7.8rem;
-  /* border: 1px solid black; */
-  display: flex;
-  flex-direction: column;
-}
-
-.orderTotalHead {
-  width: 100%;
-  height: 1.5rem;
-  /* border: 1px solid black; */
-  background-color: #f0ece0;
-}
-
-.orderTotalHead > p {
-  color: #000;
   font-family: helvetica, arial, sans-serif;
   font-size: 11px;
-  margin-left: 0.6rem;
-  margin-top: 0.3rem;
-  font-weight: bold;
+  margin-top: 0.2rem;
 }
 
-.orderTotalInfo {
-  display: flex;
-  width: 100%;
-  height: 6.3rem;
-  /* border: 1px solid teal; */
-  flex-direction: row;
-}
-.orderQuery {
-  display: flex;
-  flex-direction: column;
-  /* border: 1px solid black; */
-  width: 50%;
-}
-
-.orderQuery p {
-  color: #000;
-  font-family: helvetica, arial, sans-serif;
-  font-size: 11px;
-  margin: 0.26rem 1rem;
-}
-#queryResult {
-  display: flex;
-  flex-direction: column;
-  /* border: 1px solid black; */
-  height: 6.1rem;
-  width: 28rem;
-}
-
-#queryResult p {
-  color: #000;
-  font-family: helvetica, arial, sans-serif;
-  font-size: 11px;
-  margin-left: 22rem;
-  margin-top: 0.45rem;
-  margin-bottom: 0rem;
-  margin-right: 0rem;
-  font-weight: 500;
-}
 
 .paymentUserDetails {
   width: 64.5%;
-  height: 17rem;
+  /* height: 17rem; */
   background-color: white;
   margin: 0.7rem auto;
   display: flex;
@@ -304,7 +220,6 @@
 .payment_divHead {
   width: 100%;
   height: 1.7rem;
-  /* border: 1px solid black; */
   background-color: #f0ece0;
 }
 .payment_divHead > p {
@@ -335,263 +250,29 @@
 
 .cardInfo {
   display: flex;
-  /* flex-direction: column; */
+  padding-bottom: 1rem;
 }
 
-.cardQuery {
-  width: 20%;
-  height: 12rem;
-}
-.cardQuery p {
-  color: #000;
-  font-family: helvetica, arial, sans-serif;
-  font-size: 13px;
-  margin-left: 0.5rem;
-  margin-top: 0.45rem;
-  margin-bottom: 1.4rem;
-  margin-right: 0rem;
-  font-weight: bold;
-}
-.cardQueryResult {
-  width: 70%;
-  height: 12rem;
-  margin-left: 5rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.cardQueryResult input {
-  width: 35%;
+.inputbox {
+  width: 100%;
   height: 1.5rem;
   border: 1px solid #c3c3c3;
-  margin-left: 4.5rem;
-  margin-right: 0rem;
   border-radius: 0rem;
-  margin-bottom: 1rem;
-}
-
-.cardQueryResult > select {
-  width: 17%;
-  height: 1.5rem;
-  border: 1px solid #c3c3c3;
-  margin-left: 4.5rem;
-  margin-right: 0rem;
-  border-radius: 0rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
 }
 
 .button {
   width: 10%;
   height: 2rem;
-  /* border-radius: 1rem; */
   margin-left: 70%;
   color: #fff;
   background-color: #00c928;
   border: none;
+  cursor: pointer;
+  margin-bottom: 2rem;
 }
 
 #t3 {
   text-align: center;
   font-family: helvetica, arial, sans-serif;
+  margin: 1rem 0;
 }
-/* 
-@media (min-width: 0px) and (max-width: 500px) {
-  #box {
-    width: auto;
-    height: 850px;
-    background-color: white;
-    margin-left: 10px; 
-  }
-  #box1 {
-    width: auto;
-    height: auto;
-    margin: auto;
-    background-color: white;
-    margin-top: 10px;
-    border: 0px;
-  }
-  .container1 {
-    width: 90%;
-    border: 1px solid red;
-    display: grid;
-    grid-template-columns: 50rem;
-    grid-template-rows: 50px;
-    grid-gap: 10px;
-    padding: 45px;
-  }
-} */
-/* 
-@media (min-width: 500px) and (max-width: 1000px) {
-  input {
-    padding: 5px;
-    border: 1px solid grey;
-    width: 100%;
-    height: 40px;
-  }
-  .container1 {
-    display: grid;
-    width: auto;
-    grid-template-columns: 1fr;
-    grid-template-rows: 90px 90px;
-    padding: 5px;
-  }
-  #box {
-    width: 99%;
-    height: 850px;
-    background-color: white;
-    margin-left: 10px;
-  }
-  #box1 {
-    width: auto;
-    height: auto;
-    margin: auto;
-    background-color: white;
-    margin-top: 10px;
-    border: 0px;
-  }
-}
-/*  Payment*/
-
-/* body {
-  font-family: 'Roboto';
- 
- 
-}
-
-.mainscreen {
-  min-height: 50vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  color: black;
-}
-
-.card {
-  width: 60rem;
-  margin: auto;
-  top: 10rem;
-  display: flex;
-  flex-direction: row;
-}
-
-
-
-.product {
-  object-fit: cover;
-  width: 20em;
-  height: 20em;
-  border-radius: 100%;
-}
-
-.rigside {
-  background-color: #ffffff;
-  width: 35rem;
-  border-bottom-right-radius: 1.5rem;
-  border-top-right-radius: 1.5rem;
-  padding: 1rem 2rem 3rem 3rem;
-}
-
-p {
-  display: block;
-  font-size: 1rem;
-}
-
-.inputbox {
-  color: #030303;
-  width: 100%;
- 
-  border: none;
-  border-bottom: 1.5px solid #ccc;
-  margin-bottom: 1rem;
-  border-radius: 0.3rem;
-  font-family: 'Roboto', sans-serif;
- 
-  font-size: 1.0rem;
- 
- 
-}
-
-.expcvv {
-  display: flex;
-  justify-content: space-between;
-  
-}
-
-
-
-
-.button {
- 
-  padding: 9px;
-  border: none;
-  border-radius: 50px;
-
-  font-weight: 400;
-  font-size: 1.2rem;
-  margin-top: 8px;
-  width: 100%;
-  letter-spacing: .11rem;
-  outline: none;
-}
-
-.button:hover {
-
-  box-shadow: 3px 3px 6px #38373785;
-}
-.paydown{
-  margin-left: 12rem;
-  margin-right: 10rem;
-}
-.ukimage{
-  margin-left: 12rem;
-  margin-top: 1rem;
-}
-.ukinline{
- 
-         display: flex;
-
-
-}
-.ptag{
-  margin-top: 10px;
-  height : 90px;
-  width  :780px;
- margin-left: 12rem;
-
-}
-.candaimage{
-  margin-left: 1rem;
-  margin-top: 1rem;
-}
-.candaline{
- 
-         display: flex;
-         background-color:grey;
-         margin-left: 12rem;
-
-         margin-right: 10rem;
-         height:100px;
-}
-
-.downtag{
-  text-decoration: underline;
-   margin-left: 12rem;
-   margin-top: 2rem;
-}
-.downMenu{
-  display: flex;
-}
-.downMenu1{
-  margin-left: 12rem;
-  margin-top: 2rem;
-
-}
-.downmenu2{
-  margin-left: 12rem;
-  margin-top: 2rem;
-  margin-right: 12rem;
-}
-@media only screen and (max-width: 1000px) {
- 
-}  */

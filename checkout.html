@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,184 +33,229 @@
     </div>
 
     <div class = "returnAnchor_div">
-        <a class = "returnAnchor" href="http://">  Back to Cart</a></div>
+        <a class = "returnAnchor" href="cart.html">  Back to Cart</a></div>
+
+    <form id="checkoutForm">
     <div id="addressContainer">
         <div class="addressBox1">
             <div class="addressBoxHead">
                 <p>Billing Address</p>
             </div>
-            <div class= "bilingInputDiv">
-                <div class="bilingLabel">
-                    <label class = "topEle boldLabel">EMAIL</label> 
-                    <label  class = "boldLabel">First Name</label>
-                    <label  class = "boldLabel">Last Name</label> 
-                    <label>Company</label> 
-                    <label>Tax ID</label> 
-                    <label class = "boldLabel">Address Line 1</label>
-                    <label>Address Line 2</label>
-                    <label class = "boldLabel">Country</label> 
-                    <label class = "boldLabel">City</label> 
-                    <label>State</label> 
-                    <label>Zip code</label> 
-                    <label class = "boldLabel">Phone #</label> 
-                </div>
-                <div class="bilingInput">
-                    <input class = "topEle" id="email" height: type="text" required/>
-                    <input id="firstName" height: type="text" required />
-                    <input id="lastName" height: type="text" required/>
-                    <input id="company" height: type="text" />
-                    <input id="taxId" height: type="text" />
-                    <input id="address1" height: type="text" required/>
-                    <input id="address2" height: type="text" />
-                    <select class="form-select countrySelect" id = "country" aria-label="Default select example" required>
-                        <option selected>Select Country</option>
-                            <option value="india">India</option>
-                            <option value="canada">Canada</option>
-                            <option value="china">China</option>
-                            <option value="japan">Japan</option>
-                            <option value="russia">Russia</option>
-                            <option value="france">France</option>
-                 </select>
-                    <input id="city" height: type="text" required/>
-                    <input id="state" height: type="text" />
-                    <input id="zipcode" height: type="text" />
-                    <input id="phone" height: type="text" required/>
 
+            <div class="checkout-form-group">
+                <div class="form-row">
+                    <label for="email" class="boldLabel">EMAIL</label>
+                    <input id="email" type="email" required />
+                </div>
+                <div class="form-row">
+                    <label for="firstName" class="boldLabel">First Name</label>
+                    <input id="firstName" type="text" required />
+                </div>
+                <div class="form-row">
+                    <label for="lastName" class="boldLabel">Last Name</label>
+                    <input id="lastName" type="text" required />
+                </div>
+                <div class="form-row">
+                    <label for="company">Company</label>
+                    <input id="company" type="text" />
+                </div>
+                <div class="form-row">
+                    <label for="taxId">Tax ID</label>
+                    <input id="taxId" type="text" />
+                </div>
+                <div class="form-row">
+                    <label for="address1" class="boldLabel">Address Line 1</label>
+                    <input id="address1" type="text" required />
+                </div>
+                <div class="form-row">
+                    <label for="address2">Address Line 2</label>
+                    <input id="address2" type="text" />
+                </div>
+                <div class="form-row">
+                    <label for="country" class="boldLabel">Country</label>
+                    <select class="form-select countrySelect" id="country" required>
+                        <option selected value="">Select Country</option>
+                        <option value="india">India</option>
+                        <option value="canada">Canada</option>
+                        <option value="china">China</option>
+                        <option value="japan">Japan</option>
+                        <option value="russia">Russia</option>
+                        <option value="france">France</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="city" class="boldLabel">City</label>
+                    <input id="city" type="text" required />
+                </div>
+                <div class="form-row">
+                    <label for="state">State</label>
+                    <input id="state" type="text" />
+                </div>
+                <div class="form-row">
+                    <label for="zipcode">Zip code</label>
+                    <input id="zipcode" type="text" />
+                </div>
+                <div class="form-row">
+                    <label for="phone" class="boldLabel">Phone #</label>
+                    <input id="phone" type="text" required />
                 </div>
             </div>
-            
-
         </div>
+
         <div class="addressBox2">
             <div class="addressBoxHead">
                 <p>Shipping Address</p>
             </div>
-            <div class= "bilingInputDiv">
-                <div class="bilingLabel increaseDivWidth">
-                    <label class = "topEle boldLabel">EMAIL</label> 
-                    <label  class = "boldLabel">First Name</label>
-                    <label  class = "boldLabel">Last Name</label> 
-                    <label>Company</label> 
-                    <label>Tax ID</label> 
-                    <label class = "boldLabel">Address Line 1</label>
-                    <label>Address Line 2</label>
-                    <label></label>
-                    <label class = "boldLabel">Country</label> 
-                    <label class = "boldLabel">City</label> 
-                    <label>State</label> 
-                    <label>Zip code</label> 
-                    <label class = "boldLabel">Phone #</label> 
-                </div>
-                <div class="bilingInput">
-                    <input class = "topEle" id="email2" height: type="text" />
-                    <input id="firstName2" height: type="text" />
-                    <input id="lastName2" height: type="text" />
-                    <input id="company2" height: type="text" />
-                    <input id="taxId2" height: type="text" />
-                    <input id="address12" height: type="text" />
-                    <input id="shipping_address22" height: type="text" />
-                    <p class = "interputer">(We cannot ship to PO box, APO or FPO addresses.)</p>
-                    <select class="form-select countrySelect" id = "country2" aria-label="Default select example">
-                            <option selected>Select Country</option>
-                            <option value="india">India</option>
-                            <option value="canada">Canada</option>
-                            <option value="china">China</option>
-                            <option value="japan">Japan</option>
-                            <option value="russia">Russia</option>
-                            <option value="france">France</option>
-                     </select>
-                    <input id="city2" height: type="text" />
-                    <input id="state2" height: type="text" />
-                    <input id="zipcode2" height: type="text" />
-                    <input id="phone2" height: type="text" />
 
+            <div class="checkout-form-group">
+                <div class="form-row">
+                    <label for="email2" class="boldLabel">EMAIL</label>
+                    <input id="email2" type="email" />
+                </div>
+                <div class="form-row">
+                    <label for="firstName2" class="boldLabel">First Name</label>
+                    <input id="firstName2" type="text" />
+                </div>
+                <div class="form-row">
+                    <label for="lastName2" class="boldLabel">Last Name</label>
+                    <input id="lastName2" type="text" />
+                </div>
+                <div class="form-row">
+                    <label for="company2">Company</label>
+                    <input id="company2" type="text" />
+                </div>
+                <div class="form-row">
+                    <label for="taxId2">Tax ID</label>
+                    <input id="taxId2" type="text" />
+                </div>
+                <div class="form-row">
+                    <label for="address12" class="boldLabel">Address Line 1</label>
+                    <input id="address12" type="text" />
+                </div>
+                <div class="form-row">
+                    <label for="shipping_address22">Address Line 2</label>
+                    <input id="shipping_address22" type="text" />
+                </div>
+
+                <div class="form-row">
+                   <p class="interputer" style="margin-left: 35%;">(We cannot ship to PO box, APO or FPO addresses.)</p>
+                </div>
+
+                <div class="form-row">
+                    <label for="country2" class="boldLabel">Country</label>
+                    <select class="form-select countrySelect" id="country2">
+                        <option selected value="">Select Country</option>
+                        <option value="india">India</option>
+                        <option value="canada">Canada</option>
+                        <option value="china">China</option>
+                        <option value="japan">Japan</option>
+                        <option value="russia">Russia</option>
+                        <option value="france">France</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="city2" class="boldLabel">City</label>
+                    <input id="city2" type="text" />
+                </div>
+                <div class="form-row">
+                    <label for="state2">State</label>
+                    <input id="state2" type="text" />
+                </div>
+                <div class="form-row">
+                    <label for="zipcode2">Zip code</label>
+                    <input id="zipcode2" type="text" />
+                </div>
+                <div class="form-row">
+                    <label for="phone2" class="boldLabel">Phone #</label>
+                    <input id="phone2" type="text" />
                 </div>
             </div>
-            
         </div>
     </div>
 
-    <div class = "paymentsItemInfo">
-        <div>
-
-        </div>
-        <div class = "methodShipping">
+    <div class="paymentsItemInfo">
+        <div></div>
+        <div class="methodShipping">
             <div class="headShipping">
                 <p>Shipping Method</p>
             </div>
-            <div class = "shippingInfo">
+            <div class="shippingInfo">
                
-                <div class = "shippingDiv2">
-                     <div>
-                        <input type="radio" name = "shippingMethod" value="standard">
-                         <span><b>International Standard</b> - 11785.06 INR</span>
-                         <p class = "green">Estimated Delivery Date: 2022-01-05</p>
+                <div class="shippingDiv2">
+                     <div class="shipping-option">
+                        <label>
+                            <input type="radio" name="shippingMethod" value="standard">
+                            <span><b>International Standard</b> - 11785.06 INR</span>
+                        </label>
+                         <p class="green" style="margin-left: 1.5rem;">Estimated Delivery Date: 2022-01-05</p>
                      </div>
-                     <div>
-                        <input type="radio" name = "shippingMethod" value="express">
-                        <span><b>International Express</b> - 14405.21 INR</span>
-                        <p class = "green">Estimated Delivery Date: 2021-12-31</p>
+                     <div class="shipping-option">
+                        <label>
+                            <input type="radio" name="shippingMethod" value="express">
+                            <span><b>International Express</b> - 14405.21 INR</span>
+                        </label>
+                        <p class="green" style="margin-left: 1.5rem;">Estimated Delivery Date: 2021-12-31</p>
                      </div>
                 </div>
             </div>
         </div>
-       
     </div>
 
 
-    <div class = "paymentUserDetails">
-        <div class = "payment_divHead">
+    <div class="paymentUserDetails">
+        <div class="payment_divHead">
             <p>Payment Information</p>
         </div>
-        <div class = "paymentDetails">
-            <div class = "imgDiv">
-                <img src = "https://e7.pngegg.com/pngimages/27/252/png-clipart-mastercard-visa-credit-card-paypal-logo-mastercard-text-display-advertising.png"/>
+        <div class="paymentDetails">
+            <div class="imgDiv">
+                <img src="https://e7.pngegg.com/pngimages/27/252/png-clipart-mastercard-visa-credit-card-paypal-logo-mastercard-text-display-advertising.png"/>
             </div>
-            <div class = "cardInfo">
-                <div class="cardQuery">
-                    <p>Card Type</p>
-                    <p>Cardholder Name</p>
-                    <p class="expcvv_text">Expiry</p>
-                    <p class="expcvv_text2">CVV</p>
-                </div>
-                <div class="cardQueryResult">
-                    <select class="inputbox" name="card_type" id="card_type" required>
-                        <option value="">Select Card</option>
-                        <option value="Visa">Visa</option>
-                        <option value="RuPay">RuPay</option>
-                        <option value="MasterCard">MasterCard</option>
-                      </select>
-                    <input type="text" class="inputbox" name="name" id="name" required />
-                    <input type="date" class="inputbox" name="exp_date" id="exp_date" required />
-                    <input type="password" class="inputbox" name="cvv" id="cvv" required />
+            <div class="cardInfo">
+                <div class="checkout-form-group" style="width: 100%; padding: 1rem;">
+                    <div class="form-row">
+                        <label for="card_type" class="boldLabel">Card Type</label>
+                        <select class="inputbox" name="card_type" id="card_type" required>
+                            <option value="">Select Card</option>
+                            <option value="Visa">Visa</option>
+                            <option value="RuPay">RuPay</option>
+                            <option value="MasterCard">MasterCard</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label for="name" class="boldLabel">Cardholder Name</label>
+                        <input type="text" class="inputbox" name="name" id="name" required />
+                    </div>
+                    <div class="form-row">
+                        <label for="exp_date" class="boldLabel">Expiry</label>
+                        <input type="date" class="inputbox" name="exp_date" id="exp_date" required />
+                    </div>
+                    <div class="form-row">
+                        <label for="cvv" class="boldLabel">CVV</label>
+                        <input type="password" class="inputbox" name="cvv" id="cvv" required />
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
    
-                <div id="t3">
-                    <input type="checkbox" />
-                    <span id="five">When you sign up for email, you'll get exclusive coupons, sale notifications, and product ideas.</span>
-                    <br />
-                    <br />
-                </div>
-                <p></p>
-                    <button  type="submit" class="button" >Place order >></button>
-                <!-- </form> -->
-            </div>
-        </div>
+    <div id="t3">
+        <label>
+            <input type="checkbox" />
+            <span id="five">When you sign up for email, you'll get exclusive coupons, sale notifications, and product ideas.</span>
+        </label>
+        <br />
+        <br />
+    </div>
+    <p></p>
+    <button type="submit" class="button">Place order >></button>
+    </form>
     </div>
 
 
 </div>
 
-
-
-
-
 </body>
-
 </html>
 
 <script src="./scripts/checkout.js"></script>
