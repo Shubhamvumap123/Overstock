@@ -39,7 +39,7 @@ const updateJob = async (req, res) => {
     }
 
     const updatedJob = await Job.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
+      returnDocument: 'after',
     });
 
     res.json(updatedJob);
