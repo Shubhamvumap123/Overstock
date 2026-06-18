@@ -11,9 +11,10 @@ interface JobFormProps {
   initialData?: Job | null;
   onSubmit: (data: Job) => void;
   onCancel: () => void;
+  error?: string | null;
 }
 
-export default function JobForm({ initialData, onSubmit, onCancel }: JobFormProps) {
+export default function JobForm({ initialData, onSubmit, onCancel, error }: JobFormProps) {
   const [formData, setFormData] = useState<Job>({
     company: "",
     position: "",
@@ -37,6 +38,11 @@ export default function JobForm({ initialData, onSubmit, onCancel }: JobFormProp
         <h2 className="text-2xl font-bold mb-6 text-gray-800">
           {initialData ? "Edit Job" : "Add New Job"}
         </h2>
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
+            <span className="block sm:inline">{error}</span>
+          </div>
+        )}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 mb-2 font-medium">Company</label>
