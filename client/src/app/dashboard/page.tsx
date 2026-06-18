@@ -31,15 +31,22 @@ export default function Dashboard() {
   const [editingJob, setEditingJob] = useState<Job | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("All");
+  const [error, setError] = useState<string | null>(null);
+  const [formError, setFormError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
+        setError(null);
         const { data } = await API.get("/jobs");
         setJobs(data);
-      } catch (error) {
+      } catch (error: unknown) {
         console.error("Failed to fetch jobs:", error);
-        router.push("/login");
+        if (error && typeof error === 'object' && 'response' in error && (error as { response?: { status?: number } }).response?.status === 401) {
+           router.push("/login");
+        } else {
+           setError("Failed to fetch jobs. Please try again later.");
+        }
       } finally {
         setLoading(false);
       }
@@ -49,32 +56,40 @@ export default function Dashboard() {
 
   const handleAddJob = async (jobData: Omit<Job, "_id" | "createdAt">) => {
     try {
+      setFormError(null);
       const { data } = await API.post("/jobs", jobData);
       setJobs([...jobs, data]);
       setIsFormOpen(false);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error("Failed to add job:", error);
+      const errMsg = error && typeof error === 'object' && 'response' in error ? (error as { response?: { data?: { message?: string } } }).response?.data?.message : undefined;
+      setFormError(errMsg || "Failed to add job. Please try again.");
     }
   };
 
   const handleEditJob = async (jobData: Omit<Job, "_id" | "createdAt">) => {
     try {
+      setFormError(null);
       const { data } = await API.put(`/jobs/${editingJob?._id}`, jobData);
       setJobs(jobs.map((job) => (job._id === editingJob?._id ? data : job)));
       setIsFormOpen(false);
       setEditingJob(null);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error("Failed to update job:", error);
+      const errMsg = error && typeof error === 'object' && 'response' in error ? (error as { response?: { data?: { message?: string } } }).response?.data?.message : undefined;
+      setFormError(errMsg || "Failed to update job. Please try again.");
     }
   };
 
   const handleDeleteJob = async (id: string) => {
     if (!window.confirm("Are you sure you want to delete this job application?")) return;
     try {
+      setError(null);
       await API.delete(`/jobs/${id}`);
       setJobs(jobs.filter((job) => job._id !== id));
-    } catch (error) {
+    } catch (error: unknown) {
       console.error("Failed to delete job:", error);
+      setError("Failed to delete job. Please try again.");
     }
   };
 
@@ -126,6 +141,7 @@ export default function Dashboard() {
         <button
           onClick={() => {
             setEditingJob(null);
+            setFormError(null);
             setIsFormOpen(true);
           }}
           className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-sm"
@@ -133,6 +149,12 @@ export default function Dashboard() {
           + Add New Job
         </button>
       </div>
+
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
+          <span className="block sm:inline">{error}</span>
+        </div>
+      )}
 
       {jobs.length > 0 && (
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 mb-8 h-80">
@@ -194,7 +216,9 @@ export default function Dashboard() {
           onCancel={() => {
             setIsFormOpen(false);
             setEditingJob(null);
+            setFormError(null);
           }}
+          error={formError}
         />
       )}
     </div>
