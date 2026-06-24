@@ -68,4 +68,13 @@ const deleteJob = async (req, res) => {
   }
 };
 
-module.exports = { getJobs, createJob, updateJob, deleteJob };
+const getAllJobsAdmin = async (req, res) => {
+  try {
+    const jobs = await Job.find({}).populate('user', 'name email');
+    res.json(jobs);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getJobs, createJob, updateJob, deleteJob, getAllJobsAdmin };
